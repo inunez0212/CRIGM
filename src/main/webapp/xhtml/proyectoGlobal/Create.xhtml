@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectoGlobalCreateDlg" widgetVar="ProyectoGlobalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear">
+            <h:form id="ProyectoGlobalCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectoGlobalController.selected != null}">
+                        <p:outputLabel value="ID" for="id" />
+                        <p:inputText id="id" value="PG-0#{proyectoGlobalController.selected.id}" disabled="true"/>
+                        <p:outputLabel value="Proyecto" for="proyecto" />
+                        <p:selectOneMenu id="proyecto" value="#{proyectoGlobalController.codigoProyecto}" >
+                        	<f:selectItems value="#{proyectoController.items}" var="item"
+                        	itemLabel="#{item.nombre}" itemValue="#{item.id}" > </f:selectItems>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre" for="nombre" />
+                        <p:inputText id="nombre" value="#{proyectoGlobalController.selected.nombre}" title="Nombre" />
+                        <p:outputLabel value="N. tareas" for="numerotareas" />
+                        <p:inputText id="numerotareas" value="#{proyectoGlobalController.selected.numerotareas}" title="N. tareas" />
+                        <p:outputLabel value="Kilometraje" for="kilometraje" />
+                        <p:inputText id="kiloetraje" value="#{proyectoGlobalController.selected.kilometraje}" title="Kilometraje" />
+                        <p:outputLabel value="Ruta" for="ruta" />
+                        <p:inputText id="Ruta" value="#{proyectoGlobalController.selected.ruta}" title="Ruta de la carpeta" />
+                        <p:outputLabel value="Estado" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{proyectoGlobalController.selected.estado}" >
+                        	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectoGlobalController.create}" value="Guardar" update="display,:ProyectoGlobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProyectoGlobalCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="PF('ProyectoGlobalCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
