@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <link href="/img/icon.png" rel="icon" type="image/x-icon" />	
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="Sistema de control de tareas">
+                <h:form id="menuForm">
+					<h:outputLabel value="#{loginController.usuario}"></h:outputLabel>                
+                    <p:menubar>
+                        <p:menuitem value="Inicio"  outcome="/xhtml/template.xhtml" icon="fa fa-home"/>
+                        <p:submenu label="Menu" icon="fa fa-cog">
+                            <p:menuitem value="Proyectos" outcome="/xhtml/proyecto/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Globales" outcome="/xhtml/proyectoGlobal/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Tarea" outcome="/xhtml/tarea/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Usuarios" outcome="/xhtml/usuario/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Perfil" outcome="/xhtml/perfil/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Permisos" outcome="/xhtml/perfilModulo/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Tipo de tarea" outcome="/xhtml/tipoTarea/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Cat&acuote;logos" outcome="/xhtml/catalogoValor/List.xhtml" icon="fa fa-users"/>
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

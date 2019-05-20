@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PerfilModuloViewDlg" widgetVar="PerfilModuloViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Detalles">
+            <h:form id="PerfilModuloViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{perfilModuloController.selected != null}">
+                        <h:outputText value="ID"/>
+                        <h:outputText value="#{perfilModuloController.selected.id}" />
+						<h:outputText value="Perfil"/>
+                        <h:outputText value="#{perfilModuloController.selected.perfil.descripcion}" title="Perfil"/>
+                        <h:outputText value="Ruta"/>
+                        <h:outputText value="#{perfilModuloController.selected.ruta}" title="ruta"/>
+                        <h:outputText value="Descripci&oacute;n"/>
+                        <h:outputText value="#{perfilModuloController.selected.descripcion}" title="Descripci&oacute;n"/>
+                        <h:outputText value="Crear"/>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.crear}" disabled="true"></p:selectBooleanCheckbox>
+                        <h:outputText value="Editar"/>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.editar}" disabled="true"></p:selectBooleanCheckbox>
+                        <h:outputText value="Eliminar"/>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.eliminar}" disabled="true"></p:selectBooleanCheckbox>
+                        <h:outputText value="Visualizar"/>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.visualizar}" disabled="true"></p:selectBooleanCheckbox>
+                        
+                        <h:outputText value="Fecha registro"/>
+                        <h:outputText value="#{perfilModuloController.selected.fecharegistro}" title="Fecha registro">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="Fecha modificaci&oacute;n"/>
+                        <h:outputText value="#{perfilModuloController.selected.fechamodificacion}" title="Fecha modificaci&oacute;n">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+						<h:outputText value="Usuario registro"/>
+                        <h:outputText value="#{perfilModuloController.selected.usuarioregistro.nombre} #{perfilModuloController.selected.usuarioregistro.apellido}" title="Usuario registro"/>
+                        <h:outputText value="Usuario modificaci&oacute;n"/>
+                        <h:outputText value="#{perfilModuloController.selected.usuariomodificacion.nombre} #{perfilModuloController.selected.usuariomodificacion.apellido }" title="Usuario modificaci&oacute;n"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Cerrar" onclick="PF('PerfilModuloViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

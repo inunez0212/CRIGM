@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectoEditDlg" widgetVar="ProyectoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Edici&oacute;n">
+            <h:form id="ProyectoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
+                                                <p:outputLabel value="ID" for="id" />
+                        <p:inputText id="id" value="P-00#{proyectoController.selected.id}" disabled="true"/>
+                        <p:outputLabel value="Nombre" for="nombre" />
+                        <p:inputText id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre" />
+                        <p:outputLabel value="N. tareas" for="numerotareas" />
+                        <p:inputText id="numerotareas" value="#{proyectoController.selected.numerotareas}" title="N. tareas" />
+                        <p:outputLabel value="Ruta" for="ruta" />
+                        <p:inputText id="ruta" value="#{proyectoController.selected.ruta}" title="Ruta" />
+                        <p:outputLabel value="Kilometraje" for="kilometraje" />
+                        <p:inputText id="kilometraje" value="#{proyectoController.selected.kilometraje}" title="Kilometraje" />
+                        <p:outputLabel value="Fecha inicio" for="fechainicio" />
+                        <p:calendar id="fechainicio" value="#{proyectoController.selected.fechainicio}" title="Fecha inicio del proyecto"  />
+                        <p:outputLabel value="Fecha fin" for="fechafin" />
+                        <p:calendar id="fechafin" value="#{proyectoController.selected.fechafin}" title="Fecha fin del proyecto"  />
+                        <p:outputLabel value="Carpeta" for="rutacarpeta" />
+                        <p:inputText id="rutacarpeta" value="#{proyectoController.selected.rutacarpeta}" title="ruta de la carpeta" />
+                        <p:outputLabel value="Estado" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{proyectoController.codigoReferenciaEstado}" >
+                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado(EPR)}" var="item"
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectoController.update}" value="Guardar" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectoEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="PF('ProyectoEditDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
