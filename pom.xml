@@ -11,7 +11,7 @@
 	<groupId>com.uisrael.edu.ec</groupId>
 	<artifactId>CRIGM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SISTAR</name>
+	<name>CRIGM</name>
 	<description>Control de Rendimiento con spring boot</description>
 
 	<properties>
@@ -51,6 +51,10 @@
 	      <groupId>javax.enterprise</groupId>
 	      <artifactId>cdi-api</artifactId>
 	    </dependency>
+	    <dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

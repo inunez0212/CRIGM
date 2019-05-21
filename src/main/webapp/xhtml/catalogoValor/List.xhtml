@@ -19,7 +19,7 @@
 				<p:dataTable id="datalist" value="#{catalogoValorController.items}"
 					var="item" selectionMode="single"
 					selection="#{catalogoValorController.selected}" paginator="true"
-					rowKey="#{item.id}" rows="10">
+					rowKey="#{item.codigoreferencia}" rows="10">
 
 					<p:column headerText="ID">
 						<h:outputText value="#{item.codigoreferencia}" />
@@ -29,8 +29,8 @@
 						<h:outputText value="#{item.descripcion}" />
 					</p:column>
 					<p:column headerText="Relacionado"
-						sortBy="#{item.codigoreferenciarelacionados}">
-						<h:outputText value="#{item.descripcion}" />
+						sortBy="#{item.codigoreferenciarelacionado}">
+						<h:outputText value="#{item.codigoreferenciarelacionado.codigoreferencia}" />
 					</p:column>
 					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estado == 1? 'Activo':'Inactivo'}" />
