@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.sistar.gestor.interfaces.ITipoTareaPerfilGestor;
 import com.uisrael.edu.ec.vista.beans.util.JsfUtil;
+import com.uisrael.edu.ec.vista.persistencia.entidades.PerfilDTO;
+import com.uisrael.edu.ec.vista.persistencia.entidades.TipoTareaDTO;
 import com.uisrael.edu.ec.vista.persistencia.entidades.TipoTareaPerfilDTO;
 
 @Named("tipoTareaPerfilController")
@@ -45,6 +47,10 @@ public class TipoTareaPerfilController implements Serializable {
 
     public void create() {
     	try {
+    		selected.setTipoTarea(new TipoTareaDTO());
+    		selected.setPerfilDTO(new PerfilDTO());
+    		selected.getTipoTarea().setId(idTipoTarea);
+    		selected.getPerfilDTO().setId(idPerfil);
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
     		tipoTareaTipoTareaPerfilGestor.save(selected);
@@ -57,6 +63,10 @@ public class TipoTareaPerfilController implements Serializable {
 
     public void update() {
     	try {
+    		selected.setTipoTarea(new TipoTareaDTO());
+    		selected.setPerfilDTO(new PerfilDTO());
+    		selected.getTipoTarea().setId(idTipoTarea);
+    		selected.getPerfilDTO().setId(idPerfil);
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		tipoTareaTipoTareaPerfilGestor.save(selected);

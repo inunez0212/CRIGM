@@ -75,6 +75,9 @@ public class TareaDTO implements Serializable {
     private UsuarioDTO usuarioasignador;
     @JoinColumn(name = "usuariomodificacion", referencedColumnName = "id")
     @ManyToOne
+    private UsuarioDTO revisor;
+    @JoinColumn(name = "revisor", referencedColumnName = "id")
+    @ManyToOne
     private UsuarioDTO usuariomodificacion;
     @JoinColumn(name = "usuarioregistro", referencedColumnName = "id")
     @ManyToOne
@@ -233,5 +236,14 @@ public class TareaDTO implements Serializable {
     public String toString() {
         return "entidades.TareaDTO[ id=" + id + " ]";
     }
+
+	public UsuarioDTO getRevisor() {
+		return revisor;
+	}
+
+	public void setRevisor(UsuarioDTO revisor) {
+		this.revisor = revisor;
+	}
+
     
 }

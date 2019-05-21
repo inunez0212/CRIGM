@@ -13,12 +13,24 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tareaController.selected != null}">
                         <p:outputLabel value="ID" for="id" />
-                        <p:inputText id="id" value="P-00#{tareaController.selected.id}" disabled="true"/>
-                        <p:outputLabel value="Descripci&oacute;n" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{tareaController.selected.descripcion}" title="Descripci&oacute;n" />
+                        <p:inputText id="id" value="T-00#{tareaController.selected.id}" disabled="true"/>
+    					<p:outputLabel value="Tipo Tarea" for="tipoTarea" />
+                        <p:selectOneMenu id="tipoTarea" value="#{tareaController.idTipoTarea}" >
+                        	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
+                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Fecha inicio" for="fechainicio" />
+                        <p:calendar id="fechainicio" value="#{tareaController.selected.fechainicio}" title="Fecha inicio de la tarea"  />
+						<p:outputLabel value="Ruta" for="ruta" />
+                        <p:inputText id="ruta" value="#{tareaController.selected.ruta}" title="ruta" />
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{tareaController.selected.estado}" >
                         	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Operador" for="operador" />
+                        <p:selectOneMenu id="operador" value="#{tareaController.idUsuarioAsignado}" >
+                        	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
+                        	itemLabel="#{dato.nombre} #{dato.apellido}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
                         
                     </p:panelGrid>
