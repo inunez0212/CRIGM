@@ -46,10 +46,8 @@ public class CatalogoValorController implements Serializable {
 
     public void create() {
     	try {
-    		if(StringUtils.isNotBlank(codigoReferenciaRelacionado)) {
-    			selected.setCodigoreferenciarelacionado(new CatalogoValorDTO());
-    			selected.setCodigoreferencia(codigoReferenciaRelacionado);
-    		}
+    		selected.setCodigoreferenciarelacionado(
+  					catalogoValorGestor.getOne(codigoReferenciaRelacionado));
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
     		catalogoValorGestor.save(selected);

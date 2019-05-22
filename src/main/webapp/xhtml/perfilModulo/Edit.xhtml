@@ -14,22 +14,23 @@
                     <p:panelGrid columns="2" rendered="#{perfilModuloController.selected != null}">
                         <p:outputLabel value="ID" for="id" />
                         <p:inputText id="id" value="#{perfilModuloController.selected.id}" disabled="true"/>
-                        <p:selectOneMenu id="perfil" value="#{perfilModuloController.idPerfil}" >
+                        <p:outputLabel value="Perfil" for="perfil" />
+                        <p:selectOneMenu id="perfil" value="#{perfilModuloController.perfilId}" >
                         	<f:selectItems value="#{perfilController.items}" var="dato" 
                         	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Ruta" for="ruta" />
+                        <p:outputLabel value="M&oacute;dulo" for="ruta" />
                         <p:inputText id="ruta" value="#{perfilModuloController.selected.ruta}" title="Ruta de la vista" />
                         <p:outputLabel value="Descripci&oacute;n" for="descripcion" />
                         <p:inputText id="descripcion" value="#{perfilModuloController.selected.descripcion}" title="Descripci&oacute;n" />
                         <p:outputLabel value="Crear" for="crear" />
-                        <p:toggleSwitch id="crear" value="#{perfilModuloController.selected.crear}" />
+                        <p:selectBooleanCheckbox id="crear" value="#{perfilModuloController.selected.crear}" />
                         <p:outputLabel value="Editar" for="editar" />
-                        <p:toggleSwitch id="editar" value="#{perfilModuloController.selected.editar}" />
+                        <p:selectBooleanCheckbox id="editar" value="#{perfilModuloController.selected.modificar}" />
                         <p:outputLabel value="Eliminar" for="eliminar" />
-                        <p:toggleSwitch id="eliminar" value="#{perfilModuloController.selected.eliminar}" />
+                        <p:selectBooleanCheckbox id="eliminar" value="#{perfilModuloController.selected.eliminar}" />
                         <p:outputLabel value="Visualizar" for="visualizar" />
-                        <p:toggleSwitch id="visualizar" value="#{perfilModuloController.selected.listar}" />
+                        <p:selectBooleanCheckbox id="visualizar" value="#{perfilModuloController.selected.listar}" />
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{perfilModuloController.selected.estado}" >
                         	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>

@@ -15,7 +15,7 @@
                          <p:outputLabel value="ID" for="id" />
                         <p:inputText id="id" value="TT-00#{tipoTareaController.selected.id}" disabled="true"/>
                         <p:outputLabel value="Nombre" for="nombre" />
-                        <p:inputText id="id" value="P-00#{tipoTareaController.selected.nombre}" required="true"/>
+                        <p:inputText id="nombre" value="#{tipoTareaController.selected.nombre}" required="true"/>
                         <p:outputLabel value="Descripci&oacute;n" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoTareaController.selected.descripcion}" title="Descripci&oacute;n" />
                         <p:outputLabel value="Estado" for="estado" />

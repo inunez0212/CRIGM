@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{perfilModuloController.selected != null}">
                         <h:outputText value="ID"/>
                         <h:outputText value="#{perfilModuloController.selected.id}" />
-						<h:outputText value="Perfil"/>
-                        <h:outputText value="#{perfilModuloController.selected.perfil.descripcion}" title="Perfil"/>
+						<h:outputText value="Perfil" />
+                        <h:outputText value="#{perfilModuloController.selected.perfil.descripcion}" title="Descripcion"/>
                         <h:outputText value="Ruta"/>
                         <h:outputText value="#{perfilModuloController.selected.ruta}" title="ruta"/>
                         <h:outputText value="Descripci&oacute;n"/>
@@ -23,11 +23,11 @@
                         <h:outputText value="Crear"/>
                         <p:selectBooleanCheckbox value="#{perfilModuloController.selected.crear}" disabled="true"></p:selectBooleanCheckbox>
                         <h:outputText value="Editar"/>
-                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.editar}" disabled="true"></p:selectBooleanCheckbox>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.modificar}" disabled="true"></p:selectBooleanCheckbox>
                         <h:outputText value="Eliminar"/>
                         <p:selectBooleanCheckbox value="#{perfilModuloController.selected.eliminar}" disabled="true"></p:selectBooleanCheckbox>
                         <h:outputText value="Visualizar"/>
-                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.visualizar}" disabled="true"></p:selectBooleanCheckbox>
+                        <p:selectBooleanCheckbox value="#{perfilModuloController.selected.listar}" disabled="true"></p:selectBooleanCheckbox>
                         
                         <h:outputText value="Fecha registro"/>
                         <h:outputText value="#{perfilModuloController.selected.fecharegistro}" title="Fecha registro">

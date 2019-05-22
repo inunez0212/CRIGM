@@ -20,16 +20,17 @@
             <p:layoutUnit position="north" size="65" header="Sistema de control de tareas">
                 <h:form id="menuForm">
 					<h:outputLabel value="#{loginController.usuario}"></h:outputLabel>                
-                    <p:menubar>
+                    <p:menubar >
                         <p:menuitem value="Inicio"  outcome="/xhtml/template.xhtml" icon="fa fa-home"/>
-                        <p:submenu label="Menu" icon="fa fa-cog">
-                            <p:menuitem value="Proyectos" outcome="/xhtml/proyecto/List.xhtml" icon="fa fa-users"/>
+                        <p:submenu label="Menu" icon="fa fa-cog" >
+                            <p:menuitem value="Proyectos" outcome="/xhtml/proyecto/List.xhtml" icon="fa fa-users" />
                             <p:menuitem value="Globales" outcome="/xhtml/proyectoGlobal/List.xhtml" icon="fa fa-users"/>
                             <p:menuitem value="Tarea" outcome="/xhtml/tarea/List.xhtml" icon="fa fa-users"/>
                             <p:menuitem value="Usuarios" outcome="/xhtml/usuario/List.xhtml" icon="fa fa-users"/>
+                            <p:menuitem value="Conf. tareas" outcome="/xhtml/tipoTareaPerfil/List.xhtml" icon="fa fa-users" />
+							<p:menuitem value="Tipo de tarea" outcome="/xhtml/tipoTarea/List.xhtml" icon="fa fa-users"/>							
+                            <p:menuitem value="Conf. proceso" outcome="/xhtml/perfilModulo/List.xhtml" icon="fa fa-users" />	
                             <p:menuitem value="Perfil" outcome="/xhtml/perfil/List.xhtml" icon="fa fa-users"/>
-                            <p:menuitem value="Permisos" outcome="/xhtml/perfilModulo/List.xhtml" icon="fa fa-users"/>
-                            <p:menuitem value="Tipo de tarea" outcome="/xhtml/tipoTarea/List.xhtml" icon="fa fa-users"/>
                             <p:menuitem value="Cat&aacute;logos" outcome="/xhtml/catalogoValor/List.xhtml" icon="fa fa-users"/>
                         </p:submenu>
                     </p:menubar>

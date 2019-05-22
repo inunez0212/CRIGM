@@ -47,10 +47,10 @@ public class PerfilModuloController implements Serializable {
     		selected.setFecharegistro(new Date());
     		selected.setPerfil(new PerfilDTO(perfilId));
     		perfilModuloGestor.save(selected);
-    		JsfUtil.addSuccessMessage("PerfilModuloDTO creado correctamente");
+    		JsfUtil.addSuccessMessage("Permisos creados correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo crear el perfilModulo");
+			JsfUtil.addErrorMessage("No se pudo crear el permiso para el modulo indicado");
 		}
     }
 
@@ -60,10 +60,10 @@ public class PerfilModuloController implements Serializable {
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		perfilModuloGestor.save(selected);
-    		JsfUtil.addSuccessMessage("PerfilModuloDTO actaulizado correctamente");
+    		JsfUtil.addSuccessMessage("Permisos actualizados correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo actualizar el perfilModulo");
+			JsfUtil.addErrorMessage("No se pudo actualizar el permiso para el modulo indicado");
 		}
     }
 
@@ -72,10 +72,10 @@ public class PerfilModuloController implements Serializable {
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		perfilModuloGestor.eliminar(selected.getId());
-    		JsfUtil.addSuccessMessage("PerfilModuloDTO eliminado correctamente");
+    		JsfUtil.addSuccessMessage("Permisos eliminados correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo elminar el perfilModulo");
+			JsfUtil.addErrorMessage("No se pudo elminar el permiso indicado");
 		}
     }
 
