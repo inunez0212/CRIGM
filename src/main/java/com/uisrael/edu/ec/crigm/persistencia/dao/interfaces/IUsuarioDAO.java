@@ -30,5 +30,6 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 	@Query("update UsuarioDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Long id);
 	
+	UsuarioDTO findByCedulaAndContrasenia(String cedula, String contrasenia); 
 	
 }

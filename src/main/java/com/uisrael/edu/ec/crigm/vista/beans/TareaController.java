@@ -63,13 +63,13 @@ public class TareaController implements Serializable {
     		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setProyecto(proyectoGestor.getOne(idProyecto));
     		if(idUsuarioAsignado!=null) {
-    			selected.setUsuarioasignador(loginController.getUsuario());
+    			selected.setUsuarioasignador(loginController.getUsuarioDTO());
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
         		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
     		}else {
         		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
     		}
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		tareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("Tarea creada correctamente");
@@ -84,14 +84,14 @@ public class TareaController implements Serializable {
     		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setProyecto(proyectoGestor.getOne(idProyecto));
     		if(idUsuarioAsignado!=null && selected.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
-    			selected.setUsuarioasignador(loginController.getUsuario());
+    			selected.setUsuarioasignador(loginController.getUsuarioDTO());
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
         		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
     		}else {
         		selected.setEstadotarea(catalogoValorGestor.getOne(estadoValor));
     		}
     		selected.setRevisor(usuarioGestor.getOne(idUsuarioRevisor));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("Tarea actaulizada correctamente");
@@ -103,7 +103,7 @@ public class TareaController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tareaGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("Tarea eliminada correctamente");

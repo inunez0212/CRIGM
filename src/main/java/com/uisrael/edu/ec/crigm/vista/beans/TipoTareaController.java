@@ -41,7 +41,7 @@ public class TipoTareaController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		tipoTareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaDTO creado correctamente");
@@ -53,7 +53,7 @@ public class TipoTareaController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tipoTareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaDTO actaulizado correctamente");
@@ -65,7 +65,7 @@ public class TipoTareaController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tipoTareaGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("TipoTareaDTO eliminado correctamente");

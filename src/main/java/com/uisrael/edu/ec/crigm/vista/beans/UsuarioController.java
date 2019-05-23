@@ -47,7 +47,7 @@ public class UsuarioController implements Serializable {
     public void create() {
     	try {
     		selected.setPerfil(perfilGestor.getOne(idPerfil));
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		usuarioGestor.save(selected);
     		JsfUtil.addSuccessMessage("UsuarioDTO creado correctamente");
@@ -60,7 +60,7 @@ public class UsuarioController implements Serializable {
     public void update() {
     	try {
     		selected.setPerfil(perfilGestor.getOne(idPerfil));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		usuarioGestor.save(selected);
     		JsfUtil.addSuccessMessage("UsuarioDTO actualizado correctamente");
@@ -72,7 +72,7 @@ public class UsuarioController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		usuarioGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("UsuarioDTO eliminado correctamente");

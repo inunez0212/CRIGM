@@ -47,7 +47,7 @@ public class PerfilModuloController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		selected.setPerfil(perfilGestor.getOne(perfilId));
     		perfilModuloGestor.save(selected);
@@ -61,7 +61,7 @@ public class PerfilModuloController implements Serializable {
     public void update() {
     	try {
     		selected.setPerfil(perfilGestor.getOne(perfilId));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		perfilModuloGestor.save(selected);
     		JsfUtil.addSuccessMessage("Permisos actualizados correctamente");
@@ -73,7 +73,7 @@ public class PerfilModuloController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		perfilModuloGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("Permisos eliminados correctamente");

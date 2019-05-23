@@ -48,7 +48,7 @@ public class CatalogoValorController implements Serializable {
     	try {
     		selected.setCodigoreferenciarelacionado(
   					catalogoValorGestor.getOne(codigoReferenciaRelacionado));
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		catalogoValorGestor.save(selected);
     		JsfUtil.addSuccessMessage("CatalogoValor creado correctamente");
@@ -62,7 +62,7 @@ public class CatalogoValorController implements Serializable {
     	try {
   			selected.setCodigoreferenciarelacionado(
   					catalogoValorGestor.getOne(codigoReferenciaRelacionado));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		catalogoValorGestor.save(selected);
     		JsfUtil.addSuccessMessage("CatalogoValor actaulizado correctamente");
@@ -74,7 +74,7 @@ public class CatalogoValorController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		catalogoValorGestor.eliminar(selected.getCodigoreferencia());
     		JsfUtil.addSuccessMessage("CatalogoValorDTO eliminado correctamente");

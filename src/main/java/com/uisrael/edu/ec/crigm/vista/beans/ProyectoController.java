@@ -48,7 +48,7 @@ public class ProyectoController implements Serializable {
     public void create() {
     	try {
     		selected.setEstadoproyecto(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		proyectoGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoDTO creado correctamente");
@@ -61,7 +61,7 @@ public class ProyectoController implements Serializable {
     public void update() {
     	try {
     		selected.setEstadoproyecto(this.catalogoValorGestor.getOne(codigoRefereciaEstado));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoDTO actaulizado correctamente");
@@ -73,7 +73,7 @@ public class ProyectoController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGestor.eliminar(selected.getId().intValue());
     		JsfUtil.addSuccessMessage("ProyectoDTO eliminado correctamente");

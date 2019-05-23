@@ -52,7 +52,7 @@ public class TipoTareaPerfilController implements Serializable {
     	try {
     		selected.setTipoTarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setPerfilDTO(perfilGestor.getOne(idPerfil));
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		tipoTareaPerfilGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO creado correctamente");
@@ -66,7 +66,7 @@ public class TipoTareaPerfilController implements Serializable {
     	try {
     		selected.setTipoTarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setPerfilDTO(perfilGestor.getOne(idPerfil));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tipoTareaPerfilGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO actaulizado correctamente");
@@ -78,7 +78,7 @@ public class TipoTareaPerfilController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tipoTareaPerfilGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO eliminado correctamente");

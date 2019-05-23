@@ -41,7 +41,7 @@ public class HistorialTareaController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		historialTareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("HistorialTareaDTO creado correctamente");
@@ -53,7 +53,7 @@ public class HistorialTareaController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		historialTareaGestor.save(selected);
     		JsfUtil.addSuccessMessage("HistorialTareaDTO actaulizado correctamente");
@@ -65,7 +65,7 @@ public class HistorialTareaController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		historialTareaGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("HistorialTareaDTO eliminado correctamente");

@@ -52,7 +52,7 @@ public class ProyectoGlobalController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setUsuarioregistro(loginController.getUsuario());
+    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
     		selected.setEstadoglobal(catalogoValorGestor.getOne(Constantes.ESTADO_EN_PROCESO));
@@ -68,7 +68,7 @@ public class ProyectoGlobalController implements Serializable {
     	try {
     		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
     		selected.setEstadoglobal(catalogoValorGestor.getOne(codigoReferenciaEstado));
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGlobalGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoGlobalDTO actaulizado correctamente");
@@ -80,7 +80,7 @@ public class ProyectoGlobalController implements Serializable {
 
     public void destroy() {
     	try {
-    		selected.setUsuariomodificacion(loginController.getUsuario());
+    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGlobalGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("ProyectoGlobalDTO eliminado correctamente");

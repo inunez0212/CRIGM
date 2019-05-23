@@ -11,7 +11,7 @@ import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.IUsuarioDAO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 
 @Repository
-public class UsuarioGestor implements IUsuarioGestor	{
+public class UsuarioGestor implements IUsuarioGestor{
 
 	@Autowired
 	IUsuarioDAO usuarioDAO;
@@ -45,4 +45,11 @@ public class UsuarioGestor implements IUsuarioGestor	{
 	public int eliminar(Long id) {
 		return usuarioDAO.eliminar(id);
 	}
+
+	@Override
+	public UsuarioDTO identificar(UsuarioDTO usuario) {
+		return this.usuarioDAO.findByCedulaAndContrasenia(usuario.getCedula(), usuario.getContrasenia());
+	}
+	
+	
 }
