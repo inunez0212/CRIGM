@@ -9,6 +9,9 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.constantes.Constantes;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGlobalGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
@@ -23,6 +26,12 @@ public class ProyectoGlobalController implements Serializable {
 
 	@Autowired
 	private IProyectoGlobalGestor proyectoGlobalGestor;
+	@Autowired
+	private IProyectoGestor proyectoGestor;
+	@Autowired
+	private ICatalogoValorGestor catalogoValorGestor; 
+	
+	
 	
 	@Inject
 	private LoginController loginController;
@@ -31,7 +40,7 @@ public class ProyectoGlobalController implements Serializable {
     private ProyectoGlobalDTO selected;
     private List<ProyectoGlobalDTO> itemsFiltrados;
     private String codigoReferenciaEstado;
-    private Integer codigoProyecto;
+    private Long codigoProyecto;
     
     public ProyectoGlobalController() {
     }
@@ -45,6 +54,8 @@ public class ProyectoGlobalController implements Serializable {
     	try {
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
+    		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
+    		selected.setEstadoglobal(catalogoValorGestor.getOne(Constantes.ESTADO_EN_PROCESO));
     		proyectoGlobalGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoGlobalDTO creado correctamente");
     	}catch (Exception e) {
@@ -55,6 +66,8 @@ public class ProyectoGlobalController implements Serializable {
 
     public void update() {
     	try {
+    		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
+    		selected.setEstadoglobal(catalogoValorGestor.getOne(codigoReferenciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		proyectoGlobalGestor.save(selected);
@@ -114,11 +127,11 @@ public class ProyectoGlobalController implements Serializable {
 		this.loginController = loginController;
 	}
 
-	public Integer getCodigoProyecto() {
+	public Long getCodigoProyecto() {
 		return codigoProyecto;
 	}
 
-	public void setCodigoProyecto(Integer codigoProyecto) {
+	public void setCodigoProyecto(Long codigoProyecto) {
 		this.codigoProyecto = codigoProyecto;
 	}
 

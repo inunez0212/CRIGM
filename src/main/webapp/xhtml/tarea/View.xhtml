@@ -13,9 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tareaController.selected != null}">
                         <h:outputText value="ID"/>
-                        <h:outputText value="P00-#{tareaController.selected.id}" title="#{bundle.ViewTareaTitle_id}"/>
+                        <h:outputText value="T00-#{tareaController.selected.id}" title="#{bundle.ViewTareaTitle_id}"/>
                         <h:outputText value="Descripci&oacute;n"/>
-                        <h:outputText value="#{tareaController.selected.descripcion}" title="Descripci&oacute;n"/>
+                        <h:outputText value="#{tareaController.selected.proyecto.nombre}" title="Proyecto"/>
+                        <h:outputText value="Carpeta"/>
+                        <h:outputText value="#{tareaController.selected.rutacarpeta}" title="Ruta carpeta"/>
                         <h:outputText value="Estado tarea"/>
                         <h:outputText value="#{tareaController.selected.estadotarea.descripcion}" title="Estado"/>
                         <h:outputText value="Usuario asignador"/>

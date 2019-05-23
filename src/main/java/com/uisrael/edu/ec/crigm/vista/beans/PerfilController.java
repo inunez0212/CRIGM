@@ -68,7 +68,7 @@ public class PerfilController implements Serializable {
     	try {
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
-    		perfilGestor.eliminar(selected.getId());
+    		perfilGestor.eliminar(selected.getId().intValue());
     		JsfUtil.addSuccessMessage("PerfilDTO eliminado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();

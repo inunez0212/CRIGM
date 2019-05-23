@@ -12,6 +12,6 @@ public interface ITipoTareaGestor {
 	TipoTareaDTO getOne(Long id);
 	long count();
 	TipoTareaDTO save(TipoTareaDTO entity);
-	int eliminar(Integer id);	
+	int eliminar(Long id);	
 	
 }

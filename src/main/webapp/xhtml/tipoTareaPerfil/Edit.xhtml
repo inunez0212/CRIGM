@@ -11,21 +11,18 @@
         <p:dialog id="TipoTareaPerfilEditDlg" widgetVar="TipoTareaPerfilEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Edici&oacute;n">
             <h:form id="TipoTareaPerfilEditForm">
                 <h:panelGroup id="display">
-                    <p:outputLabel value="ID" for="id" />
+                    <p:panelGrid columns="2" rendered="#{tipoTareaPerfilController.selected != null}">
+                        <p:outputLabel value="ID" for="id" />
                         <p:inputText id="id" value="TTP-00#{tipoTareaPerfilController.selected.id}" disabled="true"/>
                         <p:outputLabel value="Perfil" for="perfil" />
                         <p:selectOneMenu id="perfil" value="#{tipoTareaPerfilController.idPerfil}" >
-                        	<f:selectItems value="#{perfilController.items}" var="dato" 
-                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        	<f:selectItems value="#{perfilController.items}" var="item"
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.id}" > </f:selectItems>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Tipo Tarea" for="tipoTarea" />
+                        <p:outputLabel value="Tipo tarea" for="tipoTarea" />
                         <p:selectOneMenu id="tipoTarea" value="#{tipoTareaPerfilController.idTipoTarea}" >
-                        	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
-                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Estado" for="estado" />
-                        <p:selectOneMenu id="estado" value="#{tipoTareaPerfilController.selected.estado}" >
-                        	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
+                        	<f:selectItems value="#{tipoTareaController.items}" var="item"
+                        	itemLabel="#{item.nombre}" itemValue="#{item.id}" > </f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{tipoTareaPerfilController.selected.estado}" >

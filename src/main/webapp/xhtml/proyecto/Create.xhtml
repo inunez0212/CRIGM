@@ -16,18 +16,14 @@
                         <p:inputText id="id" value="P-00#{proyectoController.selected.id}" disabled="true"/>
                         <p:outputLabel value="Nombre" for="nombre" />
                         <p:inputText id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre" />
-                        <p:outputLabel value="N. tareas" for="numerotareas" />
-                        <p:inputText id="numerotareas" value="#{proyectoController.selected.numerotareas}" title="N. tareas" />
-                        <p:outputLabel value="Ruta" for="ruta" />
-                        <p:inputText id="ruta" value="#{proyectoController.selected.ruta}" title="Ruta" />
                         <p:outputLabel value="Kilometraje" for="kilometraje" />
                         <p:inputText id="kilometraje" value="#{proyectoController.selected.kilometraje}" title="Kilometraje" />
                         <p:outputLabel value="Fecha inicio" for="fechainicio" />
                         <p:calendar id="fechainicio" value="#{proyectoController.selected.fechainicio}" title="Fecha inicio del proyecto"  />
                         <p:outputLabel value="Fecha fin" for="fechafin" />
                         <p:calendar id="fechafin" value="#{proyectoController.selected.fechafin}" title="Fecha fin del proyecto"  />
-                        <p:outputLabel value="Carpeta" for="rutacarpeta" />
-                        <p:inputText id="rutacarpeta" value="#{proyectoController.selected.rutacarpeta}" title="ruta de la carpeta" />
+                        <p:outputLabel value="Carpeta inicial" for="rutacarpeta" />
+                        <p:inputText id="rutacarpeta" value="#{proyectoController.selected.rutacarpeta}" title="Ruta de la carpeta" />
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{proyectoController.selected.estado}" >
                         	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>

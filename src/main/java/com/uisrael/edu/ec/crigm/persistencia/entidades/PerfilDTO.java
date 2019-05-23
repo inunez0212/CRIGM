@@ -8,6 +8,7 @@ package com.uisrael.edu.ec.crigm.persistencia.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class PerfilDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Size(max = 100)
     @Column(name = "descripcion")
     private String descripcion;
@@ -66,15 +67,15 @@ public class PerfilDTO implements Serializable {
     public PerfilDTO() {
     }
 
-    public PerfilDTO(Integer id) {
+    public PerfilDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -16,10 +16,8 @@
                         <p:inputText id="id" value="P-00#{proyectoController.selected.id}" disabled="true"/>
                         <p:outputLabel value="Nombre" for="nombre" />
                         <p:inputText id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre" />
-                        <p:outputLabel value="N. tareas" for="numerotareas" />
-                        <p:inputText id="numerotareas" value="#{proyectoController.selected.numerotareas}" title="N. tareas" />
                         <p:outputLabel value="Ruta" for="ruta" />
-                        <p:inputText id="ruta" value="#{proyectoController.selected.ruta}" title="Ruta" />
+                        <p:inputText id="ruta" value="#{proyectoController.selected.rutacarpeta}" title="Ruta" />
                         <p:outputLabel value="Kilometraje" for="kilometraje" />
                         <p:inputText id="kilometraje" value="#{proyectoController.selected.kilometraje}" title="Kilometraje" />
                         <p:outputLabel value="Fecha inicio" for="fechainicio" />
@@ -29,8 +27,8 @@
                         <p:outputLabel value="Carpeta" for="rutacarpeta" />
                         <p:inputText id="rutacarpeta" value="#{proyectoController.selected.rutacarpeta}" title="ruta de la carpeta" />
                         <p:outputLabel value="Estado" for="estado" />
-                        <p:selectOneMenu id="estado" value="#{proyectoController.codigoReferenciaEstado}" >
-                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado(EPR)}" var="item"
+                        <p:selectOneMenu id="estado" value="#{proyectoController.codigoRefereciaEstado}" >
+                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('EST')}" var="item"
                         	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                         </p:selectOneMenu>
                     </p:panelGrid>

@@ -10,12 +10,12 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ITipoTareaGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.TipoTareaDTO;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
 @Named("tareaController")
@@ -28,6 +28,14 @@ public class TareaController implements Serializable {
 
 	@Autowired
 	private ITareaGestor tareaGestor;
+	@Autowired
+	private ICatalogoValorGestor catalogoValorGestor;
+	@Autowired
+	private IUsuarioGestor usuarioGestor;
+	@Autowired
+	private ITipoTareaGestor tipoTareaGestor;
+	@Autowired
+	private IProyectoGestor proyectoGestor;
 	
 	@Inject
 	private LoginController loginController;
@@ -35,12 +43,12 @@ public class TareaController implements Serializable {
     private List<TareaDTO> items = null;
     private TareaDTO selected;
     private List<TareaDTO> itemsFiltrados;
-    private Integer idTipoTarea;
+    private Long idTipoTarea;
     private String estadoValor;
-    private Integer idProyecto;
-    private Integer idUsuarioAsignado;
-    private Integer idUsuarioAsignador;
-    private Integer idUsuarioRevisor;
+    private Long idProyecto;
+    private Long idUsuarioAsignado;
+    private Long idUsuarioAsignador;
+    private Long idUsuarioRevisor;
     
     public TareaController() {
     }
@@ -52,18 +60,14 @@ public class TareaController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setEstadotarea(new CatalogoValorDTO());
-    		selected.setTipotarea(new TipoTareaDTO());
-    		selected.getTipotarea().setId(idTipoTarea);
-    		selected.setProyecto(new ProyectoDTO());
-    		selected.getProyecto().setId(idProyecto);
+    		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
+    		selected.setProyecto(proyectoGestor.getOne(idProyecto));
     		if(idUsuarioAsignado!=null) {
     			selected.setUsuarioasignador(loginController.getUsuario());
-        		selected.setUsuarioasignado(new UsuarioDTO());
-        		selected.getUsuarioasignado().setId(idUsuarioAsignado);
-        		selected.getEstadotarea().setCodigoreferencia(Constantes.ESTADO_TAREA_ASIGNADA);
+        		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
+        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
     		}else {
-        		selected.getEstadotarea().setCodigoreferencia(Constantes.ESTADO_TAREA_REGISTRADA);
+        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
     		}
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
@@ -77,12 +81,16 @@ public class TareaController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setEstadotarea(new CatalogoValorDTO());
-    		selected.getEstadotarea().setCodigoreferencia(estadoValor);
-    		selected.setTipotarea(new TipoTareaDTO());
-    		selected.getTipotarea().setId(idTipoTarea);
-    		selected.setProyecto(new ProyectoDTO());
-    		selected.getProyecto().setId(idProyecto);
+    		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
+    		selected.setProyecto(proyectoGestor.getOne(idProyecto));
+    		if(idUsuarioAsignado!=null && selected.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
+    			selected.setUsuarioasignador(loginController.getUsuario());
+        		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
+        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
+    		}else {
+        		selected.setEstadotarea(catalogoValorGestor.getOne(estadoValor));
+    		}
+    		selected.setRevisor(usuarioGestor.getOne(idUsuarioRevisor));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		tareaGestor.save(selected);
@@ -126,51 +134,87 @@ public class TareaController implements Serializable {
 		this.itemsFiltrados = itemsFiltrados;
 	}
 
-	public Integer getIdTipoTarea() {
+	/**
+	 * @return the idTipoTarea
+	 */
+	public Long getIdTipoTarea() {
 		return idTipoTarea;
 	}
 
-	public void setIdTipoTarea(Integer idTipoTarea) {
+	/**
+	 * @param idTipoTarea the idTipoTarea to set
+	 */
+	public void setIdTipoTarea(Long idTipoTarea) {
 		this.idTipoTarea = idTipoTarea;
 	}
 
+	/**
+	 * @return the estadoValor
+	 */
 	public String getEstadoValor() {
 		return estadoValor;
 	}
 
+	/**
+	 * @param estadoValor the estadoValor to set
+	 */
 	public void setEstadoValor(String estadoValor) {
 		this.estadoValor = estadoValor;
 	}
 
-	public Integer getIdProyecto() {
+	/**
+	 * @return the idProyecto
+	 */
+	public Long getIdProyecto() {
 		return idProyecto;
 	}
 
-	public void setIdProyecto(Integer idProyecto) {
+	/**
+	 * @param idProyecto the idProyecto to set
+	 */
+	public void setIdProyecto(Long idProyecto) {
 		this.idProyecto = idProyecto;
 	}
 
-	public Integer getIdUsuarioAsignado() {
+	/**
+	 * @return the idUsuarioAsignado
+	 */
+	public Long getIdUsuarioAsignado() {
 		return idUsuarioAsignado;
 	}
 
-	public void setIdUsuarioAsignado(Integer idUsuarioAsignado) {
+	/**
+	 * @param idUsuarioAsignado the idUsuarioAsignado to set
+	 */
+	public void setIdUsuarioAsignado(Long idUsuarioAsignado) {
 		this.idUsuarioAsignado = idUsuarioAsignado;
 	}
 
-	public Integer getIdUsuarioAsignador() {
+	/**
+	 * @return the idUsuarioAsignador
+	 */
+	public Long getIdUsuarioAsignador() {
 		return idUsuarioAsignador;
 	}
 
-	public void setIdUsuarioAsignador(Integer idUsuarioAsignador) {
+	/**
+	 * @param idUsuarioAsignador the idUsuarioAsignador to set
+	 */
+	public void setIdUsuarioAsignador(Long idUsuarioAsignador) {
 		this.idUsuarioAsignador = idUsuarioAsignador;
 	}
 
-	public Integer getIdUsuarioRevisor() {
+	/**
+	 * @return the idUsuarioRevisor
+	 */
+	public Long getIdUsuarioRevisor() {
 		return idUsuarioRevisor;
 	}
 
-	public void setIdUsuarioRevisor(Integer idUsuarioRevisor) {
+	/**
+	 * @param idUsuarioRevisor the idUsuarioRevisor to set
+	 */
+	public void setIdUsuarioRevisor(Long idUsuarioRevisor) {
 		this.idUsuarioRevisor = idUsuarioRevisor;
 	}
 	

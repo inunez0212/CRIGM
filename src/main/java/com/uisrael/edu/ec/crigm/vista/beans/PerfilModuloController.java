@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilModuloGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilModuloDTO;
@@ -24,6 +25,9 @@ public class PerfilModuloController implements Serializable {
 
 	@Autowired
 	private IPerfilModuloGestor perfilModuloGestor;
+	@Autowired
+	private IPerfilGestor perfilGestor;
+	
 	
 	@Inject
 	private LoginController loginController;
@@ -31,7 +35,7 @@ public class PerfilModuloController implements Serializable {
     private List<PerfilModuloDTO> items = null;
     private PerfilModuloDTO selected;
     private List<PerfilModuloDTO> itemsFiltrados;
-    private Integer perfilId;
+    private Long perfilId;
     
     public PerfilModuloController() {
     }
@@ -45,7 +49,7 @@ public class PerfilModuloController implements Serializable {
     	try {
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
-    		selected.setPerfil(new PerfilDTO(perfilId));
+    		selected.setPerfil(perfilGestor.getOne(perfilId));
     		perfilModuloGestor.save(selected);
     		JsfUtil.addSuccessMessage("Permisos creados correctamente");
     	}catch (Exception e) {
@@ -56,7 +60,7 @@ public class PerfilModuloController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setPerfil(new PerfilDTO(perfilId));
+    		selected.setPerfil(perfilGestor.getOne(perfilId));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		perfilModuloGestor.save(selected);
@@ -100,11 +104,11 @@ public class PerfilModuloController implements Serializable {
 		this.itemsFiltrados = itemsFiltrados;
 	}
 
-	public Integer getPerfilId() {
+	public Long getPerfilId() {
 		return perfilId;
 	}
 
-	public void setPerfilId(Integer perfilId) {
+	public void setPerfilId(Long perfilId) {
 		this.perfilId = perfilId;
 	}
 	

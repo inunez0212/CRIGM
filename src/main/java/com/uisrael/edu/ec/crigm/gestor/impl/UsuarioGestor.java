@@ -42,7 +42,7 @@ public class UsuarioGestor implements IUsuarioGestor	{
 	}
 
 	@Override	
-	public int eliminar(Integer id) {
+	public int eliminar(Long id) {
 		return usuarioDAO.eliminar(id);
 	}
 }

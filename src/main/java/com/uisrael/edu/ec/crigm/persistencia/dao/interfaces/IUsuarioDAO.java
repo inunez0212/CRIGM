@@ -28,7 +28,7 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 	@Transactional
 	@Modifying
 	@Query("update UsuarioDTO p set estado = 0 where p.id = ?1")
-	int eliminar(Integer id);
+	int eliminar(Long id);
 	
 	
 }

@@ -90,7 +90,8 @@ public class CatalogoValorController implements Serializable {
     }
     
     public List<CatalogoValorDTO> obtenerCatalogosPorRelacionado(String codigoRelacionado) {
-    	return catalogoValorGestor.findByCodigoreferenciarelacionado(codigoRelacionado);
+    	CatalogoValorDTO catalogoRelacionado = catalogoValorGestor.getOne(codigoRelacionado);	
+    	return catalogoValorGestor.findByCodigoreferenciarelacionado(catalogoRelacionado);
     }
     
 	public CatalogoValorDTO getSelected() {

@@ -13,14 +13,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoTareaPerfilController.selected != null}">
                         <h:outputText value="ID"/>
-                        <h:outputText value="TTP00-#{tipoTareaPerfilController.selected.id}" title="ID"/>
-                        <h:outputText value="Tipo tarea"/>
-                        <h:outputText value="#{tipoTareaPerfilController.selected.tipoTarea}" title="Tipo tarea"/>
+                        <h:outputText value="TTP-00-#{tipoTareaPerfilController.selected.id}" title="ID"/>
                         <h:outputText value="Perfil"/>
-                        <h:outputText value="#{tipoTareaPerfilController.selected.perfil}" title="Perfil"/>
+                        <h:outputText value="#{tipoTareaPerfilController.selected.perfilDTO.descripcion}" title="Perfil"/>
+                        <h:outputText value="Tipo Tarea"/>
+                        <h:outputText value="#{tipoTareaPerfilController.selected.tipoTareaDTO.nombre}" title="Tipo tarea"/>
                         <h:outputText value="Estado"/>
                         <h:outputText value="#{tipoTareaPerfilController.selected.estado}" title="Estado"/>
-                        <h:outputText value="Fecha registro"/>
+						<h:outputText value="Fecha registro"/>
                         <h:outputText value="#{tipoTareaPerfilController.selected.fecharegistro}" title="Fecha registro">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>

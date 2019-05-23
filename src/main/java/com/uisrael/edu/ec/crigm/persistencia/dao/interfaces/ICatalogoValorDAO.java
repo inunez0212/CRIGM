@@ -31,7 +31,7 @@ public interface ICatalogoValorDAO extends JpaRepository<CatalogoValorDTO, Long>
 	@Query("update CatalogoValorDTO p set estado = 0 where p.id = ?1")
 	int eliminar(String id);
 
-	List<CatalogoValorDTO> findByCodigoreferenciarelacionado(String relacionado);
+	List<CatalogoValorDTO> findByCodigoreferenciarelacionado(CatalogoValorDTO relacionado);
 	
 	
 }

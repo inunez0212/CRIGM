@@ -40,7 +40,7 @@ public class ProyectoDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "numerotareas")
     private Integer numerotareas;
     @Size(max = 200)
@@ -86,15 +86,15 @@ public class ProyectoDTO implements Serializable {
     public ProyectoDTO() {
     }
 
-    public ProyectoDTO(Integer id) {
+    public ProyectoDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

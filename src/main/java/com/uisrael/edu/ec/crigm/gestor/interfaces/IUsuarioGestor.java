@@ -12,6 +12,6 @@ public interface IUsuarioGestor {
 	UsuarioDTO getOne(Long id);
 	long count();
 	UsuarioDTO save(UsuarioDTO entity);
-	int eliminar(Integer id);	
+	int eliminar(Long id);	
 	
 }

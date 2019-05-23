@@ -47,7 +47,7 @@ public class CatalogoValorGestor implements ICatalogoValorGestor	{
 	}
 
 	@Override
-	public List<CatalogoValorDTO> findByCodigoreferenciarelacionado(String relacionado) {
+	public List<CatalogoValorDTO> findByCodigoreferenciarelacionado(CatalogoValorDTO relacionado) {
 		return this.catalogoValorDAO.findByCodigoreferenciarelacionado(relacionado);
 	}
 }

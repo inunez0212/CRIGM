@@ -5,9 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
     <ui:composition>
-
         <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear">
             <h:form id="UsuarioCreateForm">
                 <h:panelGroup id="display">
@@ -18,7 +16,7 @@
                         <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="Nombre" />
                         <p:outputLabel value="Apellido" for="apellido" />
                         <p:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="Apellido" />
-                        <p:outputLabel value="C&eacuote;dula" for="cedula" />
+                        <p:outputLabel value="C&eacute;dula" for="cedula" />
                         <p:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="C&eacuote;dula" />
                         <p:outputLabel value="Email" for="email" />
                         <p:inputText id="email" value="#{usuarioController.selected.email}" title="Email" />
@@ -28,6 +26,12 @@
                         <p:selectOneMenu id="perfil" value="#{usuarioController.idPerfil}" >
                         	<f:selectItems value="#{perfilController.items}" var="dato" 
                         	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Grupo" for="grupo" />
+                        <p:selectOneMenu id="grupo" value="#{usuarioController.selected.grupo}" >
+                        	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
+                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('GRUP')}" var="item"
+                        	itemLabel="#{item.codigoreferencia}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{usuarioController.selected.estado}" >

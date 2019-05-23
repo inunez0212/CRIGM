@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
@@ -24,6 +25,8 @@ public class UsuarioController implements Serializable {
 
 	@Autowired
 	private IUsuarioGestor usuarioGestor;
+	@Autowired
+	private IPerfilGestor perfilGestor;
 	
 	@Inject
 	private LoginController loginController;
@@ -31,7 +34,7 @@ public class UsuarioController implements Serializable {
     private List<UsuarioDTO> items = null;
     private UsuarioDTO selected;
     private List<UsuarioDTO> itemsFiltrados;
-    private Integer idPerfil;
+    private Long idPerfil;
     
     public UsuarioController() {
     }
@@ -43,7 +46,7 @@ public class UsuarioController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setPerfil(new PerfilDTO(idPerfil));
+    		selected.setPerfil(perfilGestor.getOne(idPerfil));
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
     		usuarioGestor.save(selected);
@@ -56,7 +59,7 @@ public class UsuarioController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setPerfil(new PerfilDTO(idPerfil));
+    		selected.setPerfil(perfilGestor.getOne(idPerfil));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		usuarioGestor.save(selected);
@@ -100,11 +103,11 @@ public class UsuarioController implements Serializable {
 		this.itemsFiltrados = itemsFiltrados;
 	}
 
-	public Integer getIdPerfil() {
+	public Long getIdPerfil() {
 		return idPerfil;
 	}
 
-	public void setIdPerfil(Integer idPerfil) {
+	public void setIdPerfil(Long idPerfil) {
 		this.idPerfil = idPerfil;
 	}
 

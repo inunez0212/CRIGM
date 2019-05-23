@@ -28,7 +28,7 @@ public interface ITipoTareaDAO extends JpaRepository<TipoTareaDTO, Long>{
 	@Transactional
 	@Modifying
 	@Query("update TipoTareaDTO p set estado = 0 where p.id = ?1")
-	int eliminar(Integer id);
+	int eliminar(Long id);
 	
 	
 }

@@ -40,7 +40,7 @@ public class TipoTareaDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Size(max = 100)
     @Column(name = "nombre")
     private String nombre;
@@ -72,15 +72,15 @@ public class TipoTareaDTO implements Serializable {
     public TipoTareaDTO() {
     }
 
-    public TipoTareaDTO(Integer id) {
+    public TipoTareaDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

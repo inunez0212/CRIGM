@@ -9,7 +9,10 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.constantes.Constantes;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -23,6 +26,8 @@ public class ProyectoController implements Serializable {
 
 	@Autowired
 	private IProyectoGestor proyectoGestor;
+	@Autowired
+	private ICatalogoValorGestor catalogoValorGestor; 
 	
 	@Inject
 	private LoginController loginController;
@@ -42,6 +47,7 @@ public class ProyectoController implements Serializable {
 
     public void create() {
     	try {
+    		selected.setEstadoproyecto(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
     		proyectoGestor.save(selected);
@@ -54,6 +60,7 @@ public class ProyectoController implements Serializable {
 
     public void update() {
     	try {
+    		selected.setEstadoproyecto(this.catalogoValorGestor.getOne(codigoRefereciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
     		proyectoGestor.save(selected);
@@ -68,7 +75,7 @@ public class ProyectoController implements Serializable {
     	try {
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
-    		proyectoGestor.eliminar(selected.getId());
+    		proyectoGestor.eliminar(selected.getId().intValue());
     		JsfUtil.addSuccessMessage("ProyectoDTO eliminado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();

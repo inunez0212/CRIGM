@@ -42,7 +42,7 @@ public class TipoTareaGestor implements ITipoTareaGestor	{
 	}
 
 	@Override	
-	public int eliminar(Integer id) {
+	public int eliminar(Long id) {
 		return tipoTareaDAO.eliminar(id);
 	}
 }

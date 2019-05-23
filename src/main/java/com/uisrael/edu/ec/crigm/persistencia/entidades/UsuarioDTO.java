@@ -40,7 +40,7 @@ public class UsuarioDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Size(max = 100)
     @Column(name = "nombre")
     private String nombre;
@@ -57,6 +57,8 @@ public class UsuarioDTO implements Serializable {
     @Size(max = 100)
     @Column(name = "contrasenia")
     private String contrasenia;
+    @Column(name = "grupo")
+    private String grupo;
     @Size(max = 1)
     @Column(name = "estado")
     private String estado;
@@ -91,15 +93,15 @@ public class UsuarioDTO implements Serializable {
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(Integer id) {
+    public UsuarioDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -264,5 +266,13 @@ public class UsuarioDTO implements Serializable {
     public String toString() {
         return "entidades.UsuarioDTO[ id=" + id + " ]";
     }
+
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
     
 }

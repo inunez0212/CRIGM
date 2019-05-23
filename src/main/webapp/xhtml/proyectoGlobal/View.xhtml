@@ -1,44 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
+<ui:composition>
 
-        <p:dialog id="ProyectoGlobalViewDlg" widgetVar="ProyectoGlobalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Detalles">
-            <h:form id="ProyectoGlobalViewForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{proyectoGlobalController.selected != null}">
-                        <h:outputText value="PG00-#{proyectoGlobalController.selected.id}" title="ID"/>
-                        <h:outputText value="Nombre"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.nombre}" title="Nombre"/>
-                        <h:outputText value="Estado"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.estadoglobal.descripcion}" title="Estado"/>
-                        </h:outputText>
-                        <h:outputText value="Kilometraje"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.kilometraje}" title="Kilometraje"/>
-                        <h:outputText value="Ruta"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.ruta}" title="Ruta"/>
-                        <h:outputText value="Fecha registro"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.fecharegistro}" title="Fecha registro">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                        <h:outputText value="Fecha modificaci&oacute;n"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.fechamodificacion}" title="Fecha modificaci&oacute;n">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-						<h:outputText value="Usuario registro"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.usuarioregistro.nombre} #{proyectoGlobalController.selected.usuarioregistro.apellido}" title="Usuario registro"/>
-                        <h:outputText value="Usuario modificaci&oacute;n"/>
-                        <h:outputText value="#{proyectoGlobalController.selected.usuariomodificacion.nombre} #{proyectoGlobalController.selected.usuariomodificacion.apellido }" title="Usuario modificaci&oacute;n"/>
-                    </p:panelGrid>
-                    <p:commandButton value="Cerrar" onclick="PF('ProyectoGlobalViewDialog').hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
+	<p:dialog id="ProyectoGlobalViewDlg"
+		widgetVar="ProyectoGlobalViewDialog" modal="true" resizable="false"
+		appendTo="@(body)" header="Detalles">
+		<h:form id="ProyectoGlobalViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2"
+					rendered="#{proyectoGlobalController.selected != null}">
+					<h:outputText value="ID" />
+					<h:outputText value="PG00-#{proyectoGlobalController.selected.id}"
+						title="ID" />
+					<h:outputText value="Proyecto" />
+					<h:outputText value="#{proyectoGlobalController.selected.proyecto.nombre}"/>
+					<h:outputText value="Nombre" />
+					<h:outputText value="#{proyectoGlobalController.selected.nombre}"
+						title="Nombre" />
+					<h:outputText value="Estado" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.estadoglobal.descripcion}"
+						title="Estado" />
+					<h:outputText value="Kilometraje" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.kilometraje}"
+						title="Kilometraje" />
+					<h:outputText value="Ruta" />
+					<h:outputText value="#{proyectoGlobalController.selected.rutacarpeta}"
+						title="Ruta" />
+					<h:outputText value="Fecha registro" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.fecharegistro}"
+						title="Fecha registro">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="Fecha modificaci&oacute;n" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.fechamodificacion}"
+						title="Fecha modificaci&oacute;n">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="Usuario registro" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.usuarioregistro.nombre} #{proyectoGlobalController.selected.usuarioregistro.apellido}"
+						title="Usuario registro" />
+					<h:outputText value="Usuario modificaci&oacute;n" />
+					<h:outputText
+						value="#{proyectoGlobalController.selected.usuariomodificacion.nombre} #{proyectoGlobalController.selected.usuariomodificacion.apellido }"
+						title="Usuario modificaci&oacute;n" />
+				</p:panelGrid>
+				<p:commandButton value="Cerrar"
+					onclick="PF('ProyectoGlobalViewDialog').hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
 
-    </ui:composition>
+</ui:composition>
 </html>

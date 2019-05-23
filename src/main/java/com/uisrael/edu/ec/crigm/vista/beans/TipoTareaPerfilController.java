@@ -4,15 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.annotation.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ITipoTareaGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITipoTareaPerfilGestor;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilDTO;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.TipoTareaDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TipoTareaPerfilDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -25,7 +24,11 @@ public class TipoTareaPerfilController implements Serializable {
 	private static final long serialVersionUID = 6438741790634876364L;
 
 	@Autowired
-	private ITipoTareaPerfilGestor tipoTareaTipoTareaPerfilGestor;
+	private ITipoTareaPerfilGestor tipoTareaPerfilGestor;
+	@Autowired
+	private ITipoTareaGestor tipoTareaGestor;
+	@Autowired
+	private IPerfilGestor perfilGestor;
 	
 	@Inject
 	private LoginController loginController;
@@ -33,8 +36,8 @@ public class TipoTareaPerfilController implements Serializable {
     private List<TipoTareaPerfilDTO> items = null;
     private TipoTareaPerfilDTO selected;
     private List<TipoTareaPerfilDTO> itemsFiltrados;
-    private Integer idTipoTarea;
-    private Integer idPerfil;
+    private Long idTipoTarea;
+    private Long idPerfil;
     
     
     public TipoTareaPerfilController() {
@@ -47,13 +50,11 @@ public class TipoTareaPerfilController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setTipoTarea(new TipoTareaDTO());
-    		selected.setPerfilDTO(new PerfilDTO());
-    		selected.getTipoTarea().setId(idTipoTarea);
-    		selected.getPerfilDTO().setId(idPerfil);
+    		selected.setTipoTarea(tipoTareaGestor.getOne(idTipoTarea));
+    		selected.setPerfilDTO(perfilGestor.getOne(idPerfil));
     		selected.setUsuarioregistro(loginController.getUsuario());
     		selected.setFecharegistro(new Date());
-    		tipoTareaTipoTareaPerfilGestor.save(selected);
+    		tipoTareaPerfilGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO creado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
@@ -63,13 +64,11 @@ public class TipoTareaPerfilController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setTipoTarea(new TipoTareaDTO());
-    		selected.setPerfilDTO(new PerfilDTO());
-    		selected.getTipoTarea().setId(idTipoTarea);
-    		selected.getPerfilDTO().setId(idPerfil);
+    		selected.setTipoTarea(tipoTareaGestor.getOne(idTipoTarea));
+    		selected.setPerfilDTO(perfilGestor.getOne(idPerfil));
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
-    		tipoTareaTipoTareaPerfilGestor.save(selected);
+    		tipoTareaPerfilGestor.save(selected);
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO actaulizado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
@@ -81,7 +80,7 @@ public class TipoTareaPerfilController implements Serializable {
     	try {
     		selected.setUsuariomodificacion(loginController.getUsuario());
     		selected.setFechamodificacion(new Date());
-    		tipoTareaTipoTareaPerfilGestor.eliminar(selected.getId());
+    		tipoTareaPerfilGestor.eliminar(selected.getId());
     		JsfUtil.addSuccessMessage("TipoTareaPerfilDTO eliminado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
@@ -90,7 +89,7 @@ public class TipoTareaPerfilController implements Serializable {
     }
 
     public List<TipoTareaPerfilDTO> getItems() {
-        items=tipoTareaTipoTareaPerfilGestor.findByEstadoActivo();
+        items=tipoTareaPerfilGestor.findByEstadoActivo();
         return items;
     }
 
@@ -110,19 +109,32 @@ public class TipoTareaPerfilController implements Serializable {
 		this.itemsFiltrados = itemsFiltrados;
 	}
 
-	public Integer getIdTipoTarea() {
+	/**
+	 * @return the idTipoTarea
+	 */
+	public Long getIdTipoTarea() {
 		return idTipoTarea;
 	}
 
-	public void setIdTipoTarea(Integer idTipoTarea) {
+	/**
+	 * @param idTipoTarea the idTipoTarea to set
+	 */
+	public void setIdTipoTarea(Long idTipoTarea) {
 		this.idTipoTarea = idTipoTarea;
 	}
 
-	public Integer getIdPerfil() {
+	/**
+	 * @return the idPerfil
+	 */
+	public Long getIdPerfil() {
 		return idPerfil;
 	}
 
-	public void setIdPerfil(Integer idPerfil) {
+	/**
+	 * @param idPerfil the idPerfil to set
+	 */
+	public void setIdPerfil(Long idPerfil) {
 		this.idPerfil = idPerfil;
 	}
+
 }

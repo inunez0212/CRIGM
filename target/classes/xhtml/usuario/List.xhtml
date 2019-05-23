@@ -44,6 +44,9 @@
 						sortBy="#{item.perfil.descripcion}">
 						<h:outputText value="#{item.perfil.descripcion}" />
 					</p:column>
+					<p:column headerText="Grupo" sortBy="#{item.grupo}">
+						<h:outputText value="#{item.grupo}" />
+					</p:column>
 					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estado == 1? 'Activo':'Inactivo'}" />
 					</p:column>
