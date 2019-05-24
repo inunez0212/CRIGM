@@ -50,6 +50,17 @@ public class UsuarioGestor implements IUsuarioGestor{
 	public UsuarioDTO identificar(UsuarioDTO usuario) {
 		return this.usuarioDAO.findByCedulaAndContrasenia(usuario.getCedula(), usuario.getContrasenia());
 	}
+
+	@Override
+	public UsuarioDTO findByCedula(String cedula) {
+		return this.usuarioDAO.findByCedula(cedula);
+	}
+
+	@Override
+	public List<UsuarioDTO> findByCedulaOrNombreOrApellido(String cedula, String nombre, 
+			String apellido) {
+		return this.usuarioDAO.findByCedulaOrNombreOrApellido(cedula, nombre, apellido);
+	}
 	
 	
 }

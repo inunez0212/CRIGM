@@ -47,7 +47,7 @@ public class CatalogoValorController implements Serializable {
     public void create() {
     	try {
     		selected.setCodigoreferenciarelacionado(
-  					catalogoValorGestor.getOne(codigoReferenciaRelacionado));
+  					catalogoValorGestor.findByCodigoreferencia(codigoReferenciaRelacionado));
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		catalogoValorGestor.save(selected);
@@ -61,7 +61,7 @@ public class CatalogoValorController implements Serializable {
     public void update() {
     	try {
   			selected.setCodigoreferenciarelacionado(
-  					catalogoValorGestor.getOne(codigoReferenciaRelacionado));
+  					catalogoValorGestor.findByCodigoreferencia(codigoReferenciaRelacionado));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		catalogoValorGestor.save(selected);
@@ -90,7 +90,7 @@ public class CatalogoValorController implements Serializable {
     }
     
     public List<CatalogoValorDTO> obtenerCatalogosPorRelacionado(String codigoRelacionado) {
-    	CatalogoValorDTO catalogoRelacionado = catalogoValorGestor.getOne(codigoRelacionado);	
+    	CatalogoValorDTO catalogoRelacionado = catalogoValorGestor.findByCodigoreferencia(codigoRelacionado);	
     	return catalogoValorGestor.findByCodigoreferenciarelacionado(catalogoRelacionado);
     }
     

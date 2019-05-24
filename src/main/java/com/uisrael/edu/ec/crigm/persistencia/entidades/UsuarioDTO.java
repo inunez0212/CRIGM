@@ -6,7 +6,6 @@
 package com.uisrael.edu.ec.crigm.persistencia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -77,18 +75,18 @@ public class UsuarioDTO implements Serializable {
     @JoinColumn(name = "perfilDTO", referencedColumnName = "id")
     @ManyToOne
     private PerfilDTO perfilDTO;
-    @OneToMany(mappedBy = "usuariomodificacion")
-    private Collection<ProyectoGlobalDTO> proyectoGlobalCollection;
-    @OneToMany(mappedBy = "usuarioregistro")
-    private Collection<ProyectoGlobalDTO> proyectoGlobalCollection1;
-    @OneToMany(mappedBy = "usuariomodificacion")
-    private Collection<PerfilDTO> perfilCollection;
-    @OneToMany(mappedBy = "usuarioregistro")
-    private Collection<PerfilDTO> perfilCollection1;
-    @OneToMany(mappedBy = "usuariomodificacion")
-    private Collection<TipoTareaDTO> tipoTareaCollection;
-    @OneToMany(mappedBy = "usuarioregistro")
-    private Collection<TipoTareaDTO> tipoTareaCollection1;
+//    @OneToMany(mappedBy = "usuariomodificacion")
+//    private Collection<ProyectoGlobalDTO> proyectoGlobalCollection;
+//    @OneToMany(mappedBy = "usuarioregistro")
+//    private Collection<ProyectoGlobalDTO> proyectoGlobalCollection1;
+//    @OneToMany(mappedBy = "usuariomodificacion")
+//    private Collection<PerfilDTO> perfilCollection;
+//    @OneToMany(mappedBy = "usuarioregistro")
+//    private Collection<PerfilDTO> perfilCollection1;
+//    @OneToMany(mappedBy = "usuariomodificacion")
+//    private Collection<TipoTareaDTO> tipoTareaCollection;
+//    @OneToMany(mappedBy = "usuarioregistro")
+//    private Collection<TipoTareaDTO> tipoTareaCollection1;
 
     public UsuarioDTO() {
     }
@@ -176,54 +174,54 @@ public class UsuarioDTO implements Serializable {
     public void setPerfil(PerfilDTO perfilDTO) {
         this.perfilDTO = perfilDTO;
     }
-
-    public Collection<ProyectoGlobalDTO> getProyectoGlobalCollection() {
-        return proyectoGlobalCollection;
-    }
-
-    public void setProyectoGlobalCollection(Collection<ProyectoGlobalDTO> proyectoGlobalCollection) {
-        this.proyectoGlobalCollection = proyectoGlobalCollection;
-    }
-
-    public Collection<ProyectoGlobalDTO> getProyectoGlobalCollection1() {
-        return proyectoGlobalCollection1;
-    }
-
-    public void setProyectoGlobalCollection1(Collection<ProyectoGlobalDTO> proyectoGlobalCollection1) {
-        this.proyectoGlobalCollection1 = proyectoGlobalCollection1;
-    }
-
-    public Collection<PerfilDTO> getPerfilCollection() {
-        return perfilCollection;
-    }
-
-    public void setPerfilCollection(Collection<PerfilDTO> perfilCollection) {
-        this.perfilCollection = perfilCollection;
-    }
-
-    public Collection<PerfilDTO> getPerfilCollection1() {
-        return perfilCollection1;
-    }
-
-    public void setPerfilCollection1(Collection<PerfilDTO> perfilCollection1) {
-        this.perfilCollection1 = perfilCollection1;
-    }
-
-    public Collection<TipoTareaDTO> getTipoTareaCollection() {
-        return tipoTareaCollection;
-    }
-
-    public void setTipoTareaCollection(Collection<TipoTareaDTO> tipoTareaCollection) {
-        this.tipoTareaCollection = tipoTareaCollection;
-    }
-
-    public Collection<TipoTareaDTO> getTipoTareaCollection1() {
-        return tipoTareaCollection1;
-    }
-
-    public void setTipoTareaCollection1(Collection<TipoTareaDTO> tipoTareaCollection1) {
-        this.tipoTareaCollection1 = tipoTareaCollection1;
-    }
+//
+//    public Collection<ProyectoGlobalDTO> getProyectoGlobalCollection() {
+//        return proyectoGlobalCollection;
+//    }
+//
+//    public void setProyectoGlobalCollection(Collection<ProyectoGlobalDTO> proyectoGlobalCollection) {
+//        this.proyectoGlobalCollection = proyectoGlobalCollection;
+//    }
+//
+//    public Collection<ProyectoGlobalDTO> getProyectoGlobalCollection1() {
+//        return proyectoGlobalCollection1;
+//    }
+//
+//    public void setProyectoGlobalCollection1(Collection<ProyectoGlobalDTO> proyectoGlobalCollection1) {
+//        this.proyectoGlobalCollection1 = proyectoGlobalCollection1;
+//    }
+//
+//    public Collection<PerfilDTO> getPerfilCollection() {
+//        return perfilCollection;
+//    }
+//
+//    public void setPerfilCollection(Collection<PerfilDTO> perfilCollection) {
+//        this.perfilCollection = perfilCollection;
+//    }
+//
+//    public Collection<PerfilDTO> getPerfilCollection1() {
+//        return perfilCollection1;
+//    }
+//
+//    public void setPerfilCollection1(Collection<PerfilDTO> perfilCollection1) {
+//        this.perfilCollection1 = perfilCollection1;
+//    }
+//
+//    public Collection<TipoTareaDTO> getTipoTareaCollection() {
+//        return tipoTareaCollection;
+//    }
+//
+//    public void setTipoTareaCollection(Collection<TipoTareaDTO> tipoTareaCollection) {
+//        this.tipoTareaCollection = tipoTareaCollection;
+//    }
+//
+//    public Collection<TipoTareaDTO> getTipoTareaCollection1() {
+//        return tipoTareaCollection1;
+//    }
+//
+//    public void setTipoTareaCollection1(Collection<TipoTareaDTO> tipoTareaCollection1) {
+//        this.tipoTareaCollection1 = tipoTareaCollection1;
+//    }
     
 
     public UsuarioDTO getUsuariomodificacion() {

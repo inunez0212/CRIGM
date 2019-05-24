@@ -47,7 +47,7 @@ public class ProyectoController implements Serializable {
 
     public void create() {
     	try {
-    		selected.setEstadoproyecto(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
+    		selected.setEstadoproyecto(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA));
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		proyectoGestor.save(selected);
@@ -60,7 +60,7 @@ public class ProyectoController implements Serializable {
 
     public void update() {
     	try {
-    		selected.setEstadoproyecto(this.catalogoValorGestor.getOne(codigoRefereciaEstado));
+    		selected.setEstadoproyecto(this.catalogoValorGestor.findByCodigoreferencia(codigoRefereciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGestor.save(selected);

@@ -27,7 +27,7 @@ public class CatalogoValorGestor implements ICatalogoValorGestor	{
 	}
 
 	@Override
-	public CatalogoValorDTO getOne(String id) {
+	public CatalogoValorDTO findByCodigoreferencia(String id) {
 		return catalogoValorDAO.findByCodigoreferencia(id);
 	}
 

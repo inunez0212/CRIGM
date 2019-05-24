@@ -15,7 +15,43 @@
 
 	<ui:define name="body">
 		<h:form id="UsuarioListForm">
-			<p:panel header="Usuario">
+			<p:panel header="Usuarios">
+				<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{usuarioController.prepareCreate}"	update=":UsuarioCreateForm"
+					oncomplete="PF('UsuarioCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":UsuarioEditForm"
+						oncomplete="PF('UsuarioEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{usuarioController.destroy}"
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
+				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
+				<p:panelGrid columns="10" layout="grid" id="gridBusqueda">
+					<p:inputText id="ced" placeholder="C&eacute;dula" value="#{usuarioController.cedula}">
+					</p:inputText>
+					<p:inputText id="nom" placeholder="Nombre" value="#{usuarioController.nombre}"></p:inputText>
+					<p:inputText id="ape" placeholder="Apellido" value="#{usuarioController.apellido}"></p:inputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
+						actionListener="#{usuarioController.busqueda}" process="gridBusqueda" update="UsuarioListForm"> </p:commandButton>
+					<p:commandButton  value="Actualizar" icon="fa fa-refresh" styleClass="CyanButton"
+						update="UsuarioListForm ced nom ape"> </p:commandButton>
+    			</p:panelGrid>
+				
 				<p:dataTable id="datalist" value="#{usuarioController.items}"
 					var="item" selectionMode="single"
 					selection="#{usuarioController.selected}" paginator="true"
@@ -50,6 +86,11 @@
 					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estado == 1? 'Activo':'Inactivo'}" />
 					</p:column>
+					<p:column style="text-align: center" headerText="Opciones" >
+			             <p:commandButton   icon="fa fa-unlock" title="Resetar contraseña">
+			                <f:setPropertyActionListener value="#{item}" target="#{usuarioController.selected}"/>
+			            </p:commandButton>
+			        </p:column>
 					<f:facet name="footer" style="text-align: left !important; ">
 						<h:outputText
 							value="Total registros: #{usuarioController.items.size()}" />

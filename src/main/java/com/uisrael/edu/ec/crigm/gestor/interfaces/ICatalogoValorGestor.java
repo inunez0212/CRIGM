@@ -9,7 +9,7 @@ public interface ICatalogoValorGestor {
 
 	List<CatalogoValorDTO> findByEstadoActivo();
 	void delete(CatalogoValorDTO entity);
-	CatalogoValorDTO getOne(String id);
+	CatalogoValorDTO findByCodigoreferencia(String id);
 	long count();
 	CatalogoValorDTO save(CatalogoValorDTO entity);
 	int eliminar(String id);

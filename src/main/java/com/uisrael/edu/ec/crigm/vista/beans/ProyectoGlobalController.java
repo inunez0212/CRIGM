@@ -55,7 +55,7 @@ public class ProyectoGlobalController implements Serializable {
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
-    		selected.setEstadoglobal(catalogoValorGestor.getOne(Constantes.ESTADO_EN_PROCESO));
+    		selected.setEstadoglobal(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PROCESO));
     		proyectoGlobalGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoGlobalDTO creado correctamente");
     	}catch (Exception e) {
@@ -67,7 +67,7 @@ public class ProyectoGlobalController implements Serializable {
     public void update() {
     	try {
     		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
-    		selected.setEstadoglobal(catalogoValorGestor.getOne(codigoReferenciaEstado));
+    		selected.setEstadoglobal(catalogoValorGestor.findByCodigoreferencia(codigoReferenciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		proyectoGlobalGestor.save(selected);

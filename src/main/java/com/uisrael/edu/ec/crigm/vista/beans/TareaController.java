@@ -65,9 +65,9 @@ public class TareaController implements Serializable {
     		if(idUsuarioAsignado!=null) {
     			selected.setUsuarioasignador(loginController.getUsuarioDTO());
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
-        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
+        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_ASIGNADA));
     		}else {
-        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_REGISTRADA));
+        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA));
     		}
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
@@ -86,9 +86,9 @@ public class TareaController implements Serializable {
     		if(idUsuarioAsignado!=null && selected.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
     			selected.setUsuarioasignador(loginController.getUsuarioDTO());
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
-        		selected.setEstadotarea(catalogoValorGestor.getOne(Constantes.ESTADO_ASIGNADA));
+        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_ASIGNADA));
     		}else {
-        		selected.setEstadotarea(catalogoValorGestor.getOne(estadoValor));
+        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(estadoValor));
     		}
     		selected.setRevisor(usuarioGestor.getOne(idUsuarioRevisor));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());

@@ -31,5 +31,10 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 	int eliminar(Long id);
 	
 	UsuarioDTO findByCedulaAndContrasenia(String cedula, String contrasenia); 
+
+	UsuarioDTO findByCedula(String cedula);
+
+	List<UsuarioDTO> findByCedulaOrNombreOrApellido(
+			String cedula, String nombre, String apellido);
 	
 }
