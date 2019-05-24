@@ -35,10 +35,10 @@
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
 				<p:panelGrid columns="10" layout="grid" id="gridBusqueda">
-					<p:inputText id="ced" placeholder="C&eacute;dula" value="#{usuarioController.cedula}">
+					<p:inputText placeholder="C&eacute;dula" value="#{usuarioController.cedula}">
 					</p:inputText>
-					<p:inputText id="nom" placeholder="Nombre" value="#{usuarioController.nombre}"></p:inputText>
-					<p:inputText id="ape" placeholder="Apellido" value="#{usuarioController.apellido}"></p:inputText>
+					<p:inputText placeholder="Nombre" value="#{usuarioController.nombre}"></p:inputText>
+					<p:inputText placeholder="Apellido" value="#{usuarioController.apellido}"></p:inputText>
 					<h:outputText></h:outputText>
 					<h:outputText></h:outputText>
 					<h:outputText></h:outputText>
@@ -47,9 +47,9 @@
 					<h:outputText></h:outputText>
 					<h:outputText></h:outputText>
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
-						actionListener="#{usuarioController.busqueda}" process="gridBusqueda" update="UsuarioListForm"> </p:commandButton>
+						actionListener="#{usuarioController.busqueda}" process="gridBusqueda" update="UsuarioListForm gridBusqueda"> </p:commandButton>
 					<p:commandButton  value="Actualizar" icon="fa fa-refresh" styleClass="CyanButton"
-						update="UsuarioListForm ced nom ape"> </p:commandButton>
+						update="UsuarioListForm gridBusqueda"> </p:commandButton>
     			</p:panelGrid>
 				
 				<p:dataTable id="datalist" value="#{usuarioController.items}"
