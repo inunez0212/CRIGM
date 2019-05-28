@@ -11,6 +11,9 @@
         <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Edici&oacute;n">
             <h:form id="UsuarioEditForm">
                 <h:panelGroup id="display">
+                	<p:panelGrid columns="2" rendered="#{usuarioController.selected == null || usuarioController.selected.id == null}">
+                		<p:outputLabel value="No se ha seleccionado un usuario" />
+                	</p:panelGrid>
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
                         <p:outputLabel value="ID" for="id" />
                         <p:inputText id="id" value="U-00#{usuarioController.selected.id}" disabled="true"/>

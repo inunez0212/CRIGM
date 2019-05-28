@@ -22,41 +22,33 @@
 					actionListener="#{usuarioController.prepareCreate}"	update=":UsuarioCreateForm"
 					oncomplete="PF('UsuarioCreateDialog').show()" />
 					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
-						update=":UsuarioEditForm"
+						update=":UsuarioEditForm" 	
 						oncomplete="PF('UsuarioEditDialog').show()" />
 					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
-						actionListener="#{usuarioController.destroy}"
+						actionListener="#{usuarioController.destroy}" 
 						update=":growl,datalist">
 						<p:confirm header="Confirmation" 
 							message="¿Esta seguro?"
 							icon="fa fa-warning" />
 					</p:commandButton>
+					<p:commandButton icon="fa fa-unlock" value="Resetear" styleClass="CyanButton" title="Resetear contrase&ntilde;a"
+						action="#{usuarioController.resetearContrasenia}" update=":growl">
+					</p:commandButton>
 				</p:panelGrid>
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
-				<p:panelGrid columns="10" layout="grid" id="gridBusqueda">
-					<p:inputText placeholder="C&eacute;dula" value="#{usuarioController.cedula}">
+				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
+					<p:inputText placeholder="C&eacute;dula, Nombre, Apellido" value="#{usuarioController.cedula}" onchange="#{usuarioController.busqueda()}" style="">
 					</p:inputText>
-					<p:inputText placeholder="Nombre" value="#{usuarioController.nombre}"></p:inputText>
-					<p:inputText placeholder="Apellido" value="#{usuarioController.apellido}"></p:inputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
-					<h:outputText></h:outputText>
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
 						actionListener="#{usuarioController.busqueda}" process="gridBusqueda" update="UsuarioListForm gridBusqueda"> </p:commandButton>
-					<p:commandButton  value="Actualizar" icon="fa fa-refresh" styleClass="CyanButton"
-						update="UsuarioListForm gridBusqueda"> </p:commandButton>
     			</p:panelGrid>
 				
-				<p:dataTable id="datalist" value="#{usuarioController.items}"
-					var="item" selectionMode="single"
+				<p:dataTable id="datalist" value="#{usuarioController.items}" 
+					var="item" selectionMode="single" 
 					selection="#{usuarioController.selected}" paginator="true"
 					rowKey="#{item.id}" rows="10">
-
+					<f:facet name="header">Lista de usuarios</f:facet>
 					<p:column headerText="ID">
 						<h:outputText value="U-00#{item.id}" />
 					</p:column>
@@ -86,11 +78,6 @@
 					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estado == 1? 'Activo':'Inactivo'}" />
 					</p:column>
-					<p:column style="text-align: center" headerText="Opciones" >
-			             <p:commandButton   icon="fa fa-unlock" title="Resetar contraseña">
-			                <f:setPropertyActionListener value="#{item}" target="#{usuarioController.selected}"/>
-			            </p:commandButton>
-			        </p:column>
 					<f:facet name="footer" style="text-align: left !important; ">
 						<h:outputText
 							value="Total registros: #{usuarioController.items.size()}" />
@@ -113,6 +100,9 @@
 						<p:confirm header="Confirmation" 
 							message="¿Esta seguro?"
 							icon="fa fa-warning" />
+					</p:menuitem>
+					<p:menuitem icon="fa fa-unlock" value="Resetear" title="Resetear contrase&ntilde;a" styleClass="CyanButton"
+						action="#{usuarioController.resetearContrasenia}" update=":growl">
 					</p:menuitem>
 				</p:contextMenu>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

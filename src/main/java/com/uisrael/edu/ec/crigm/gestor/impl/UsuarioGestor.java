@@ -59,8 +59,14 @@ public class UsuarioGestor implements IUsuarioGestor{
 	@Override
 	public List<UsuarioDTO> findByCedulaOrNombreOrApellido(String cedula, String nombre, 
 			String apellido) {
-		return this.usuarioDAO.findByCedulaOrNombreOrApellido(cedula, nombre, apellido);
+		return this.usuarioDAO.findByCedulaOrNombreOrApellidoAndEstado(cedula, nombre, apellido, Constantes.ESTADO_ACTIVO);
 	}
+
+	@Override
+	public int actualizarContrasenia(String contrasenia, Long id) {
+		return this.usuarioDAO.actualizarContrasenia(contrasenia, id);
+	}
+
 	
 	
 }

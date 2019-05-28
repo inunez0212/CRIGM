@@ -34,7 +34,11 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 
 	UsuarioDTO findByCedula(String cedula);
 
-	List<UsuarioDTO> findByCedulaOrNombreOrApellido(
-			String cedula, String nombre, String apellido);
-	
+	List<UsuarioDTO> findByCedulaOrNombreOrApellidoAndEstado(
+			String cedula, String nombre, String apellido, String estado);
+
+	@Transactional
+	@Modifying
+	@Query("update UsuarioDTO p set contrasenia =?1  where p.id = ?2")
+	int actualizarContrasenia(String contrasenia, Long id);
 }

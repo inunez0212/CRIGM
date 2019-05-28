@@ -11,8 +11,11 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.constantes.Constantes;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -28,6 +31,8 @@ public class UsuarioController implements Serializable {
 	private IUsuarioGestor usuarioGestor;
 	@Autowired
 	private IPerfilGestor perfilGestor;
+	@Autowired
+	private ICatalogoValorGestor catalogoValorGestor;
 	
 	@Inject
 	private LoginController loginController;
@@ -38,10 +43,7 @@ public class UsuarioController implements Serializable {
     private Long idPerfil;
     
     //objetos de busqueda
-    private Long perfilId;
     private String cedula;
-    private String nombre;
-    private String apellido;
     private boolean busqueda = false;
     
     public UsuarioController() {
@@ -51,6 +53,7 @@ public class UsuarioController implements Serializable {
         selected = new UsuarioDTO();
         return selected;
     }
+    
 
     public void create() {
     	try {
@@ -91,13 +94,32 @@ public class UsuarioController implements Serializable {
     }
 
     public void busqueda(){
-    	if(StringUtils.isNotBlank(cedula)|| StringUtils.isNotBlank(nombre) || StringUtils.isNotBlank(apellido)) {
+    	if(StringUtils.isNotBlank(cedula)) {
     		busqueda = true;
-    	}    	
+    	}else {
+    		busqueda = false;
+    	}
     }
     
+    public void resetearContrasenia(){
+    	try {
+    		if(selected!=null && selected.getId()!=null) {
+        		CatalogoValorDTO catalogoContrasenia = catalogoValorGestor.findByCodigoreferencia(Constantes.CONTRASENIA_POR_DEFECTO);
+        		this.usuarioGestor.actualizarContrasenia(catalogoContrasenia.getDescripcion(), selected.getId());
+        		JsfUtil.addSuccessMessage("Se reseteo la clave del usuario "+selected.getCedula() + " " + selected.getApellido() +" con ID " + selected.getCedula());
+    		}else {   
+    			JsfUtil.addErrorMessage("Debe seleccionar un usuario");
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			JsfUtil.addErrorMessage("No se pudo resetear la clave del usuario "+selected.getCedula());
+		}
+    	 	
+    }
+    
+    
     private List<UsuarioDTO> findByCedulaOrNombreOrApellido() {
-    	List<UsuarioDTO> items = usuarioGestor.findByCedulaOrNombreOrApellido(cedula, nombre, apellido);
+    	List<UsuarioDTO> items = usuarioGestor.findByCedulaOrNombreOrApellido(cedula,cedula, cedula);
     	if(items==null) {
 			items=new ArrayList<>();
 		}
@@ -108,16 +130,17 @@ public class UsuarioController implements Serializable {
     public List<UsuarioDTO> getItems() {
     	if(busqueda) {
     		items=this.findByCedulaOrNombreOrApellido();
-    		busqueda=false;
     	}else {
     		items=usuarioGestor.findByEstadoActivo();
     	}
-    	cedula = null;
-    	nombre = null;
-    	apellido = null;
         return items;
     }
 
+    public void actualizar() {
+    	cedula = null;
+    	busqueda = false;
+    }
+    
 	public UsuarioDTO getSelected() {
 		return selected;
 	}
@@ -150,19 +173,6 @@ public class UsuarioController implements Serializable {
 		return loginController;
 	}
 
-	/**
-	 * @return the perfilId
-	 */
-	public Long getPerfilId() {
-		return perfilId;
-	}
-
-	/**
-	 * @param perfilId the perfilId to set
-	 */
-	public void setPerfilId(Long perfilId) {
-		this.perfilId = perfilId;
-	}
 
 	/**
 	 * @return the cedula
@@ -178,33 +188,6 @@ public class UsuarioController implements Serializable {
 		this.cedula = cedula;
 	}
 
-	/**
-	 * @return the nombre
-	 */
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * @param nombre the nombre to set
-	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	/**
-	 * @return the apellido
-	 */
-	public String getApellido() {
-		return apellido;
-	}
-
-	/**
-	 * @param apellido the apellido to set
-	 */
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
 
 	
 }
