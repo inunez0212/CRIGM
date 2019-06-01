@@ -18,7 +18,7 @@ public class ProyectoGlobalGestor implements IProyectoGlobalGestor	{
 	
 	@Override
 	public List<ProyectoGlobalDTO> findByEstadoActivo() {
-		return proyectoGlobalDAO.findByEstado(Constantes.ESTADO_ACTIVO); 
+		return proyectoGlobalDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class PerfilModuloGestor implements IPerfilModuloGestor	{
 	
 	@Override
 	public List<PerfilModuloDTO> findByEstadoActivo() {
-		return perfilModuloDAO.findByEstado(Constantes.ESTADO_ACTIVO); 
+		return perfilModuloDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override

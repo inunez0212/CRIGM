@@ -18,7 +18,7 @@ public class CatalogoValorGestor implements ICatalogoValorGestor	{
 	
 	@Override
 	public List<CatalogoValorDTO> findByEstadoActivo() {
-		return catalogoValorDAO.findByEstado(Constantes.ESTADO_ACTIVO); 
+		return catalogoValorDAO.findByEstadoOrderByCodigoreferenciaDESC(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -48,6 +48,6 @@ public class CatalogoValorGestor implements ICatalogoValorGestor	{
 
 	@Override
 	public List<CatalogoValorDTO> findByCodigoreferenciarelacionado(CatalogoValorDTO relacionado) {
-		return this.catalogoValorDAO.findByCodigoreferenciarelacionado(relacionado);
+		return this.catalogoValorDAO.findByCodigoreferenciarelacionadoOrderByCodigoreferenciaDESC(relacionado);
 	}
 }

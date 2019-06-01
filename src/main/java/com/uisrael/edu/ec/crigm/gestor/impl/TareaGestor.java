@@ -18,7 +18,7 @@ public class TareaGestor implements ITareaGestor	{
 	
 	@Override
 	public List<TareaDTO> findByEstadoActivo() {
-		return tareaDAO.findByEstado(Constantes.ESTADO_ACTIVO); 
+		return tareaDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
