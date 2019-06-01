@@ -13,7 +13,7 @@ import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 @Repository
 public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 	
-	List<UsuarioDTO> findByEstado(String estado);
+	List<UsuarioDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
 	
 	@Transactional
 	void delete(UsuarioDTO entity);
@@ -34,7 +34,7 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>{
 
 	UsuarioDTO findByCedula(String cedula);
 
-	List<UsuarioDTO> findByCedulaOrNombreOrApellidoAndEstado(
+	List<UsuarioDTO> findByCedulaOrNombreOrApellidoAndEstadoOrderByFechaRegistroDesc(
 			String cedula, String nombre, String apellido, String estado);
 
 	@Transactional

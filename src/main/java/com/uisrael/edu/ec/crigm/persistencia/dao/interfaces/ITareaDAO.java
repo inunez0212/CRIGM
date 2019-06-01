@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
 @Repository
 public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	
-	List<TareaDTO> findByEstado(String estado);
+	List<TareaDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
 	
 	@Transactional
 	void delete(TareaDTO entity);
@@ -30,5 +31,5 @@ public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	@Query("update TareaDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
 	
-	
+	List<TareaDTO> findByProyectoDTOOrderByFechaRegistroDesc(ProyectoDTO proyecto, String estado);
 }

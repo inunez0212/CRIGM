@@ -13,7 +13,7 @@ import com.uisrael.edu.ec.crigm.persistencia.entidades.TipoTareaDTO;
 @Repository
 public interface ITipoTareaDAO extends JpaRepository<TipoTareaDTO, Long>{
 	
-	List<TipoTareaDTO> findByEstado(String estado);
+	List<TipoTareaDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
 	
 	@Transactional
 	void delete(TipoTareaDTO entity);

@@ -13,7 +13,7 @@ import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilModuloDTO;
 @Repository
 public interface IPerfilModuloDAO extends JpaRepository<PerfilModuloDTO, Long>{
 	
-	List<PerfilModuloDTO> findByEstado(String estado);
+	List<PerfilModuloDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
 	
 	@Transactional
 	void delete(PerfilModuloDTO entity);

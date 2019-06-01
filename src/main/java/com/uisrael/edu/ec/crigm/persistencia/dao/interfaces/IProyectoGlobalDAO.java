@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 
 @Repository
 public interface IProyectoGlobalDAO extends JpaRepository<ProyectoGlobalDTO, Long>{
 	
-	List<ProyectoGlobalDTO> findByEstado(String estado);
+	List<ProyectoGlobalDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
 	
 	@Transactional
 	void delete(ProyectoGlobalDTO entity);
@@ -30,5 +31,6 @@ public interface IProyectoGlobalDAO extends JpaRepository<ProyectoGlobalDTO, Lon
 	@Query("update ProyectoGlobalDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
 	
-	
+	List<ProyectoGlobalDTO> findByProyectoDTOAndEstadoOrderByFechaRegistroDesc(ProyectoDTO proyecto,
+			String estado);
 }
