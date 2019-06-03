@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGlobalGestor;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.IProyectoGlobalDAO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 
 @Repository
@@ -18,7 +19,7 @@ public class ProyectoGlobalGestor implements IProyectoGlobalGestor	{
 	
 	@Override
 	public List<ProyectoGlobalDTO> findByEstadoActivo() {
-		return proyectoGlobalDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return proyectoGlobalDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -44,5 +45,11 @@ public class ProyectoGlobalGestor implements IProyectoGlobalGestor	{
 	@Override	
 	public int eliminar(Integer id) {
 		return proyectoGlobalDAO.eliminar(id);
+	}
+
+	@Override
+	public List<ProyectoGlobalDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto,
+			String estado) {
+		return this.proyectoGlobalDAO.findByProyectoDTOAndEstadoOrderByFecharegistroDesc(proyecto, estado);
 	}
 }

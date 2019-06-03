@@ -11,14 +11,14 @@ import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.ICatalogoValorDAO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 
 @Repository
-public class CatalogoValorGestor implements ICatalogoValorGestor	{
+public class CatalogoValorGestor implements ICatalogoValorGestor{
 
 	@Autowired
 	ICatalogoValorDAO catalogoValorDAO;
 	
 	@Override
 	public List<CatalogoValorDTO> findByEstadoActivo() {
-		return catalogoValorDAO.findByEstadoOrderByCodigoreferenciaDESC(Constantes.ESTADO_ACTIVO); 
+		return catalogoValorDAO.findByEstadoOrderByCodigoreferenciaDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -47,7 +47,19 @@ public class CatalogoValorGestor implements ICatalogoValorGestor	{
 	}
 
 	@Override
-	public List<CatalogoValorDTO> findByCodigoreferenciarelacionado(CatalogoValorDTO relacionado) {
-		return this.catalogoValorDAO.findByCodigoreferenciarelacionadoOrderByCodigoreferenciaDESC(relacionado);
+	public List<CatalogoValorDTO> findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc(
+			CatalogoValorDTO relacionado, String estado) {
+		return this.catalogoValorDAO.findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc(relacionado, estado); 
 	}
+
+	@Override
+	public List<CatalogoValorDTO> findByCodigoreferenciaAndEstadoOrderByCodigoreferenciaDesc(String codigoReferencia) {
+		return this.catalogoValorDAO.findByCodigoreferenciaIgnoreCaseAndEstadoOrderByCodigoreferenciaDesc(codigoReferencia,
+				Constantes.ESTADO_ACTIVO);
+				
+	}
+
+
+	
+	
 }

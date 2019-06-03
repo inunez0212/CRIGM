@@ -13,7 +13,7 @@ import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 @Repository
 public interface ICatalogoValorDAO extends JpaRepository<CatalogoValorDTO, Long>{
 	
-	List<CatalogoValorDTO> findByEstadoOrderByCodigoreferenciaASC(String estado);
+	List<CatalogoValorDTO> findByEstadoOrderByCodigoreferenciaDesc(String estado);
 	
 	@Transactional
 	void delete(CatalogoValorDTO entity);
@@ -31,9 +31,9 @@ public interface ICatalogoValorDAO extends JpaRepository<CatalogoValorDTO, Long>
 	@Query("update CatalogoValorDTO p set estado = 0 where p.id = ?1")
 	int eliminar(String id);
 
-	List<CatalogoValorDTO> findByCodigoreferenciarelacionadoOrderByCodigoreferenciaASC(
-			CatalogoValorDTO relacionado);
+	List<CatalogoValorDTO> findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc(
+			CatalogoValorDTO relacionado, String estado);
 	
-	List<CatalogoValorDTO> findByCodigoreferenciaAndEstadoOrderByCodigoreferenciaASC(
-			String cedula, String nombre, String apellido, String estado);
+	List<CatalogoValorDTO> findByCodigoreferenciaIgnoreCaseAndEstadoOrderByCodigoreferenciaDesc(
+			String codigoReferencia, String estado);
 }

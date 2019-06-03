@@ -9,12 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 
 @Repository
 public interface IProyectoDAO extends JpaRepository<ProyectoDTO, Long>{
 	
-	List<ProyectoDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
+	List<ProyectoDTO> findByEstadoOrderByFecharegistroDesc(String estado);
 	
 	@Transactional
 	void delete(ProyectoDTO entity);
@@ -31,7 +30,7 @@ public interface IProyectoDAO extends JpaRepository<ProyectoDTO, Long>{
 	@Query("update ProyectoDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
 	
-	List<UsuarioDTO> findByNombreAndEstadoOrderByFechaRegistroDesc(
-			String cedula, String nombre, String apellido, String estado);
+	List<ProyectoDTO> findByNombreIgnoreCaseAndEstadoOrderByFecharegistroDesc(
+			String filtros, String estado);
 	
 }

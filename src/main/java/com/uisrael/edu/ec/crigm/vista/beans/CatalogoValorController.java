@@ -1,16 +1,15 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.annotation.ManagedProperty;
-import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
@@ -34,7 +33,10 @@ public class CatalogoValorController implements Serializable {
     private List<CatalogoValorDTO> itemsFiltrados;
     private String codigoReferenciaRelacionado;
 
-    
+    //objetos de busqueda
+    private String filtros;
+    private boolean busqueda = false;
+
     
     public CatalogoValorController() {
     }
@@ -84,14 +86,29 @@ public class CatalogoValorController implements Serializable {
 		}
     }
 
-    public List<CatalogoValorDTO> getItems() {
-        items=catalogoValorGestor.findByEstadoActivo();
+    private List<CatalogoValorDTO> findByCodigoReferencia() {
+    	List<CatalogoValorDTO> items = catalogoValorGestor.findByCodigoreferenciaAndEstadoOrderByCodigoreferenciaDesc(filtros);
+    	if(items==null) {
+			items=new ArrayList<>();
+		}
         return items;
     }
     
+    
+    public List<CatalogoValorDTO> getItems() {
+    	if(busqueda) {
+    		items=this.findByCodigoReferencia();
+    	}else {
+    		items=catalogoValorGestor.findByEstadoActivo();
+    	}
+        return items;
+    }
+
+    
     public List<CatalogoValorDTO> obtenerCatalogosPorRelacionado(String codigoRelacionado) {
     	CatalogoValorDTO catalogoRelacionado = catalogoValorGestor.findByCodigoreferencia(codigoRelacionado);	
-    	return catalogoValorGestor.findByCodigoreferenciarelacionado(catalogoRelacionado);
+    	return catalogoValorGestor.findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc
+    			(catalogoRelacionado, Constantes.ESTADO_ACTIVO);
     }
     
 	public CatalogoValorDTO getSelected() {
@@ -126,5 +143,18 @@ public class CatalogoValorController implements Serializable {
 		this.loginController = loginController;
 	}
 
-	
+	/**
+	 * @return the filtros
+	 */
+	public String getFiltros() {
+		return filtros;
+	}
+
+	/**
+	 * @param filtros the filtros to set
+	 */
+	public void setFiltros(String filtros) {
+		this.filtros = filtros;
+	}
+
 }

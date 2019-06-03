@@ -1,6 +1,7 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGlobalGestor;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -41,6 +43,10 @@ public class ProyectoGlobalController implements Serializable {
     private List<ProyectoGlobalDTO> itemsFiltrados;
     private String codigoReferenciaEstado;
     private Long codigoProyecto;
+    
+	//objetos de busqueda
+    private String idProyecto;
+    private boolean busqueda = false;
     
     public ProyectoGlobalController() {
     }
@@ -90,10 +96,29 @@ public class ProyectoGlobalController implements Serializable {
 		}
     }
 
-    public List<ProyectoGlobalDTO> getItems() {
-        items=proyectoGlobalGestor.findByEstadoActivo();
+    private List<ProyectoGlobalDTO> findByNombreAndEstado() {
+    	ProyectoDTO proyecto= proyectoGestor.getOne(codigoProyecto);
+    	List<ProyectoGlobalDTO> items = new ArrayList<>();
+    	if(proyecto!=null && proyecto.getId()!=null) {
+    		 items = proyectoGlobalGestor.
+        			findByProyectoDTOAndEstadoOrderByFecharegistroDesc(proyecto, Constantes.ESTADO_ACTIVO);
+    	}
+    	if(items==null) {
+			items=new ArrayList<>();
+		}
         return items;
     }
+    
+    
+    public List<ProyectoGlobalDTO> getItems() {
+    	if(busqueda) {
+    		items=this.findByNombreAndEstado();
+    	}else {
+    		items=proyectoGlobalGestor.findByEstadoActivo();
+    	}
+        return items;
+    }
+
 
 	public ProyectoGlobalDTO getSelected() {
 		return selected;
@@ -134,6 +159,21 @@ public class ProyectoGlobalController implements Serializable {
 	public void setCodigoProyecto(Long codigoProyecto) {
 		this.codigoProyecto = codigoProyecto;
 	}
+
+	/**
+	 * @return the idProyecto
+	 */
+	public String getIdProyecto() {
+		return idProyecto;
+	}
+
+	/**
+	 * @param idProyecto the idProyecto to set
+	 */
+	public void setIdProyecto(String idProyecto) {
+		this.idProyecto = idProyecto;
+	}
+
 
 	
 }

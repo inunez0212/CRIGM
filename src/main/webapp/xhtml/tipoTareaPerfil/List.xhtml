@@ -14,8 +14,25 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="TipoTareaPerfilListForm">
+		<h:form id="TipoTareaPerfilListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="TipoTareaPerfil">
+			<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{tipoTareaPerfilController.prepareCreate}"	update=":TipoTareaPerfilCreateForm"
+					oncomplete="PF('TipoTareaPerfilCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":TipoTareaPerfilEditForm" 	
+						oncomplete="PF('TipoTareaPerfilEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{tipoTareaPerfilController.destroy}" 
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
 				<p:dataTable id="datalist" value="#{tipoTareaPerfilController.items}"
 					var="item" selectionMode="single"
 					selection="#{tipoTareaPerfilController.selected}" paginator="true"
@@ -24,8 +41,8 @@
 						<h:outputText value="TTP-00#{item.id}" />
 					</p:column>
 					<p:column headerText="Perfil"
-						sortBy="#{item.perfilDTO.descripcion}">
-						<h:outputText value="#{item.perfilDTO.descripcion}" />
+						sortBy="#{item.perfilDTO.Descripcion}">
+						<h:outputText value="#{item.perfilDTO.Descripcion}" />
 					</p:column>
 					<p:column headerText="Tipo tarea"
 						sortBy="#{item.tipoTareaDTO.nombre}">

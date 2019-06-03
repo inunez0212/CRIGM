@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilModuloGestor;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.IPerfilModuloDAO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilModuloDTO;
 
 @Repository
@@ -18,7 +19,7 @@ public class PerfilModuloGestor implements IPerfilModuloGestor	{
 	
 	@Override
 	public List<PerfilModuloDTO> findByEstadoActivo() {
-		return perfilModuloDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return perfilModuloDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -44,5 +45,10 @@ public class PerfilModuloGestor implements IPerfilModuloGestor	{
 	@Override	
 	public int eliminar(Integer id) {
 		return perfilModuloDAO.eliminar(id);
+	}
+
+	@Override
+	public List<PerfilModuloDTO> findByPerfilDTOAndEstadoOrderByFecharegistroDesc(PerfilDTO perfil) {
+		return this.perfilModuloDAO.findByPerfilDTOAndEstadoOrderByFecharegistroDesc(perfil, Constantes.ESTADO_ACTIVO);
 	}
 }

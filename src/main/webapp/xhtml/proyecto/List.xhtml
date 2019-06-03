@@ -14,8 +14,32 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="ProyectoListForm">
+		<h:form id="ProyectoListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="Proyecto">
+				<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{proyectoController.prepareCreate}"	update=":ProyectoCreateForm"
+					oncomplete="PF('ProyectoCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":ProyectoEditForm" 	
+						oncomplete="PF('ProyectoEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{proyectoController.destroy}" 
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
+				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
+				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
+					<p:inputText placeholder="Nombre" value="#{proyectoController.filtros}" onchange="#{proyectoController.busqueda()}" style="">
+					</p:inputText>
+					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
+						actionListener="#{proyectoController.busqueda}" process="gridBusqueda" update="ProyectoListForm gridBusqueda"> </p:commandButton>
+    			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{proyectoController.items}"
 					var="item" selectionMode="single"
 					selection="#{proyectoController.selected}" paginator="true"

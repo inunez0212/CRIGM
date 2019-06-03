@@ -14,7 +14,7 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="UsuarioListForm">
+		<h:form id="UsuarioListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="Usuarios">
 				<h:outputText value="Opciones"></h:outputText>
 				<p:panelGrid columns="10" layout="grid">
@@ -69,8 +69,8 @@
 						<h:outputText value="#{item.email}" />
 					</p:column>
 					<p:column headerText="Perfil"
-						sortBy="#{item.perfil.descripcion}">
-						<h:outputText value="#{item.perfil.descripcion}" />
+						sortBy="#{item.perfil.Descripcion}">
+						<h:outputText value="#{item.perfil.Descripcion}" />
 					</p:column>
 					<p:column headerText="Grupo" sortBy="#{item.grupo}">
 						<h:outputText value="#{item.grupo}" />

@@ -1755,7 +1755,7 @@
 .icon-wb_cloudy:before {
 	content: "\e240";
 }
-.icon-wb_incandescent:before {
+.icon-wb_incanDescent:before {
 	content: "\e241";
 }
 .icon-wb_sunny:before {
@@ -1776,7 +1776,7 @@
 .icon-vignette:before {
 	content: "\e247";
 }
-.icon-wb_iridescent:before {
+.icon-wb_iriDescent:before {
 	content: "\e248";
 }
 .icon-beenhere:before {
@@ -2358,7 +2358,7 @@
 .icon-delete2:before {
 	content: "\e309";
 }
-.icon-description:before {
+.icon-Description:before {
 	content: "\e30a";
 }
 .icon-dns:before {

@@ -14,7 +14,7 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="CatalogoValorListForm">
+		<h:form id="CatalogoValorListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="Catálogos">
 				<p:dataTable id="datalist" value="#{catalogoValorController.items}"
 					var="item" selectionMode="single"
@@ -25,8 +25,8 @@
 						<h:outputText value="#{item.codigoreferencia}" />
 					</p:column>
 					<p:column headerText="Descripci&oacute;n"
-						sortBy="#{item.descripcion}">
-						<h:outputText value="#{item.descripcion}" />
+						sortBy="#{item.Descripcion}">
+						<h:outputText value="#{item.Descripcion}" />
 					</p:column>
 					<p:column headerText="Relacionado"
 						sortBy="#{item.codigoreferenciarelacionado}">

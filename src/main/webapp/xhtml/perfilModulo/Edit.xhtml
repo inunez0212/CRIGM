@@ -17,12 +17,12 @@
                         <p:outputLabel value="Perfil" for="perfil" />
                         <p:selectOneMenu id="perfil" value="#{perfilModuloController.perfilId}" >
                         	<f:selectItems value="#{perfilController.items}" var="dato" 
-                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="M&oacute;dulo" for="ruta" />
                         <p:inputText id="ruta" value="#{perfilModuloController.selected.ruta}" title="Ruta de la vista" />
-                        <p:outputLabel value="Descripci&oacute;n" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{perfilModuloController.selected.descripcion}" title="Descripci&oacute;n" />
+                        <p:outputLabel value="Descripci&oacute;n" for="Descripcion" />
+                        <p:inputText id="Descripcion" value="#{perfilModuloController.selected.Descripcion}" title="Descripci&oacute;n" />
                         <p:outputLabel value="Crear" for="crear" />
                         <p:selectBooleanCheckbox id="crear" value="#{perfilModuloController.selected.crear}" />
                         <p:outputLabel value="Editar" for="editar" />

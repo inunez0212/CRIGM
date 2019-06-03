@@ -18,7 +18,7 @@ public class TipoTareaGestor implements ITipoTareaGestor	{
 	
 	@Override
 	public List<TipoTareaDTO> findByEstadoActivo() {
-		return tipoTareaDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return tipoTareaDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override

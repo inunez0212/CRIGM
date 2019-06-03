@@ -13,6 +13,9 @@ public interface ICatalogoValorGestor {
 	long count();
 	CatalogoValorDTO save(CatalogoValorDTO entity);
 	int eliminar(String id);
-	List<CatalogoValorDTO> findByCodigoreferenciarelacionado(CatalogoValorDTO relacionado);	
+	List<CatalogoValorDTO> findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc(
+			CatalogoValorDTO relacionado, String estado);
 	
+	List<CatalogoValorDTO> findByCodigoreferenciaAndEstadoOrderByCodigoreferenciaDesc(
+			String codigoReferencia);
 }

@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilModuloDTO;
 
 @Repository
 public interface IPerfilModuloDAO extends JpaRepository<PerfilModuloDTO, Long>{
 	
-	List<PerfilModuloDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
+	List<PerfilModuloDTO> findByEstadoOrderByFecharegistroDesc(String estado);
 	
 	@Transactional
 	void delete(PerfilModuloDTO entity);
@@ -30,5 +31,7 @@ public interface IPerfilModuloDAO extends JpaRepository<PerfilModuloDTO, Long>{
 	@Query("update PerfilModuloDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
 	
+	List<PerfilModuloDTO> findByPerfilDTOAndEstadoOrderByFecharegistroDesc(
+			PerfilDTO perfil, String estado);
 	
 }

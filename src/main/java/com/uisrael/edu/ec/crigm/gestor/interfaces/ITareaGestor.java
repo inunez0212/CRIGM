@@ -2,6 +2,7 @@ package com.uisrael.edu.ec.crigm.gestor.interfaces;
 
 import java.util.List;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
 
@@ -13,5 +14,5 @@ public interface ITareaGestor {
 	long count();
 	TareaDTO save(TareaDTO entity);
 	int eliminar(Integer id);	
-	
+	List<TareaDTO> findByProyectoDTOOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado);
 }

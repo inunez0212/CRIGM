@@ -14,7 +14,7 @@ import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 @Repository
 public interface IProyectoGlobalDAO extends JpaRepository<ProyectoGlobalDTO, Long>{
 	
-	List<ProyectoGlobalDTO> findByEstadoOrderByFechaRegistroDesc(String estado);
+	List<ProyectoGlobalDTO> findByEstadoOrderByFecharegistroDesc(String estado);
 	
 	@Transactional
 	void delete(ProyectoGlobalDTO entity);
@@ -31,6 +31,6 @@ public interface IProyectoGlobalDAO extends JpaRepository<ProyectoGlobalDTO, Lon
 	@Query("update ProyectoGlobalDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
 	
-	List<ProyectoGlobalDTO> findByProyectoDTOAndEstadoOrderByFechaRegistroDesc(ProyectoDTO proyecto,
+	List<ProyectoGlobalDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto,
 			String estado);
 }

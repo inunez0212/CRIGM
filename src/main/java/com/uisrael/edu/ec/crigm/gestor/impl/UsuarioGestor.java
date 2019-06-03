@@ -18,7 +18,7 @@ public class UsuarioGestor implements IUsuarioGestor{
 	
 	@Override
 	public List<UsuarioDTO> findByEstadoActivo() {
-		return usuarioDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return usuarioDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -59,7 +59,9 @@ public class UsuarioGestor implements IUsuarioGestor{
 	@Override
 	public List<UsuarioDTO> findByCedulaOrNombreOrApellido(String cedula, String nombre, 
 			String apellido) {
-		return this.usuarioDAO.findByCedulaOrNombreOrApellidoAndEstadoOrderByFechaRegistroDesc(cedula, nombre, apellido, Constantes.ESTADO_ACTIVO);
+		return this.usuarioDAO.
+				findByCedulaIgnoreCaseOrNombreIgnoreCaseOrApellidoIgnoreCaseAndEstadoOrderByFecharegistroDesc(
+						cedula, nombre, apellido, Constantes.ESTADO_ACTIVO);
 	}
 
 	@Override

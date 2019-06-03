@@ -1,18 +1,19 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
-import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -36,6 +37,10 @@ public class ProyectoController implements Serializable {
     private ProyectoDTO selected;
     private List<ProyectoDTO> itemsFiltrados;
     private String codigoRefereciaEstado;
+    
+    //objetos de busqueda
+    private String filtros;
+    private boolean busqueda = false;
     
     public ProyectoController() {
     }
@@ -83,11 +88,33 @@ public class ProyectoController implements Serializable {
 		}
     }
 
+    public void busqueda(){
+    	if(StringUtils.isNotBlank(filtros)) {
+    		busqueda = true;
+    	}else {
+    		busqueda = false;
+    	}
+    }
+
+    private List<ProyectoDTO> findByNombreAndEstado() {
+    	List<ProyectoDTO> items = proyectoGestor.findByNombreAndEstadoOrderByFecharegistroDesc(filtros);
+    	if(items==null) {
+			items=new ArrayList<>();
+		}
+        return items;
+    }
+    
+    
     public List<ProyectoDTO> getItems() {
-        items=proyectoGestor.findByEstadoActivo();
+    	if(busqueda) {
+    		items=this.findByNombreAndEstado();
+    	}else {
+    		items=proyectoGestor.findByEstadoActivo();
+    	}
         return items;
     }
 
+    
 	public ProyectoDTO getSelected() {
 		return selected;
 	}
@@ -111,5 +138,19 @@ public class ProyectoController implements Serializable {
 	public void setCodigoRefereciaEstado(String codigoRefereciaEstado) {
 		this.codigoRefereciaEstado = codigoRefereciaEstado;
 	}
-	
+
+	/**
+	 * @return the filtros
+	 */
+	public String getFiltros() {
+		return filtros;
+	}
+
+	/**
+	 * @param filtros the filtros to set
+	 */
+	public void setFiltros(String filtros) {
+		this.filtros = filtros;
+	}
+
 }

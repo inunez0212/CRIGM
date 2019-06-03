@@ -1,6 +1,7 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITipoTareaGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -49,6 +51,11 @@ public class TareaController implements Serializable {
     private Long idUsuarioAsignado;
     private Long idUsuarioAsignador;
     private Long idUsuarioRevisor;
+    
+    //objetos de busqueda
+    private Long codigoProyecto;
+    private boolean busqueda = false;
+    
     
     public TareaController() {
     }
@@ -112,9 +119,27 @@ public class TareaController implements Serializable {
 			JsfUtil.addErrorMessage("No se pudo elminar el tarea");
 		}
     }
-
+    
+    private List<TareaDTO> findByNombreAndEstado() {
+    	ProyectoDTO proyecto= proyectoGestor.getOne(codigoProyecto);
+    	List<TareaDTO> items = new ArrayList<>();
+    	if(proyecto!=null && proyecto.getId()!=null) {
+    		 items = tareaGestor.
+    				 findByProyectoDTOOrderByFecharegistroDesc(proyecto, Constantes.ESTADO_ACTIVO);
+    	}
+    	if(items==null) {
+			items=new ArrayList<>();
+		}
+        return items;
+    }
+    
+    
     public List<TareaDTO> getItems() {
-        items=tareaGestor.findByEstadoActivo();
+    	if(busqueda) {
+    		items=this.findByNombreAndEstado();
+    	}else {
+    		items=tareaGestor.findByEstadoActivo();
+    	}
         return items;
     }
 
@@ -217,5 +242,21 @@ public class TareaController implements Serializable {
 	public void setIdUsuarioRevisor(Long idUsuarioRevisor) {
 		this.idUsuarioRevisor = idUsuarioRevisor;
 	}
+
+	/**
+	 * @return the codigoProyecto
+	 */
+	public Long getCodigoProyecto() {
+		return codigoProyecto;
+	}
+
+	/**
+	 * @param codigoProyecto the codigoProyecto to set
+	 */
+	public void setCodigoProyecto(Long codigoProyecto) {
+		this.codigoProyecto = codigoProyecto;
+	}
+
+	
 	
 }

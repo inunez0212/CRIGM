@@ -18,7 +18,7 @@ public class TipoTareaPerfilGestor implements ITipoTareaPerfilGestor	{
 	
 	@Override
 	public List<TipoTareaPerfilDTO> findByEstadoActivo() {
-		return tipoTareaPerfilDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return tipoTareaPerfilDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override

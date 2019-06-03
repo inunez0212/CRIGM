@@ -13,5 +13,5 @@ public interface IProyectoGestor {
 	long count();
 	ProyectoDTO save(ProyectoDTO entity);
 	int eliminar(Integer id);	
-	
+	List<ProyectoDTO> findByNombreAndEstadoOrderByFecharegistroDesc(String filtros);
 }

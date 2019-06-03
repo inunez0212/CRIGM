@@ -797,7 +797,7 @@
   content: "\f0dc";
 }
 .fa-sort-down:before,
-.fa-sort-desc:before {
+.fa-sort-Desc:before {
   content: "\f0dd";
 }
 .fa-sort-up:before,
@@ -1179,19 +1179,19 @@
 .fa-sort-alpha-asc:before {
   content: "\f15d";
 }
-.fa-sort-alpha-desc:before {
+.fa-sort-alpha-Desc:before {
   content: "\f15e";
 }
 .fa-sort-amount-asc:before {
   content: "\f160";
 }
-.fa-sort-amount-desc:before {
+.fa-sort-amount-Desc:before {
   content: "\f161";
 }
 .fa-sort-numeric-asc:before {
   content: "\f162";
 }
-.fa-sort-numeric-desc:before {
+.fa-sort-numeric-Desc:before {
   content: "\f163";
 }
 .fa-thumbs-up:before {

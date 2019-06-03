@@ -14,8 +14,35 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="PerfilModuloListForm">
+		<h:form id="PerfilModuloListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="PerfilModulo">
+				<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{perfilModuloController.prepareCreate}"	update=":PerfilModuloCreateForm"
+					oncomplete="PF('PerfilModuloCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":PerfilModuloEditForm" 	
+						oncomplete="PF('UsuarioEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{perfilModuloController.destroy}" 
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
+				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
+				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
+					<p:selectOneMenu id="perfil" value="#{perfilModuloController.perfilBusqueda}" >
+                        	<f:selectItem itemLabel="Perfil" itemValue="0"></f:selectItem>
+                        	<f:selectItems value="#{perfilController.items}" var="dato" 
+                        	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        </p:selectOneMenu>
+					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
+						actionListener="#{perfilModuloController.busqueda}" process="gridBusqueda" update="PerfilModuloForm gridBusqueda"> </p:commandButton>
+    			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{perfilModuloController.items}"
 					var="item" selectionMode="single"
 					selection="#{perfilModuloController.selected}" paginator="true"
@@ -24,14 +51,14 @@
 						<h:outputText value="#{item.id}" />
 					</p:column>
 					<p:column headerText="Perfil">
-						<h:outputText value="#{item.perfil.descripcion}" />
+						<h:outputText value="#{item.perfil.Descripcion}" />
 					</p:column>
 					<p:column headerText="Ruta">
 						<h:outputText value="#{item.ruta}" />
 					</p:column>
 					<p:column headerText="Descripci&oacute;n"
-						sortBy="#{item.descripcion}">
-						<h:outputText value="#{item.descripcion}" />
+						sortBy="#{item.Descripcion}">
+						<h:outputText value="#{item.Descripcion}" />
 					</p:column>
 					<p:column headerText="Crear">
 						 <p:selectBooleanCheckbox value="#{item.crear}" disabled="true"></p:selectBooleanCheckbox>

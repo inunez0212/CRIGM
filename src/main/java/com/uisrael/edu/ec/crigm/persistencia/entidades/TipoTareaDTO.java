@@ -45,8 +45,8 @@ public class TipoTareaDTO implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "Descripcion")
+    private String Descripcion;
     @Size(max = 1)
     @Column(name = "estado")
     private String estado;
@@ -93,11 +93,11 @@ public class TipoTareaDTO implements Serializable {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return Descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     public String getEstado() {

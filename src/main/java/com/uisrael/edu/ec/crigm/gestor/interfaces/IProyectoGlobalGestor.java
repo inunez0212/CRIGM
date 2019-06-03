@@ -2,6 +2,7 @@ package com.uisrael.edu.ec.crigm.gestor.interfaces;
 
 import java.util.List;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoGlobalDTO;
 
 
@@ -13,5 +14,6 @@ public interface IProyectoGlobalGestor {
 	long count();
 	ProyectoGlobalDTO save(ProyectoGlobalDTO entity);
 	int eliminar(Integer id);	
-	
+	List<ProyectoGlobalDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto,
+			String estado);
 }

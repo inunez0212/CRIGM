@@ -39,8 +39,8 @@ public class PerfilModuloDTO implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "Descripcion")
+    private String Descripcion;
     @Size(max = 100)
     @Column(name = "ruta")
     private String ruta;
@@ -87,11 +87,11 @@ public class PerfilModuloDTO implements Serializable {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return Descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     public String getRuta() {

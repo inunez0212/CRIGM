@@ -14,8 +14,25 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="PerfilListForm">
+		<h:form id="PerfilListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="Perfil">
+			<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{perfilController.prepareCreate}"	update=":PerfilCreateForm"
+					oncomplete="PF('PerfilCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":PerfilEditForm" 	
+						oncomplete="PF('PerfilEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{perfilController.destroy}" 
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
 				<p:dataTable id="datalist" value="#{perfilController.items}"
 					var="item" selectionMode="single"
 					selection="#{perfilController.selected}" paginator="true"
@@ -25,8 +42,8 @@
 						<h:outputText value="P-00#{item.id}" />
 					</p:column>
 					<p:column headerText="Descripci&oacute;n"
-						sortBy="#{item.descripcion}">
-						<h:outputText value="#{item.descripcion}" />
+						sortBy="#{item.Descripcion}">
+						<h:outputText value="#{item.Descripcion}" />
 					</p:column>
 					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estado == 1? 'Activo':'Inactivo'}" />

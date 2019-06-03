@@ -14,8 +14,35 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form id="ProyectoGlobalListForm">
+		<h:form id="ProyectoGlobalListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="ProyectoGlobal">
+				<h:outputText value="Opciones"></h:outputText>
+				<p:panelGrid columns="10" layout="grid">
+		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{proyectoGlobalController.prepareCreate}"	update=":ProyectoGlobalCreateForm"
+					oncomplete="PF('ProyectoGlobalCreateDialog').show()" />
+					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
+						update=":ProyectoGlobalEditForm" 	
+						oncomplete="PF('ProyectoGlobalEditDialog').show()" />
+					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
+						actionListener="#{proyectoGlobalController.destroy}" 
+						update=":growl,datalist">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+				</p:panelGrid>
+				<p:separator/>
+				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
+				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
+					<p:selectOneMenu id="proyectob" value="#{proyectoGlobalController.idProyecto}" >
+                      	<f:selectItem itemLabel="Proyecto" itemValue="0"></f:selectItem>
+                      	<f:selectItems value="#{proyectoController.items}" var="dato" 
+                      	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                    </p:selectOneMenu>
+					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
+						actionListener="#{proyectoGlobalController.busqueda}" process="gridBusqueda" update="ProyectoGlobalForm gridBusqueda"> </p:commandButton>
+	   			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{proyectoGlobalController.items}"
 					var="item" selectionMode="single"
 					selection="#{proyectoGlobalController.selected}" paginator="true"
@@ -32,8 +59,8 @@
 						sortBy="#{item.nombre}">
 						<h:outputText value="#{item.nombre}" />
 					</p:column>
-					<p:column headerText="Estado" sortBy="#{item.descripcion}">
-						<h:outputText value="#{item.estadoglobal.descripcion}" />
+					<p:column headerText="Estado" sortBy="#{item.Descripcion}">
+						<h:outputText value="#{item.estadoglobal.Descripcion}" />
 					</p:column>
 					<p:column headerText="Kilometraje" sortBy="#{item.kilometraje}">
 						<h:outputText value="#{item.kilometraje}" />

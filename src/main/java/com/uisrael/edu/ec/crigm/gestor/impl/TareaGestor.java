@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.ITareaDAO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
 @Repository
@@ -18,7 +19,7 @@ public class TareaGestor implements ITareaGestor	{
 	
 	@Override
 	public List<TareaDTO> findByEstadoActivo() {
-		return tareaDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return tareaDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -44,5 +45,10 @@ public class TareaGestor implements ITareaGestor	{
 	@Override	
 	public int eliminar(Integer id) {
 		return tareaDAO.eliminar(id);
+	}
+
+	@Override
+	public List<TareaDTO> findByProyectoDTOOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado) {
+		return this.tareaDAO.findByProyectoDTOAndEstadoOrderByFecharegistroDesc(proyecto, estado);
 	}
 }

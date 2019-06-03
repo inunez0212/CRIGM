@@ -1,6 +1,7 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,10 @@ public class PerfilModuloController implements Serializable {
     private PerfilModuloDTO selected;
     private List<PerfilModuloDTO> itemsFiltrados;
     private Long perfilId;
+    
+    //objetos de busqueda
+    private Long perfilBusqueda;
+    private boolean busqueda = false;
     
     public PerfilModuloController() {
     }
@@ -83,8 +88,26 @@ public class PerfilModuloController implements Serializable {
 		}
     }
 
+    private List<PerfilModuloDTO> findByPerfilDTOAndEstado() {
+    	PerfilDTO perfil= perfilGestor.getOne(perfilBusqueda);
+    	List<PerfilModuloDTO> items = new ArrayList<>();
+    	if(perfil!=null && perfil.getId()!=null) {
+    		 items =perfilModuloGestor.
+    				 findByPerfilDTOAndEstadoOrderByFecharegistroDesc(perfil);
+    	}
+    	if(items==null) {
+			items=new ArrayList<>();
+		}
+        return items;
+    }
+    
+    
     public List<PerfilModuloDTO> getItems() {
-        items=perfilModuloGestor.findByEstadoActivo();
+    	if(busqueda) {
+    		items=this.findByPerfilDTOAndEstado();
+    	}else {
+    		items=perfilModuloGestor.findByEstadoActivo();
+    	}
         return items;
     }
 
@@ -110,6 +133,19 @@ public class PerfilModuloController implements Serializable {
 
 	public void setPerfilId(Long perfilId) {
 		this.perfilId = perfilId;
+	}
+	/**
+	 * @return the perfilBusqueda
+	 */
+	public Long getPerfilBusqueda() {
+		return perfilBusqueda;
+	}
+
+	/**
+	 * @param perfilBusqueda the perfilBusqueda to set
+	 */
+	public void setPerfilBusqueda(Long perfilBusqueda) {
+		this.perfilBusqueda = perfilBusqueda;
 	}
 	
 	

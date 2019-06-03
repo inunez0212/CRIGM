@@ -18,7 +18,7 @@ public class ProyectoGestor implements IProyectoGestor	{
 	
 	@Override
 	public List<ProyectoDTO> findByEstadoActivo() {
-		return proyectoDAO.findByEstadoOrderByFechaRegistroDesc(Constantes.ESTADO_ACTIVO); 
+		return proyectoDAO.findByEstadoOrderByFecharegistroDesc(Constantes.ESTADO_ACTIVO); 
 	}
 
 	@Override
@@ -44,5 +44,11 @@ public class ProyectoGestor implements IProyectoGestor	{
 	@Override	
 	public int eliminar(Integer id) {
 		return proyectoDAO.eliminar(id);
+	}
+
+	@Override
+	public List<ProyectoDTO> findByNombreAndEstadoOrderByFecharegistroDesc(String filtros) {
+		return this.proyectoDAO.findByNombreIgnoreCaseAndEstadoOrderByFecharegistroDesc(filtros,
+				Constantes.ESTADO_ACTIVO);
 	}
 }
