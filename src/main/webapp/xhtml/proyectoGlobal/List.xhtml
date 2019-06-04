@@ -38,10 +38,10 @@
 					<p:selectOneMenu id="proyectob" value="#{proyectoGlobalController.idProyecto}" >
                       	<f:selectItem itemLabel="Proyecto" itemValue="0"></f:selectItem>
                       	<f:selectItems value="#{proyectoController.items}" var="dato" 
-                      	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                      	itemLabel="#{dato.nombre}" itemValue="#{dato.id}"></f:selectItems>
                     </p:selectOneMenu>
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
-						actionListener="#{proyectoGlobalController.busqueda}" process="gridBusqueda" update="ProyectoGlobalForm gridBusqueda"> </p:commandButton>
+						actionListener="#{proyectoGlobalController.busqueda}" process="gridBusqueda" update="ProyectoGlobalListForm gridBusqueda"> </p:commandButton>
 	   			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{proyectoGlobalController.items}"
 					var="item" selectionMode="single"
@@ -59,8 +59,8 @@
 						sortBy="#{item.nombre}">
 						<h:outputText value="#{item.nombre}" />
 					</p:column>
-					<p:column headerText="Estado" sortBy="#{item.Descripcion}">
-						<h:outputText value="#{item.estadoglobal.Descripcion}" />
+					<p:column headerText="Estado" sortBy="#{item.descripcion}">
+						<h:outputText value="#{item.estadoglobal.descripcion}" />
 					</p:column>
 					<p:column headerText="Kilometraje" sortBy="#{item.kilometraje}">
 						<h:outputText value="#{item.kilometraje}" />

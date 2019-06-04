@@ -22,7 +22,7 @@
                         <p:outputLabel value="Tipo tarea" for="tipoTarea" />	
                         <p:selectOneMenu id="tipoTarea" value="#{tareaController.idTipoTarea}" >
                         	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
-                        	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="Fecha inicio" for="fechainicio" />
                         <p:calendar id="fechainicio" value="#{tareaController.selected.fechainicio}" title="Fecha inicio de la tarea"  />

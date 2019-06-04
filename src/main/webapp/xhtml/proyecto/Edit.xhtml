@@ -29,7 +29,7 @@
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{proyectoController.codigoRefereciaEstado}" >
                         	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('EST')}" var="item"
-                        	itemLabel="#{item.Descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{proyectoController.update}" value="Guardar" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectoEditDialog');"/>

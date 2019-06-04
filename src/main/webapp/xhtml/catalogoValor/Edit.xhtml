@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{catalogoValorController.selected != null}">
                         <p:outputLabel value="ID" for="codigoreferencia" />
                         <p:inputText id="codigoreferencia" value="#{catalogoValorController.selected.codigoreferencia}" disabled="false" maxlength="4"/>
-                        <p:outputLabel value="Descripci&oacute;n " for="Descripcion" />
-                        <p:inputText id="Descripcion" value="#{catalogoValorController.selected.Descripcion}" disabled="false"/>
+                        <p:outputLabel value="Descripci&oacute;n " for="descripcion" />
+                        <p:inputText id="descripcion" value="#{catalogoValorController.selected.descripcion}" disabled="false"/>
                         <p:outputLabel value="C&oacute;digo relacionado" for="relacionado" />
                         <p:selectOneMenu id="relacionado" value="#{catalogoValorController.codigoReferenciaRelacionado}" >
                         	<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>

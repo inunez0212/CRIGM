@@ -1,10 +1,13 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,6 +35,12 @@ public class ProyectoController implements Serializable {
 	
 	@Inject
 	private LoginController loginController;
+	
+	@Inject
+	private TareaController tareaController;
+	
+	@Inject
+	private ProyectoGlobalController proyectoGlobalController;
 	
     private List<ProyectoDTO> items = null;
     private ProyectoDTO selected;
@@ -114,6 +123,56 @@ public class ProyectoController implements Serializable {
         return items;
     }
 
+    public void seleccionarTareas() {
+    	try {
+    		if(this.selected!=null && this.selected.getId()!=null) {
+    			this.tareaController.setCodigoProyecto(this.selected.getId());
+            	FacesContext fContext = FacesContext.getCurrentInstance();
+        		ExternalContext extContext = fContext.getExternalContext();
+    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
+    		}else {
+    			JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
+    		}
+    		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void seleccionarGlobal() {
+    	try {
+    		if(this.selected!=null && this.selected.getId()!=null) {
+    			this.proyectoGlobalController.setIdProyecto(this.selected.getId());
+            	FacesContext fContext = FacesContext.getCurrentInstance();
+        		ExternalContext extContext = fContext.getExternalContext();
+    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
+    		}else {
+    			JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
+    		}
+    		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void pausarTarea() {
+    	try {
+    		JsfUtil.addSuccessMessage("Tarea pausada");
+    	}catch (Exception e) {
+    		JsfUtil.addErrorMessage("Error al pausar la tarea");
+		}
+    	
+    }
+    
+    public void pausarTodo() {
+    	try {
+    		JsfUtil.addSuccessMessage("Todas las tareas se han pausado");
+    	}catch (Exception e) {
+    		JsfUtil.addErrorMessage("Error al pausar la tarea");
+		}
+    }
+    
+    
     
 	public ProyectoDTO getSelected() {
 		return selected;

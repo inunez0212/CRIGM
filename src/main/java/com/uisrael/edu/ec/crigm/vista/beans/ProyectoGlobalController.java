@@ -45,7 +45,7 @@ public class ProyectoGlobalController implements Serializable {
     private Long codigoProyecto;
     
 	//objetos de busqueda
-    private String idProyecto;
+    private Long idProyecto;
     private boolean busqueda = false;
     
     public ProyectoGlobalController() {
@@ -97,7 +97,7 @@ public class ProyectoGlobalController implements Serializable {
     }
 
     private List<ProyectoGlobalDTO> findByNombreAndEstado() {
-    	ProyectoDTO proyecto= proyectoGestor.getOne(codigoProyecto);
+    	ProyectoDTO proyecto= proyectoGestor.getOne(idProyecto);
     	List<ProyectoGlobalDTO> items = new ArrayList<>();
     	if(proyecto!=null && proyecto.getId()!=null) {
     		 items = proyectoGlobalGestor.
@@ -163,14 +163,14 @@ public class ProyectoGlobalController implements Serializable {
 	/**
 	 * @return the idProyecto
 	 */
-	public String getIdProyecto() {
+	public Long getIdProyecto() {
 		return idProyecto;
 	}
 
 	/**
 	 * @param idProyecto the idProyecto to set
 	 */
-	public void setIdProyecto(String idProyecto) {
+	public void setIdProyecto(Long idProyecto) {
 		this.idProyecto = idProyecto;
 	}
 

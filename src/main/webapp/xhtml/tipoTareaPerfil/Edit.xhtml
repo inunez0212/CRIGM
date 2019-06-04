@@ -17,7 +17,7 @@
                         <p:outputLabel value="Perfil" for="perfil" />
                         <p:selectOneMenu id="perfil" value="#{tipoTareaPerfilController.idPerfil}" >
                         	<f:selectItems value="#{perfilController.items}" var="item"
-                        	itemLabel="#{item.Descripcion}" itemValue="#{item.id}" > </f:selectItems>
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.id}" > </f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="Tipo tarea" for="tipoTarea" />
                         <p:selectOneMenu id="tipoTarea" value="#{tipoTareaPerfilController.idTipoTarea}" >

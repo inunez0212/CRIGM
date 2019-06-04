@@ -28,7 +28,20 @@
 						actionListener="#{proyectoController.destroy}" 
 						update=":growl,datalist">
 						<p:confirm header="Confirmation" 
-							message="¿Esta seguro?"
+							message="¿Esta seguro de eliminar el proyecto seleccionado?"
+							icon="fa fa-warning" />
+					</p:commandButton>
+					<p:commandButton  value="Tareas" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{proyectoController.seleccionarTareas}" update=":growl"/>
+					<p:commandButton  value="Global" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{proyectoController.seleccionarGlobal}" update=":growl"/>
+					<p:commandButton  value="Pausar tarea" icon="fa fa-plus" styleClass="CyanButton"
+					actionListener="#{proyectoController.pausarTareas}" update=":growl"/>
+					<p:commandButton icon="fa fa-trash-o" value="Pausar todo" styleClass="CyanButton"
+						actionListener="#{proyectoController.pausarTodo}" 
+						update=":growl">
+						<p:confirm header="Confirmation" 
+							message="¿Esta seguro de pausar todas las tareas?"
 							icon="fa fa-warning" />
 					</p:commandButton>
 				</p:panelGrid>

@@ -35,10 +35,10 @@
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
 				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
-					<p:selectOneMenu id="proyectob" value="#{proyectoGlobalController.codigoProyecto}" >
+					<p:selectOneMenu id="proyectob" value="#{tareaController.codigoProyecto}" >
                       	<f:selectItem itemLabel="Proyecto" itemValue="0"></f:selectItem>
                       	<f:selectItems value="#{proyectoController.items}" var="dato" 
-                      	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                      	itemLabel="#{dato.nombre}" itemValue="#{dato.id}"></f:selectItems>
                     </p:selectOneMenu>	
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
 						actionListener="#{tareaController.busqueda}" process="gridBusqueda" update="TareaListForm gridBusqueda"> </p:commandButton>
@@ -73,8 +73,8 @@
 					<p:column headerText="Fecha fin" sortBy="#{item.fechafin}">
 						<h:outputText value="#{item.fechafin}" />
 					</p:column>
-					<p:column headerText="Estado" sortBy="#{item.Descripcion}">
-						<h:outputText value="#{item.estadotarea.Descripcion}" />
+					<p:column headerText="Estado" sortBy="#{item.descripcion}">
+						<h:outputText value="#{item.estadotarea.descripcion}" />
 					</p:column>
 					<f:facet name="footer" style="text-align: left !important; ">
 						<h:outputText
