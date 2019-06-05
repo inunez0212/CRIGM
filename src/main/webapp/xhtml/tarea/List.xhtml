@@ -35,7 +35,7 @@
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
 				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
-					<p:selectOneMenu id="proyectob" value="#{tareaController.codigoProyecto}" >
+					<p:selectOneMenu id="proyectob" value="#{tareaController.idProyecto}" >
                       	<f:selectItem itemLabel="Proyecto" itemValue="0"></f:selectItem>
                       	<f:selectItems value="#{proyectoController.items}" var="dato" 
                       	itemLabel="#{dato.nombre}" itemValue="#{dato.id}"></f:selectItems>
@@ -114,5 +114,4 @@
 		<ui:include src="View.xhtml" />
 	</ui:define>
 </ui:composition>
-
 </html>

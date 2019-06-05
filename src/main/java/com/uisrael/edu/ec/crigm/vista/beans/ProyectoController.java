@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -32,6 +34,8 @@ public class ProyectoController implements Serializable {
 	private IProyectoGestor proyectoGestor;
 	@Autowired
 	private ICatalogoValorGestor catalogoValorGestor; 
+	@Autowired
+	private ITareaGestor tareaGestor;
 	
 	@Inject
 	private LoginController loginController;
@@ -61,6 +65,7 @@ public class ProyectoController implements Serializable {
 
     public void create() {
     	try {
+    		selected.setNumerotareas(0);
     		selected.setEstadoproyecto(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA));
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
@@ -74,6 +79,7 @@ public class ProyectoController implements Serializable {
 
     public void update() {
     	try {
+    		selected.setNumerotareas(selected.getTareaCollection().size());
     		selected.setEstadoproyecto(this.catalogoValorGestor.findByCodigoreferencia(codigoRefereciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
@@ -98,11 +104,7 @@ public class ProyectoController implements Serializable {
     }
 
     public void busqueda(){
-    	if(StringUtils.isNotBlank(filtros)) {
-    		busqueda = true;
-    	}else {
-    		busqueda = false;
-    	}
+  		busqueda = StringUtils.isNotBlank(filtros);
     }
 
     private List<ProyectoDTO> findByNombreAndEstado() {
@@ -126,7 +128,7 @@ public class ProyectoController implements Serializable {
     public void seleccionarTareas() {
     	try {
     		if(this.selected!=null && this.selected.getId()!=null) {
-    			this.tareaController.setCodigoProyecto(this.selected.getId());
+    			this.tareaController.setIdProyecto(this.selected.getId());
             	FacesContext fContext = FacesContext.getCurrentInstance();
         		ExternalContext extContext = fContext.getExternalContext();
     			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
@@ -145,7 +147,7 @@ public class ProyectoController implements Serializable {
     			this.proyectoGlobalController.setIdProyecto(this.selected.getId());
             	FacesContext fContext = FacesContext.getCurrentInstance();
         		ExternalContext extContext = fContext.getExternalContext();
-    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
+    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/proyectoGlobal/List.xhtml");
     		}else {
     			JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
     		}
@@ -157,11 +159,12 @@ public class ProyectoController implements Serializable {
     
     public void pausarTarea() {
     	try {
+    		CatalogoValorDTO estadoCatValDTO = this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PAUSA);
+    		this.tareaGestor.actualizarTareas(estadoCatValDTO, selected);
     		JsfUtil.addSuccessMessage("Tarea pausada");
     	}catch (Exception e) {
     		JsfUtil.addErrorMessage("Error al pausar la tarea");
 		}
-    	
     }
     
     public void pausarTodo() {

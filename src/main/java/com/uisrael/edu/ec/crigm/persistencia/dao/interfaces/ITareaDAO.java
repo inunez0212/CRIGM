@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
@@ -30,6 +31,16 @@ public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	@Modifying
 	@Query("update TareaDTO p set estado = 0 where p.id = ?1")
 	int eliminar(Integer id);
+	
+	@Transactional
+	@Modifying
+	@Query("update TareaDTO p set estado = 0 where p.proyectoDTO = ?1")
+	int pausarTareas(ProyectoDTO proyecto);
+	
+	@Transactional
+	@Modifying
+	@Query("update TareaDTO p set estadotarea = ?1 where p.proyectoDTO = ?2")
+	int actualizarTareas(CatalogoValorDTO estado, ProyectoDTO proyecto);
 	
 	List<TareaDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado);
 }

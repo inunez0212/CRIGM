@@ -20,11 +20,11 @@
                         <h:outputText value="#{proyectoController.selected.estadoproyecto.descripcion}" title="Estado"/>
                         <h:outputText value="Fecha inicio"></h:outputText>
                         <h:outputText value="#{proyectoController.selected.fechainicio}" title="Fecha inicio">
-                        	<f:convertDateTime pattern="MM/dd/yyyy" />
+                        	<f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="Fecha fin"/>
                         <h:outputText value="#{proyectoController.selected.fechafin}" title="Fecha fin">
-                        	<f:convertDateTime pattern="MM/dd/yyyy" />
+                        	<f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="Kilometraje"/>
                         <h:outputText value="#{proyectoController.selected.kilometraje}" title="Kilometraje"/>
@@ -32,11 +32,11 @@
                         <h:outputText value="#{proyectoController.selected.rutacarpeta}" title="Ruta"/>
                         <h:outputText value="Fecha registro"/>
                         <h:outputText value="#{proyectoController.selected.fecharegistro}" title="Fecha registro">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="Fecha modificaci&oacute;n"/>
                         <h:outputText value="#{proyectoController.selected.fechamodificacion}" title="Fecha modificaci&oacute;n">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
                         </h:outputText>
 						<h:outputText value="Usuario registro"/>
                         <h:outputText value="#{proyectoController.selected.usuarioregistro.nombre} #{proyectoController.selected.usuarioregistro.apellido}" title="Usuario registro"/>

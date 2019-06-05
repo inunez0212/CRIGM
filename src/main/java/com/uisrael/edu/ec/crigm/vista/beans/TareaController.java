@@ -53,7 +53,6 @@ public class TareaController implements Serializable {
     private Long idUsuarioRevisor;
     
     //objetos de busqueda
-    private Long codigoProyecto;
     private boolean busqueda = false;
     
     
@@ -79,11 +78,15 @@ public class TareaController implements Serializable {
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		tareaGestor.save(selected);
+    		
     		JsfUtil.addSuccessMessage("Tarea creada correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo crear el tarea");
+		}finally {
+			idProyecto=null;
 		}
+    	
     }
 
     public void update() {
@@ -105,6 +108,8 @@ public class TareaController implements Serializable {
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo actualizar el tarea");
+		}finally {
+			idProyecto=null;
 		}
     }
 
@@ -121,7 +126,7 @@ public class TareaController implements Serializable {
     }
     
     private List<TareaDTO> findByNombreAndEstado() {
-    	ProyectoDTO proyecto= proyectoGestor.getOne(codigoProyecto);
+    	ProyectoDTO proyecto= proyectoGestor.getOne(idProyecto);
     	List<TareaDTO> items = new ArrayList<>();
     	if(proyecto!=null && proyecto.getId()!=null) {
     		 items = tareaGestor.
@@ -133,6 +138,9 @@ public class TareaController implements Serializable {
         return items;
     }
     
+    public void busqueda(){
+  		busqueda = idProyecto!=null && idProyecto>0;
+    }
     
     public List<TareaDTO> getItems() {
     	if(busqueda) {
@@ -241,20 +249,6 @@ public class TareaController implements Serializable {
 	 */
 	public void setIdUsuarioRevisor(Long idUsuarioRevisor) {
 		this.idUsuarioRevisor = idUsuarioRevisor;
-	}
-
-	/**
-	 * @return the codigoProyecto
-	 */
-	public Long getCodigoProyecto() {
-		return codigoProyecto;
-	}
-
-	/**
-	 * @param codigoProyecto the codigoProyecto to set
-	 */
-	public void setCodigoProyecto(Long codigoProyecto) {
-		this.codigoProyecto = codigoProyecto;
 	}
 
 	

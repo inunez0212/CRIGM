@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.ITareaDAO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
 @Repository
-public class TareaGestor implements ITareaGestor	{
+public class TareaGestor implements ITareaGestor{
 
 	@Autowired
 	ITareaDAO tareaDAO;
@@ -50,5 +51,10 @@ public class TareaGestor implements ITareaGestor	{
 	@Override
 	public List<TareaDTO> findByProyectoDTOOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado) {
 		return this.tareaDAO.findByProyectoDTOAndEstadoOrderByFecharegistroDesc(proyecto, estado);
+	}
+
+	@Override
+	public int actualizarTareas(CatalogoValorDTO estado, ProyectoDTO proyecto) {
+		return this.tareaDAO.actualizarTareas(estado, proyecto);
 	}
 }

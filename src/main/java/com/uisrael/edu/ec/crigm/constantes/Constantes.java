@@ -6,6 +6,7 @@ public final class Constantes {
 	public static String ESTADO_REGISTRADA = "REG";
 	public static String ESTADO_ASIGNADA = "ASI";
 	public static String ESTADO_EN_PROCESO = "PRO";
+	public static String ESTADO_EN_PAUSA = "PRO";
 	public static String EMAIL_RESETEO ="EMR";
 	public static String CONTRASENIA_POR_DEFECTO ="CPD"; 
 

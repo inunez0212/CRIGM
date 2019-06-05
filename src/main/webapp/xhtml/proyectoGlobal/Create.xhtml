@@ -15,7 +15,7 @@
                         <p:outputLabel value="ID" for="id" />
                         <p:inputText id="id" value="PG-0#{proyectoGlobalController.selected.id}" disabled="true"/>
                         <p:outputLabel value="Proyecto" for="proyecto" />
-                        <p:selectOneMenu id="proyecto" value="#{proyectoGlobalController.codigoProyecto}" >
+                        <p:selectOneMenu id="proyecto" value="#{proyectoGlobalController.idProyecto}" >
                         	<f:selectItems value="#{proyectoController.items}" var="item"
                         	itemLabel="#{item.nombre}" itemValue="#{item.id}" > </f:selectItems>
                         </p:selectOneMenu>

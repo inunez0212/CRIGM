@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
@@ -42,10 +43,9 @@ public class ProyectoGlobalController implements Serializable {
     private ProyectoGlobalDTO selected;
     private List<ProyectoGlobalDTO> itemsFiltrados;
     private String codigoReferenciaEstado;
-    private Long codigoProyecto;
+    private Long idProyecto;
     
 	//objetos de busqueda
-    private Long idProyecto;
     private boolean busqueda = false;
     
     public ProyectoGlobalController() {
@@ -60,19 +60,21 @@ public class ProyectoGlobalController implements Serializable {
     	try {
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
-    		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
+    		selected.setProyecto(proyectoGestor.getOne(idProyecto));
     		selected.setEstadoglobal(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PROCESO));
     		proyectoGlobalGestor.save(selected);
     		JsfUtil.addSuccessMessage("ProyectoGlobalDTO creado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo crear el proyectoGlobal");
+		}finally {
+			idProyecto=null;
 		}
     }
 
     public void update() {
     	try {
-    		selected.setProyecto(proyectoGestor.getOne(codigoProyecto));
+    		selected.setProyecto(proyectoGestor.getOne(idProyecto));
     		selected.setEstadoglobal(catalogoValorGestor.findByCodigoreferencia(codigoReferenciaEstado));
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
@@ -81,6 +83,8 @@ public class ProyectoGlobalController implements Serializable {
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo actualizar el proyectoGlobal");
+		}finally {
+			idProyecto=null;
 		}
     }
 
@@ -108,7 +112,11 @@ public class ProyectoGlobalController implements Serializable {
 		}
         return items;
     }
-    
+
+    public void busqueda(){
+  		busqueda = idProyecto!=null && idProyecto>0;
+    }
+
     
     public List<ProyectoGlobalDTO> getItems() {
     	if(busqueda) {
@@ -150,14 +158,6 @@ public class ProyectoGlobalController implements Serializable {
 
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
-	}
-
-	public Long getCodigoProyecto() {
-		return codigoProyecto;
-	}
-
-	public void setCodigoProyecto(Long codigoProyecto) {
-		this.codigoProyecto = codigoProyecto;
 	}
 
 	/**

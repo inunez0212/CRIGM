@@ -15,9 +15,9 @@
 
 	<ui:define name="body">
 		<h:form id="ProyectoListForm" onkeypress="if (event.keyCode == 13) { return false; }">
-			<p:panel header="Proyecto">
+			<p:panel header="Proyecto" >
 				<h:outputText value="Opciones"></h:outputText>
-				<p:panelGrid columns="10" layout="grid">
+				<p:panelGrid columns="10" layout="grid" >
 		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
 					actionListener="#{proyectoController.prepareCreate}"	update=":ProyectoCreateForm"
 					oncomplete="PF('ProyectoCreateDialog').show()" />
@@ -31,19 +31,20 @@
 							message="¿Esta seguro de eliminar el proyecto seleccionado?"
 							icon="fa fa-warning" />
 					</p:commandButton>
-					<p:commandButton  value="Tareas" icon="fa fa-plus" styleClass="CyanButton"
-					actionListener="#{proyectoController.seleccionarTareas}" update=":growl"/>
-					<p:commandButton  value="Global" icon="fa fa-plus" styleClass="CyanButton"
-					actionListener="#{proyectoController.seleccionarGlobal}" update=":growl"/>
-					<p:commandButton  value="Pausar tarea" icon="fa fa-plus" styleClass="CyanButton"
-					actionListener="#{proyectoController.pausarTareas}" update=":growl"/>
-					<p:commandButton icon="fa fa-trash-o" value="Pausar todo" styleClass="CyanButton"
-						actionListener="#{proyectoController.pausarTodo}" 
-						update=":growl">
-						<p:confirm header="Confirmation" 
-							message="¿Esta seguro de pausar todas las tareas?"
-							icon="fa fa-warning" />
-					</p:commandButton>
+					<p:commandButton  value="Tareas" icon="fa fa-user-circle-o" styleClass="CyanButton"
+						actionListener="#{proyectoController.seleccionarTareas}" update=":growl"/>
+					<p:commandButton  value="Global" icon="fa fa-map-o" styleClass="CyanButton"
+						actionListener="#{proyectoController.seleccionarGlobal}" update=":growl"/>
+					<p:commandButton  value="Pausar tarea" icon="fa fa-pause-circle-o" styleClass="CyanButton"
+						onclomplete="PF('ProyectoPausarDialog').show()"
+						update=":growl"/>
+<!-- 					<p:commandButton icon="fa fa-stop-circle-o" value="Pausar todo" styleClass="CyanButton" -->
+<!-- 						actionListener="#{proyectoController.pausarTodo}"  -->
+<!-- 						update=":growl"> -->
+<!-- 						<p:confirm header="Confirmation"  -->
+<!-- 							message="¿Esta seguro de pausar todas las tareas?" -->
+<!-- 							icon="fa fa-warning" /> -->
+<!-- 					</p:commandButton> -->
 				</p:panelGrid>
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
@@ -69,10 +70,14 @@
 						<h:outputText value="#{item.estadoproyecto.descripcion}" />
 					</p:column>
 					<p:column headerText="Fecha inicio" sortBy="#{item.fechainicio}">
-						<h:outputText value="#{item.fechainicio}" />
+						<h:outputText value="#{item.fechainicio}" >
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</h:outputText>
 					</p:column>
 					<p:column headerText="Fecha fin" sortBy="#{item.fechafin}">
-						<h:outputText value="#{item.fechafin}" />
+						<h:outputText value="#{item.fechafin}" >
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</h:outputText>
 					</p:column>
 					<p:column headerText="Kilometraje" sortBy="#{item.kilometraje}">
 						<h:outputText value="#{item.kilometraje}" />
@@ -106,6 +111,22 @@
 							message="¿Esta seguro?"
 							icon="fa fa-warning" />
 					</p:menuitem>
+					<p:menuitem  value="Tareas" icon="fa fa-user-circle-o" 
+						actionListener="#{proyectoController.seleccionarTareas}" update=":growl">
+					</p:menuitem>
+					<p:menuitem  value="Global" icon="fa fa-map-o" 
+						actionListener="#{proyectoController.seleccionarGlobal}" update=":growl">
+					</p:menuitem>
+					<p:menuitem  value="Pausar tarea" icon="fa fa-pause-circle-o" 
+						actionListener="#{proyectoController.pausarTareas}" update=":growl">
+					</p:menuitem>
+<!-- 					<p:menuitem  icon="fa fa-stop-circle-o" value="Pausar todo"  -->
+<!-- 						actionListener="#{proyectoController.pausarTodo}"  -->
+<!-- 						update=":growl"> -->
+<!-- 						<p:confirm header="Confirmation"  -->
+<!-- 							message="¿Esta seguro de pausar todas las tareas?" -->
+<!-- 							icon="fa fa-warning" /> -->
+<!-- 					</p:menuitem> -->
 				</p:contextMenu>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="SI" type="button"
