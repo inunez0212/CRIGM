@@ -1,6 +1,5 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.context.ExternalContext;

@@ -8,6 +8,7 @@ package com.uisrael.edu.ec.crigm.persistencia.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,10 +66,7 @@ public class CatalogoValorDTO implements Serializable {
     @JoinColumn(name = "usuarioregistro", referencedColumnName = "id")
     @ManyToOne
     private UsuarioDTO usuarioregistro;
-    @OneToMany(mappedBy = "causal")
-    private Collection<HistorialTareaDTO> historialTareaCollection;
-    @OneToMany(mappedBy = "estadotarea")
-    private Collection<HistorialTareaDTO> historialTareaCollection1;
+    
     @OneToMany(mappedBy = "estadoproyecto")
     private Collection<ProyectoDTO> proyectoCollection;
     @OneToMany(mappedBy = "estadoglobal")
@@ -159,22 +157,6 @@ public class CatalogoValorDTO implements Serializable {
 
     public void setUsuarioregistro(UsuarioDTO usuarioregistro) {
         this.usuarioregistro = usuarioregistro;
-    }
-
-    public Collection<HistorialTareaDTO> getHistorialTareaCollection() {
-        return historialTareaCollection;
-    }
-
-    public void setHistorialTareaCollection(Collection<HistorialTareaDTO> historialTareaCollection) {
-        this.historialTareaCollection = historialTareaCollection;
-    }
-
-    public Collection<HistorialTareaDTO> getHistorialTareaCollection1() {
-        return historialTareaCollection1;
-    }
-
-    public void setHistorialTareaCollection1(Collection<HistorialTareaDTO> historialTareaCollection1) {
-        this.historialTareaCollection1 = historialTareaCollection1;
     }
 
     public Collection<ProyectoDTO> getProyectoCollection() {

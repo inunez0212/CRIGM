@@ -83,10 +83,7 @@ public class TareaController implements Serializable {
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo crear el tarea");
-		}finally {
-			idProyecto=null;
 		}
-    	
     }
 
     public void update() {
@@ -130,7 +127,7 @@ public class TareaController implements Serializable {
     	List<TareaDTO> items = new ArrayList<>();
     	if(proyecto!=null && proyecto.getId()!=null) {
     		 items = tareaGestor.
-    				 findByProyectoDTOOrderByFecharegistroDesc(proyecto, Constantes.ESTADO_ACTIVO);
+    				 findByProyectoDTOAndEstadoOrderByFecharegistroDesc(proyecto);
     	}
     	if(items==null) {
 			items=new ArrayList<>();
@@ -143,6 +140,7 @@ public class TareaController implements Serializable {
     }
     
     public List<TareaDTO> getItems() {
+    	busqueda();
     	if(busqueda) {
     		items=this.findByNombreAndEstado();
     	}else {

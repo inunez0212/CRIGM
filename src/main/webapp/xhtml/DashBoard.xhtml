@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Reportes"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="CatalogoValorListForm" onkeypress="if (event.keyCode == 13) { return false; }">
+			<p:panel header="Reportes">
+				<p:panelGrid columns="9" styleClass="ui-noborder"> 
+					<p:outputLabel for ="tipo" value="Tipo de reporte:"></p:outputLabel>
+					<p:selectOneMenu id="tipo" value="#{dashBoardController.tipoReporte}" immediate="true">
+                        	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
+                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('CTR')}" var="item"
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
+                        	<p:ajax event="change" update="labelGrupo grupo"></p:ajax>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Grupo" for="grupo" id="labelGrupo" />
+                    <p:selectOneMenu id="grupo" value="#{dashBoardController.grupo}" disabled="#{dashBoardController.tipoReporte!=null and dashBoardController.tipoReporte!='TRG'}">
+                      	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
+                      	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('GRUP')}" var="item"
+                      	itemLabel="#{item.codigoreferencia}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
+                    </p:selectOneMenu>
+					<p:outputLabel value="Fecha inicio:" for="fechainicio" />
+                        <p:calendar id="fechainicio" value="#{dashBoardController.fechaInicio}" pattern="yyyy-MM-dd" />
+                        <p:outputLabel value="Fecha fin" for="fechafin" />
+                        <p:calendar id="fechafin" value="#{dashBoardController.fechaFin}" pattern="yyyy-MM-dd"/>
+                        <p:commandLink  target="blank" ajax="false" action="#{dashBoardController.descargar}"  title="Descargar">
+                        	<i class="fa fa-download" style="font-size: 40px;"></i>
+                        </p:commandLink>
+				</p:panelGrid>
+				
+			</p:panel>
+		</h:form>			
+	</ui:define>
+</ui:composition>
+
+</html>

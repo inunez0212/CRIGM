@@ -35,16 +35,8 @@
 						actionListener="#{proyectoController.seleccionarTareas}" update=":growl"/>
 					<p:commandButton  value="Global" icon="fa fa-map-o" styleClass="CyanButton"
 						actionListener="#{proyectoController.seleccionarGlobal}" update=":growl"/>
-					<p:commandButton  value="Pausar tarea" icon="fa fa-pause-circle-o" styleClass="CyanButton"
-						onclomplete="PF('ProyectoPausarDialog').show()"
-						update=":growl"/>
-<!-- 					<p:commandButton icon="fa fa-stop-circle-o" value="Pausar todo" styleClass="CyanButton" -->
-<!-- 						actionListener="#{proyectoController.pausarTodo}"  -->
-<!-- 						update=":growl"> -->
-<!-- 						<p:confirm header="Confirmation"  -->
-<!-- 							message="¿Esta seguro de pausar todas las tareas?" -->
-<!-- 							icon="fa fa-warning" /> -->
-<!-- 					</p:commandButton> -->
+					<p:commandButton  value="Pausar tareas" icon="fa fa-pause-circle-o" styleClass="CyanButton"
+						oncomplete="PF('ProyectoPausarDialog').show()" update="ProyectoPausarForm"/>
 				</p:panelGrid>
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
@@ -120,13 +112,6 @@
 					<p:menuitem  value="Pausar tarea" icon="fa fa-pause-circle-o" 
 						actionListener="#{proyectoController.pausarTareas}" update=":growl">
 					</p:menuitem>
-<!-- 					<p:menuitem  icon="fa fa-stop-circle-o" value="Pausar todo"  -->
-<!-- 						actionListener="#{proyectoController.pausarTodo}"  -->
-<!-- 						update=":growl"> -->
-<!-- 						<p:confirm header="Confirmation"  -->
-<!-- 							message="¿Esta seguro de pausar todas las tareas?" -->
-<!-- 							icon="fa fa-warning" /> -->
-<!-- 					</p:menuitem> -->
 				</p:contextMenu>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="SI" type="button"
@@ -140,6 +125,7 @@
 		<ui:include src="Create.xhtml" />
 		<ui:include src="Edit.xhtml" />
 		<ui:include src="View.xhtml" />
+		<ui:include src="Pausar.xhtml" />
 	</ui:define>
 </ui:composition>
 

@@ -1,5 +1,6 @@
 package com.uisrael.edu.ec.crigm.persistencia.dao.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 
 @Repository
 public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
@@ -41,6 +43,14 @@ public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	@Modifying
 	@Query("update TareaDTO p set estadotarea = ?1 where p.proyectoDTO = ?2")
 	int actualizarTareas(CatalogoValorDTO estado, ProyectoDTO proyecto);
-	
+	//Obtiene tareas por fecha inicio
 	List<TareaDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado);
+	
+	//Obtiene las tareas por fecha inicio 
+	List<TareaDTO> findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(String estado, Date fechaInicio, Date fechaFin);
+	
+	//Obtiene las tareas por usuario y fecha inicio 
+	List<TareaDTO> findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(String estado, 
+		UsuarioDTO usuarioasignado, Date fechaInicio, Date fechaFin);
+		
 }

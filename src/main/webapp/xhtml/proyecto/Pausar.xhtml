@@ -12,20 +12,26 @@
             <h:form id="ProyectoPausarForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
+                        <h:outputText value="Nombre"/>
                         <h:outputText value="P00-#{proyectoController.selected.id}" title="ID"/>
                         <h:outputText value="Nombre"/>
                         <h:outputText value="#{proyectoController.selected.nombre}" title="Nombre"/>
                         <p:outputLabel value="Causal" for="causal" />
-                        <p:selectOneMenu id="estado" value="#{proyectoController.codigoReferenciaCausal}" >
-                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('CAP')}" var="item"
+                        <p:selectOneMenu id="causal" value="#{proyectoController.codigoReferenciaCausal}" >
+                        	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('CPT')}" var="item"
                         	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Pausar hasta:" for="fechapausa" />
-                        <p:calendar id="fechapausa" value="#{proyectoController.fechapausa}" title="Pausar hasta:"  />
+                        <p:outputLabel value="Pausar desde:" for="fechainicio" />
+                        <p:calendar id="fechainicio" value="#{proyectoController.fechaInicio}" pattern="yyyy-MM-dd HH:mm" title="Pausar desde:"  />
                         <p:outputLabel value="Fecha fin" for="fechafin" />
+                        <p:calendar id="fechafin" value="#{proyectoController.fechaFin}" pattern="yyyy-MM-dd HH:mm" title="Pausar hasta:"  />
+                   		<p:commandButton actionListener="#{proyectoController.pausarTarea}" value="Guardar" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProyectoPausarDialog');"/>
+                    	<p:commandButton value="Cancelar" onclick="PF('ProyectoPausarDialog').hide()"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{proyectoController.pausarTarea}" value="Guardar" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProyectoPausarDialog');"/>
-                    <p:commandButton value="Cancelar" onclick="PF('ProyectoPausarDialog').hide()"/>
+                    <p:panelGrid columns="2" rendered="#{proyectoController.selected == null}">
+                    	<h:outputText value="Debe seleccionar un proyecto"></h:outputText>
+                    </p:panelGrid>
+                    
                 </h:panelGroup>
             </h:form>
         </p:dialog>

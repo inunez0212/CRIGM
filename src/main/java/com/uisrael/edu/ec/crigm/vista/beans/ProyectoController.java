@@ -54,10 +54,12 @@ public class ProyectoController implements Serializable {
     //objetos de busqueda
     private String filtros;
     private boolean busqueda = false;
-    
-    public ProyectoController() {
-    }
 
+    //Objetos pausa
+    private String codigoReferenciaCausal;
+    private Date fechaInicio;
+    private Date fechaFin;
+    
     public ProyectoDTO prepareCreate() {
         selected = new ProyectoDTO();
         return selected;
@@ -160,7 +162,7 @@ public class ProyectoController implements Serializable {
     public void pausarTarea() {
     	try {
     		CatalogoValorDTO estadoCatValDTO = this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PAUSA);
-    		this.tareaGestor.actualizarTareas(estadoCatValDTO, selected);
+    		//this.tareaGestor.actualizarTareas(estadoCatValDTO, selected);
     		JsfUtil.addSuccessMessage("Tarea pausada");
     	}catch (Exception e) {
     		JsfUtil.addErrorMessage("Error al pausar la tarea");
@@ -209,10 +211,53 @@ public class ProyectoController implements Serializable {
 	}
 
 	/**
+	 * @return the codigoReferenciaCausal
+	 */
+	public String getCodigoReferenciaCausal() {
+		return codigoReferenciaCausal;
+	}
+
+	/**
+	 * @param codigoReferenciaCausal the codigoReferenciaCausal to set
+	 */
+	public void setCodigoReferenciaCausal(String codigoReferenciaCausal) {
+		this.codigoReferenciaCausal = codigoReferenciaCausal;
+	}
+
+	/**
+	 * @return the fechaInicio
+	 */
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	/**
+	 * @param fechaInicio the fechaInicio to set
+	 */
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	/**
+	 * @return the fechaFin
+	 */
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	/**
+	 * @param fechaFin the fechaFin to set
+	 */
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	/**
 	 * @param filtros the filtros to set
 	 */
 	public void setFiltros(String filtros) {
 		this.filtros = filtros;
 	}
 
+	
 }

@@ -8,6 +8,7 @@ package com.uisrael.edu.ec.crigm.persistencia.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -204,14 +205,6 @@ public class TareaDTO implements Serializable {
         this.usuarioregistro = usuarioregistro;
     }
 
-    public Collection<HistorialTareaDTO> getHistorialTareaCollection() {
-        return historialTareaCollection;
-    }
-
-    public void setHistorialTareaCollection(Collection<HistorialTareaDTO> historialTareaCollection) {
-        this.historialTareaCollection = historialTareaCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -245,5 +238,18 @@ public class TareaDTO implements Serializable {
 		this.revisor = revisor;
 	}
 
-    
+	/**
+	 * @return the historialTareaCollection
+	 */
+	public Collection<HistorialTareaDTO> getHistorialTareaCollection() {
+		return historialTareaCollection;
+	}
+
+	/**
+	 * @param historialTareaCollection the historialTareaCollection to set
+	 */
+	public void setHistorialTareaCollection(Collection<HistorialTareaDTO> historialTareaCollection) {
+		this.historialTareaCollection = historialTareaCollection;
+	}
+
 }

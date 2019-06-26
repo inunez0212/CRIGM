@@ -33,10 +33,10 @@
 					</p:commandButton>
 				</p:panelGrid>
 				<p:separator/>
-				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
+				<h:outputText value="B&uacute;squeda por proyecto" class="BigTopic"></h:outputText>
 				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
 					<p:selectOneMenu id="proyectob" value="#{tareaController.idProyecto}" >
-                      	<f:selectItem itemLabel="Proyecto" itemValue="0"></f:selectItem>
+                      	<f:selectItem itemLabel="Seleccione..." itemValue="0"></f:selectItem>
                       	<f:selectItems value="#{proyectoController.items}" var="dato" 
                       	itemLabel="#{dato.nombre}" itemValue="#{dato.id}"></f:selectItems>
                     </p:selectOneMenu>	

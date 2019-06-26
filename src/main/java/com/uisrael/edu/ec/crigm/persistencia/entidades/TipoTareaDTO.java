@@ -60,8 +60,7 @@ public class TipoTareaDTO implements Serializable {
     private Collection<TareaDTO> tareaCollection;
     @OneToMany(mappedBy = "tipoTareaDTO")
     private Collection<TipoTareaPerfilDTO> tipoTareaPerfilCollection;
-    @OneToMany(mappedBy = "tipotareaDTO")
-    private Collection<HistorialTareaDTO> historialTareaCollection;
+    
     @JoinColumn(name = "usuariomodificacion", referencedColumnName = "id")
     @ManyToOne
     private UsuarioDTO usuariomodificacion;
@@ -130,14 +129,6 @@ public class TipoTareaDTO implements Serializable {
 
     public void setTareaCollection(Collection<TareaDTO> tareaCollection) {
         this.tareaCollection = tareaCollection;
-    }
-
-    public Collection<HistorialTareaDTO> getHistorialTareaCollection() {
-        return historialTareaCollection;
-    }
-
-    public void setHistorialTareaCollection(Collection<HistorialTareaDTO> historialTareaCollection) {
-        this.historialTareaCollection = historialTareaCollection;
     }
 
     public UsuarioDTO getUsuariomodificacion() {

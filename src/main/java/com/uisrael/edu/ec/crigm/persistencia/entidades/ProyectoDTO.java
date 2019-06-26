@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,8 +70,6 @@ public class ProyectoDTO implements Serializable {
     private Date fechamodificacion;
     @OneToMany(mappedBy = "proyectoDTO")
     private Collection<TareaDTO> tareaCollection;
-    @OneToMany(mappedBy = "proyectoDTO")
-    private Collection<HistorialTareaDTO> historialTareaCollection;
     @JoinColumn(name = "estadoproyecto", referencedColumnName = "codigoreferencia")
     @ManyToOne
     private CatalogoValorDTO estadoproyecto;
@@ -176,14 +175,6 @@ public class ProyectoDTO implements Serializable {
 
     public void setTareaCollection(Collection<TareaDTO> tareaCollection) {
         this.tareaCollection = tareaCollection;
-    }
-
-    public Collection<HistorialTareaDTO> getHistorialTareaCollection() {
-        return historialTareaCollection;
-    }
-
-    public void setHistorialTareaCollection(Collection<HistorialTareaDTO> historialTareaCollection) {
-        this.historialTareaCollection = historialTareaCollection;
     }
 
     public CatalogoValorDTO getEstadoproyecto() {

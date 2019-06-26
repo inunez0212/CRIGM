@@ -9,5 +9,7 @@ public final class Constantes {
 	public static String ESTADO_EN_PAUSA = "PRO";
 	public static String EMAIL_RESETEO ="EMR";
 	public static String CONTRASENIA_POR_DEFECTO ="CPD"; 
-
+	public static String REPORTE_RENDIMIENTO_GRUPO="TRG";
+	public static String REPORTE_RENDIMIENTO_USUARIO="TRU";
+	public static String REPORTE_RENDIMIENTO_TOTAL="TRT";
 }
