@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -17,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
-import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
@@ -34,7 +35,7 @@ public class DashBoardController implements Serializable {
 	private static final long serialVersionUID = 6438741790634876364L;
 
 	@Autowired
-	private IProyectoGestor proyectoGestor;
+	private IUsuarioGestor usuarioGestor;
 	@Autowired
 	private ICatalogoValorGestor catalogoValorGestor; 
 	@Autowired
@@ -43,14 +44,9 @@ public class DashBoardController implements Serializable {
 	@Inject
 	private LoginController loginController;
 	
-	@Inject
-	private TareaController tareaController;
-	
-	@Inject
-	private ProyectoGlobalController proyectoGlobalController;
-
 	private String tipoReporte;
 	private String grupo;
+	private Long idUsuario;
 	
 	private Date fechaInicio = new Date();
 	private Date fechaFin = new Date();
@@ -75,12 +71,13 @@ public class DashBoardController implements Serializable {
 	        ExcelView excelView = new ExcelView();
 	        excelView.buildExcelDocument(modelo,output);
 	        JsfUtil.addSuccessMessage("Se ha generado el archivo correctamente");
+	        //finaliza el response
+		    fc.responseComplete();
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    	JsfUtil.addErrorMessage("Error al generar el archivo");
 	    }
-	    //finaliza el response
-	    fc.responseComplete();
+	    
 	}
 
 
@@ -90,6 +87,9 @@ public class DashBoardController implements Serializable {
 		Collection<TareaDTO>tareaDTOCOL = new ArrayList<>();  
 		if(tipoReporte.equals(Constantes.REPORTE_RENDIMIENTO_GRUPO)) {
 			tareaDTOCOL = this.tareaGestor.findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(fechaInicio, fechaFin);
+			//Obtiene las tareas del grupo indicado
+			tareaDTOCOL = tareaDTOCOL.stream().filter(dato ->  dato.getUsuarioasignado().getGrupo().equals(grupo)).
+					collect(Collectors.toList());
 			modelo.put("tareas", tareaDTOCOL);
 		}
 		if(tipoReporte.equals(Constantes.REPORTE_RENDIMIENTO_TOTAL)) {
@@ -97,7 +97,7 @@ public class DashBoardController implements Serializable {
 			modelo.put("tareas", tareaDTOCOL);
 		}
 		if(tipoReporte.equals(Constantes.REPORTE_RENDIMIENTO_USUARIO)) {
-			UsuarioDTO usuarioAsignado = new UsuarioDTO();
+			UsuarioDTO usuarioAsignado = usuarioGestor.getOne(idUsuario);
 			tareaDTOCOL = this.tareaGestor.findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(
 					usuarioAsignado, fechaInicio, fechaFin);
 			modelo.put("tareas", tareaDTOCOL);
@@ -153,6 +153,22 @@ public class DashBoardController implements Serializable {
 	 */
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
+	}
+
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }

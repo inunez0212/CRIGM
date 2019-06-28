@@ -47,10 +47,10 @@ public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	List<TareaDTO> findByProyectoDTOAndEstadoOrderByFecharegistroDesc(ProyectoDTO proyecto, String estado);
 	
 	//Obtiene las tareas por fecha inicio 
-	List<TareaDTO> findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(String estado, Date fechaInicio, Date fechaFin);
+	List<TareaDTO> findByEstadoAndUsuarioasignadoNotNullAndFechainicioBetweenOrderByUsuarioasignadoAsc(String estado, Date fechaInicio, Date fechaFin);
 	
 	//Obtiene las tareas por usuario y fecha inicio 
-	List<TareaDTO> findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(String estado, 
+	List<TareaDTO> findByEstadoAndUsuarioasignadoAndFechainicioBetweenOrderByUsuarioasignadoAsc(String estado, 
 		UsuarioDTO usuarioasignado, Date fechaInicio, Date fechaFin);
 		
 }

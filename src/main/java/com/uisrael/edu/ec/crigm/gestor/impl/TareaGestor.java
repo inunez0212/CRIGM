@@ -89,14 +89,14 @@ public class TareaGestor implements ITareaGestor{
 	@Override
 	public List<TareaDTO> findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(Date fechaInicio,
 			Date fechaFin) {
-		return this.tareaDAO.findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(Constantes.ESTADO_ACTIVO,
+		return this.tareaDAO.findByEstadoAndUsuarioasignadoNotNullAndFechainicioBetweenOrderByUsuarioasignadoAsc(Constantes.ESTADO_ACTIVO,
 			fechaInicio, fechaFin);
 	}
 
 	@Override
 	public List<TareaDTO> findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(
 			UsuarioDTO usuarioasignado, Date fechaInicio, Date fechaFin) {
-		return this.tareaDAO.findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(
+		return this.tareaDAO.findByEstadoAndUsuarioasignadoAndFechainicioBetweenOrderByUsuarioasignadoAsc(
 				Constantes.ESTADO_ACTIVO, usuarioasignado, fechaInicio, fechaFin); 
 	}
 

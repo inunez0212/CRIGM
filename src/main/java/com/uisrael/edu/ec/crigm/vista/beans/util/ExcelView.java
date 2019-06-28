@@ -88,7 +88,8 @@ public class ExcelView{
 		    
 		    for(TareaDTO tarea : tareasList){
 		        Row tareaRow =  sheet.createRow(rowCount++);
-		        tareaRow.createCell(0).setCellValue(tarea.getUsuarioasignado().getApellido() + " " +tarea.getUsuarioasignado().getNombre());
+		        tareaRow.createCell(0).setCellValue(tarea.getUsuarioasignado().getApellido() + " " +
+		        tarea.getUsuarioasignado().getNombre());
 		     }
 	
 		    workbook.write(outputStream);

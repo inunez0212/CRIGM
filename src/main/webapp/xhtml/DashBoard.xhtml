@@ -16,7 +16,8 @@
 	<ui:define name="body">
 		<h:form id="CatalogoValorListForm" onkeypress="if (event.keyCode == 13) { return false; }">
 			<p:panel header="Reportes">
-				<p:panelGrid columns="9" styleClass="ui-noborder"> 
+			<p:panelGrid columns="2">
+				<p:panelGrid columns="2" styleClass="ui-noborder" > 
 					<p:outputLabel for ="tipo" value="Tipo de reporte:"></p:outputLabel>
 					<p:selectOneMenu id="tipo" value="#{dashBoardController.tipoReporte}" immediate="true">
                         	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
@@ -24,21 +25,35 @@
                         	itemLabel="#{item.descripcion}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                         	<p:ajax event="change" update="labelGrupo grupo"></p:ajax>
                     </p:selectOneMenu>
+					<p:outputLabel value="Fecha inicio:" for="fechainicio" />
+                    <p:calendar id="fechainicio" value="#{dashBoardController.fechaInicio}" pattern="yyyy-MM-dd" />
+                    <p:outputLabel value="Fecha fin" for="fechafin" />
+                    <p:calendar id="fechafin" value="#{dashBoardController.fechaFin}" pattern="yyyy-MM-dd"/>
                     <p:outputLabel value="Grupo" for="grupo" id="labelGrupo" />
                     <p:selectOneMenu id="grupo" value="#{dashBoardController.grupo}" disabled="#{dashBoardController.tipoReporte!=null and dashBoardController.tipoReporte!='TRG'}">
                       	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
                       	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('GRUP')}" var="item"
                       	itemLabel="#{item.codigoreferencia}" itemValue="#{item.codigoreferencia}" > </f:selectItems>
                     </p:selectOneMenu>
-					<p:outputLabel value="Fecha inicio:" for="fechainicio" />
-                        <p:calendar id="fechainicio" value="#{dashBoardController.fechaInicio}" pattern="yyyy-MM-dd" />
-                        <p:outputLabel value="Fecha fin" for="fechafin" />
-                        <p:calendar id="fechafin" value="#{dashBoardController.fechaFin}" pattern="yyyy-MM-dd"/>
-                        <p:commandLink  target="blank" ajax="false" action="#{dashBoardController.descargar}"  title="Descargar">
-                        	<i class="fa fa-download" style="font-size: 40px;"></i>
-                        </p:commandLink>
+                    <p:outputLabel value="Usuario" for="usuario" id="labelUsuario" />
+                    <p:selectOneMenu id="usuario" value="#{dashBoardController.idUsuario}" disabled="#{dashBoardController.tipoReporte!=null and dashBoardController.tipoReporte!='TRU'}">
+                      	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
+                        	<f:selectItems value="#{usuarioController.items}" var="dato" 
+                        	itemLabel="#{dato.nombre} #{dato.apellido}" itemValue="#{dato.id}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <p:commandLink  target="blank" ajax="false" action="#{dashBoardController.descargar}"  title="Descargar">
+                    	<i class="fa fa-download" style="font-size: 40px;"></i>
+                    </p:commandLink>
 				</p:panelGrid>
-				
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Usuario" for="usuario" id="labelUsuario1" />
+					<p:selectOneMenu id="usuario1" value="#{dashBoardController.idUsuario}" disabled="#{dashBoardController.tipoReporte!=null and dashBoardController.tipoReporte!='TRU'}">
+                      	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>
+                        	<f:selectItems value="#{usuarioController.items}" var="dato" 
+                        	itemLabel="#{dato.nombre} #{dato.apellido}" itemValue="#{dato.id}"></f:selectItems>
+                    </p:selectOneMenu>
+				</p:panelGrid>				
+			</p:panelGrid>	
 			</p:panel>
 		</h:form>			
 	</ui:define>
