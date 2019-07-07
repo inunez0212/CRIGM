@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IHistorialTareaGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.ITareaDAO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
@@ -26,6 +27,8 @@ public class TareaGestor implements ITareaGestor{
 	ICatalogoValorGestor catalogoValorGestor;
 	@Autowired 
 	IHistorialTareaGestor historialTareaGestor;
+	@Autowired
+	IProyectoGestor proyectoGestor; 
 	
 	@Override
 	public List<TareaDTO> findByEstadoActivo() {
@@ -51,8 +54,11 @@ public class TareaGestor implements ITareaGestor{
 	public TareaDTO save(TareaDTO entity) {
 		//Registra la tarea 
 		TareaDTO tareaDTO = tareaDAO.save(entity);
+		//Actualiza el numero de tareas
+		Integer numeroTareas = entity.getProyecto().getNumerotareas();
+		this.proyectoGestor.actualizarNumeroTareas(++numeroTareas, entity.getProyecto().getId());
 		tareaDTO.setHistorialTareaCollection(new ArrayList<>());
-		//Regista los estados de la tarea
+		//Registra los estados de la tarea
 		if(entity.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
 			//registrada
 			tareaDTO.getHistorialTareaCollection().add(historialTareaGestor.guardarHistorialTarea(

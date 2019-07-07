@@ -14,4 +14,6 @@ public interface IProyectoGestor {
 	ProyectoDTO save(ProyectoDTO entity);
 	int eliminar(Integer id);	
 	List<ProyectoDTO> findByNombreAndEstadoOrderByFecharegistroDesc(String filtros);
+	int actualizarNumeroTareas(Integer numeroTareas, Long id);
+
 }

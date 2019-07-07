@@ -68,6 +68,7 @@ public class TareaController implements Serializable {
     	try {
     		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setProyecto(proyectoGestor.getOne(idProyecto));
+    		selected.setFechainicio(new Date());
     		if(idUsuarioAsignado!=null) {
     			selected.setUsuarioasignador(loginController.getUsuarioDTO());
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));

@@ -51,4 +51,9 @@ public class ProyectoGestor implements IProyectoGestor	{
 		return this.proyectoDAO.findByNombreIgnoreCaseAndEstadoOrderByFecharegistroDesc(filtros,
 				Constantes.ESTADO_ACTIVO);
 	}
+
+	@Override
+	public int actualizarNumeroTareas(Integer numeroTareas, Long id) {
+		return this.proyectoDAO.actualizarNumeroTareas(numeroTareas, id);
+	}
 }
