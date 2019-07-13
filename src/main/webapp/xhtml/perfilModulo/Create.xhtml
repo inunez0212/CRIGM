@@ -22,7 +22,7 @@
                         <p:outputLabel value="Modulo" for="ruta" />
                         <p:selectOneMenu id="ruta" value="#{perfilModuloController.selected.ruta}" >
                         	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('RUT')}" var="item"
-                        	itemLabel="#{item.Descripcion}" itemValue="#{item.descripcion}" > </f:selectItems>
+                        	itemLabel="#{item.descripcion}" itemValue="#{item.descripcion}" > </f:selectItems>
                         </p:selectOneMenu>
                         <p:outputLabel value="Descripci&oacute;n" for="Descripcion" />
                         <p:inputText id="Descripcion" value="#{perfilModuloController.selected.descripcion}" title="Descripci&oacute;n" />
@@ -32,8 +32,6 @@
                         <p:selectBooleanCheckbox id="editar" value="#{perfilModuloController.selected.modificar}" />
                         <p:outputLabel value="Eliminar" for="eliminar" />
                         <p:selectBooleanCheckbox id="eliminar" value="#{perfilModuloController.selected.eliminar}" />
-                        <p:outputLabel value="Visualizar" for="visualizar" />
-                        <p:selectBooleanCheckbox id="visualizar" value="#{perfilModuloController.selected.listar}" />
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{perfilModuloController.selected.estado}" >
                         	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>

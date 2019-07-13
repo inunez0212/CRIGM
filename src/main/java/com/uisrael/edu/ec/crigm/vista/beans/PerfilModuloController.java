@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilGestor;
@@ -52,6 +53,7 @@ public class PerfilModuloController implements Serializable {
 
     public void create() {
     	try {
+    		selected.setListar(Boolean.TRUE);	
     		selected.setUsuarioregistro(loginController.getUsuarioDTO());
     		selected.setFecharegistro(new Date());
     		selected.setPerfil(perfilGestor.getOne(perfilId));
@@ -100,7 +102,10 @@ public class PerfilModuloController implements Serializable {
 		}
         return items;
     }
-    
+
+    public void busqueda(){
+  		busqueda = perfilBusqueda!=null && perfilBusqueda>0;
+    }
     
     public List<PerfilModuloDTO> getItems() {
     	if(busqueda) {
