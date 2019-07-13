@@ -19,13 +19,13 @@
 			<h:outputText value="Opciones"></h:outputText>
 				<p:panelGrid columns="10" layout="grid">
 		            <p:commandButton  value="Crear" icon="fa fa-plus" styleClass="CyanButton"
-					actionListener="#{tipoTareaPerfilController.prepareCreate}"	update=":TipoTareaPerfilCreateForm"
-					oncomplete="PF('TipoTareaPerfilCreateDialog').show()" />
+					actionListener="#{tipoTareaController.prepareCreate}"	update=":TipoTareaCreateForm"
+					oncomplete="PF('TipoTareaCreateDialog').show()" />
 					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
-						update=":TipoTareaPerfilEditForm" 	
-						oncomplete="PF('TipoTareaPerfilEditDialog').show()" />
+						update=":TipoTareaEditForm" 	
+						oncomplete="PF('TipoTareaEditDialog').show()" />
 					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
-						actionListener="#{tipoTareaPerfilController.destroy}" 
+						actionListener="#{tipoTareaController.destroy}" 
 						update=":growl,datalist">
 						<p:confirm header="Confirmation" 
 							message="¿Esta seguro?"

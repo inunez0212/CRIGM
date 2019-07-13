@@ -28,7 +28,7 @@ public interface ICatalogoValorDAO extends JpaRepository<CatalogoValorDTO, Long>
 	
 	@Transactional
 	@Modifying
-	@Query("update CatalogoValorDTO p set estado = 0 where p.id = ?1")
+	@Query("update CatalogoValorDTO p set estado = 0 where p.codigoreferencia = ?1")
 	int eliminar(String id);
 
 	List<CatalogoValorDTO> findByCodigoreferenciarelacionadoAndEstadoOrderByCodigoreferenciaDesc(

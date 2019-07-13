@@ -63,6 +63,10 @@
 						sortBy="#{item.usuarioasignado.apellido}">
 						<h:outputText value="#{item.usuarioasignado.apellido} #{item.usuarioasignado.nombre} " />
 					</p:column>
+					<p:column headerText="Tipo tarea"
+						sortBy="#{item.tipotarea.nombre}">
+						<h:outputText value="#{item.tipotarea.nombre}" />
+					</p:column>
 					<p:column headerText="Revisor"
 						sortBy="#{item.revisor.apellido}">
 						<h:outputText value="#{item.revisor.apellido} #{item.revisor.nombre} " />

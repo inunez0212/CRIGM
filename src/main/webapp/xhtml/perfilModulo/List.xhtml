@@ -38,10 +38,10 @@
 					<p:selectOneMenu id="perfil" value="#{perfilModuloController.perfilBusqueda}" >
                         	<f:selectItem itemLabel="Perfil" itemValue="0"></f:selectItem>
                         	<f:selectItems value="#{perfilController.items}" var="dato" 
-                        	itemLabel="#{dato.Descripcion}" itemValue="#{dato.id}"></f:selectItems>
-                        </p:selectOneMenu>
+                        	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
+                    </p:selectOneMenu>
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
-						actionListener="#{perfilModuloController.busqueda}" process="gridBusqueda" update="PerfilModuloForm gridBusqueda"> </p:commandButton>
+						actionListener="#{perfilModuloController.busqueda}" process="gridBusqueda" update="PerfilModuloListForm gridBusqueda"> </p:commandButton>
     			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{perfilModuloController.items}"
 					var="item" selectionMode="single"
@@ -51,14 +51,14 @@
 						<h:outputText value="#{item.id}" />
 					</p:column>
 					<p:column headerText="Perfil">
-						<h:outputText value="#{item.perfil.Descripcion}" />
+						<h:outputText value="#{item.perfil.descripcion}" />
 					</p:column>
 					<p:column headerText="Ruta">
 						<h:outputText value="#{item.ruta}" />
 					</p:column>
 					<p:column headerText="Descripci&oacute;n"
 						sortBy="#{item.Descripcion}">
-						<h:outputText value="#{item.Descripcion}" />
+						<h:outputText value="#{item.descripcion}" />
 					</p:column>
 					<p:column headerText="Crear">
 						 <p:selectBooleanCheckbox value="#{item.crear}" disabled="true"></p:selectBooleanCheckbox>

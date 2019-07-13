@@ -32,5 +32,9 @@ public interface IProyectoDAO extends JpaRepository<ProyectoDTO, Long>{
 	
 	List<ProyectoDTO> findByNombreIgnoreCaseAndEstadoOrderByFecharegistroDesc(
 			String filtros, String estado);
-	
+
+	@Transactional
+	@Modifying
+	@Query("update ProyectoDTO p set numerotareas = ?1 where p.id = ?2")
+	int actualizarNumeroTareas(Integer numeroTareas, Long id);
 }
