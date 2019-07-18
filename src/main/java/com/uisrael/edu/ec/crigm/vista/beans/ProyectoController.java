@@ -3,6 +3,7 @@ package com.uisrael.edu.ec.crigm.vista.beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
@@ -36,149 +43,185 @@ public class ProyectoController implements Serializable {
 	private ICatalogoValorGestor catalogoValorGestor; 
 	@Autowired
 	private ITareaGestor tareaGestor;
-	
+
 	@Inject
 	private LoginController loginController;
-	
+
 	@Inject
 	private TareaController tareaController;
-	
+
 	@Inject
 	private ProyectoGlobalController proyectoGlobalController;
-	
-    private List<ProyectoDTO> items = null;
-    private ProyectoDTO selected;
-    private List<ProyectoDTO> itemsFiltrados;
-    private String codigoRefereciaEstado;
-    
-    //objetos de busqueda
-    private String filtros;
-    private boolean busqueda = false;
 
-    //Objetos pausa
-    private String codigoReferenciaCausal;
-    private Date fechaInicio;
-    private Date fechaFin;
-    
-    public ProyectoDTO prepareCreate() {
-        selected = new ProyectoDTO();
-        return selected;
-    }
+	private List<ProyectoDTO> items = null;
+	private ProyectoDTO selected;
+	private List<ProyectoDTO> itemsFiltrados;
+	private String codigoRefereciaEstado;
+	private Collection<String> modelos;
+	//objetos de busqueda
+	private String filtros;
+	private boolean busqueda = false;
 
-    public void create() {
-    	try {
-    		selected.setNumerotareas(0);
-    		selected.setEstadoproyecto(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA));
-    		selected.setUsuarioregistro(loginController.getUsuarioDTO());
-    		selected.setFecharegistro(new Date());
-    		proyectoGestor.save(selected);
-    		JsfUtil.addSuccessMessage("ProyectoDTO creado correctamente");
-    	}catch (Exception e) {
-    		e.printStackTrace();
+	//Objetos pausa
+	private String codigoReferenciaCausal;
+	private Date fechaInicio;
+	private Date fechaFin;
+
+	private UploadedFile file;
+
+	public ProyectoDTO prepareCreate() {
+		selected = new ProyectoDTO();
+		file=null;
+		return selected;
+	}
+
+	public void create() {
+		try {
+			selected.setNumerotareas(0);
+			selected.setEstadoproyecto(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA));
+			selected.setUsuarioregistro(loginController.getUsuarioDTO());
+			selected.setFecharegistro(new Date());
+			proyectoGestor.save(selected, modelos);
+			JsfUtil.addSuccessMessage("ProyectoDTO creado correctamente");
+		}catch (Exception e) {
+			e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo crear el proyecto");
 		}
-    }
+	}
 
-    public void update() {
-    	try {
-    		selected.setNumerotareas(selected.getTareaCollection().size());
-    		selected.setEstadoproyecto(this.catalogoValorGestor.findByCodigoreferencia(codigoRefereciaEstado));
-    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
-    		selected.setFechamodificacion(new Date());
-    		proyectoGestor.save(selected);
-    		JsfUtil.addSuccessMessage("ProyectoDTO actaulizado correctamente");
-    	}catch (Exception e) {
-    		e.printStackTrace();
+	public void update() {
+		try {
+			selected.setNumerotareas(selected.getTareaCollection().size());
+			selected.setEstadoproyecto(this.catalogoValorGestor.findByCodigoreferencia(codigoRefereciaEstado));
+			selected.setUsuariomodificacion(loginController.getUsuarioDTO());
+			selected.setFechamodificacion(new Date());
+			proyectoGestor.save(selected, null);
+			JsfUtil.addSuccessMessage("ProyectoDTO actaulizado correctamente");
+		}catch (Exception e) {
+			e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo actualizar el proyecto");
 		}
-    }
+	}
 
-    public void destroy() {
-    	try {
-    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
-    		selected.setFechamodificacion(new Date());
-    		proyectoGestor.eliminar(selected.getId().intValue());
-    		JsfUtil.addSuccessMessage("ProyectoDTO eliminado correctamente");
-    	}catch (Exception e) {
-    		e.printStackTrace();
+	public void destroy() {
+		try {
+			selected.setUsuariomodificacion(loginController.getUsuarioDTO());
+			selected.setFechamodificacion(new Date());
+			proyectoGestor.eliminar(selected.getId().intValue());
+			JsfUtil.addSuccessMessage("ProyectoDTO eliminado correctamente");
+		}catch (Exception e) {
+			e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo elminar el proyecto");
 		}
-    }
+	}
 
-    public void busqueda(){
-  		busqueda = StringUtils.isNotBlank(filtros);
-    }
+	public void busqueda(){
+		busqueda = StringUtils.isNotBlank(filtros);
+	}
 
-    private List<ProyectoDTO> findByNombreAndEstado() {
-    	List<ProyectoDTO> items = proyectoGestor.findByNombreAndEstadoOrderByFecharegistroDesc(filtros);
-    	if(items==null) {
+	private List<ProyectoDTO> findByNombreAndEstado() {
+		List<ProyectoDTO> items = proyectoGestor.findByNombreAndEstadoOrderByFecharegistroDesc(filtros);
+		if(items==null) {
 			items=new ArrayList<>();
 		}
-        return items;
-    }
-    
-    
-    public List<ProyectoDTO> getItems() {
-    	if(busqueda) {
-    		items=this.findByNombreAndEstado();
-    	}else {
-    		items=proyectoGestor.findByEstadoActivo();
-    	}
-        return items;
-    }
+		return items;
+	}
 
-    public void seleccionarTareas() {
-    	try {
-    		if(this.selected!=null && this.selected.getId()!=null) {
-    			this.tareaController.setIdProyecto(this.selected.getId());
-            	FacesContext fContext = FacesContext.getCurrentInstance();
-        		ExternalContext extContext = fContext.getExternalContext();
-    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
-    		}else {
-    			JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
-    		}
-    		
+
+	public List<ProyectoDTO> getItems() {
+		if(busqueda) {
+			items=this.findByNombreAndEstado();
+		}else {
+			items=proyectoGestor.findByEstadoActivo();
+		}
+		return items;
+	}
+
+	public void seleccionarTareas() {
+		try {
+			if(this.selected!=null && this.selected.getId()!=null) {
+				this.tareaController.setIdProyecto(this.selected.getId());
+				FacesContext fContext = FacesContext.getCurrentInstance();
+				ExternalContext extContext = fContext.getExternalContext();
+				extContext.redirect(extContext.getRequestContextPath() + "/xhtml/tarea/List.xhtml");
+			}else {
+				JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
-    
-    public void seleccionarGlobal() {
-    	try {
-    		if(this.selected!=null && this.selected.getId()!=null) {
-    			this.proyectoGlobalController.setIdProyecto(this.selected.getId());
-            	FacesContext fContext = FacesContext.getCurrentInstance();
-        		ExternalContext extContext = fContext.getExternalContext();
-    			extContext.redirect(extContext.getRequestContextPath() + "/xhtml/proyectoGlobal/List.xhtml");
-    		}else {
-    			JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
-    		}
-    		
+	}
+
+	public void seleccionarGlobal() {
+		try {
+			if(this.selected!=null && this.selected.getId()!=null) {
+				this.proyectoGlobalController.setIdProyecto(this.selected.getId());
+				FacesContext fContext = FacesContext.getCurrentInstance();
+				ExternalContext extContext = fContext.getExternalContext();
+				extContext.redirect(extContext.getRequestContextPath() + "/xhtml/proyectoGlobal/List.xhtml");
+			}else {
+				JsfUtil.addErrorMessage("Debe seleccionar un proyecto");
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
-    
-    public void pausarTarea() {
-    	try {
-    		CatalogoValorDTO estadoCatValDTO = this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PAUSA);
-    		//this.tareaGestor.actualizarTareas(estadoCatValDTO, selected);
-    		JsfUtil.addSuccessMessage("Tarea pausada");
-    	}catch (Exception e) {
-    		JsfUtil.addErrorMessage("Error al pausar la tarea");
+	}
+
+	public void pausarTarea() {
+		try {
+			CatalogoValorDTO estadoCatValDTO = this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_EN_PAUSA);
+			//this.tareaGestor.actualizarTareas(estadoCatValDTO, selected);
+			JsfUtil.addSuccessMessage("Tarea pausada");
+		}catch (Exception e) {
+			JsfUtil.addErrorMessage("Error al pausar la tarea");
 		}
-    }
-    
-    public void pausarTodo() {
-    	try {
-    		JsfUtil.addSuccessMessage("Todas las tareas se han pausado");
-    	}catch (Exception e) {
-    		JsfUtil.addErrorMessage("Error al pausar la tarea");
+	}
+
+	public void pausarTodo() {
+		try {
+			JsfUtil.addSuccessMessage("Todas las tareas se han pausado");
+		}catch (Exception e) {
+			JsfUtil.addErrorMessage("Error al pausar la tarea");
 		}
-    }
-    
-    
-    
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		file = event.getFile();
+		this.readExcel();
+	}
+
+
+	private  void readExcel() {
+		int i=0;
+		XSSFWorkbook wb=null;
+		try {
+			modelos=new ArrayList<>();
+			wb = new XSSFWorkbook(file.getInputstream());
+			XSSFSheet sheet = wb.getSheetAt(0);
+			int rows = sheet.getLastRowNum();
+			for (i=1; i < rows; ++i) {
+				XSSFRow row = sheet.getRow(i);
+				XSSFCell modeloCell = row.getCell(0);
+				String modelo =  modeloCell.getStringCellValue();
+				modelos.add(modelo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			JsfUtil.addErrorMessage("Error al leer el archivo en la fila: "+i);
+		}finally {
+			if(wb!=null) {
+				try {
+					wb.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
 	public ProyectoDTO getSelected() {
 		return selected;
 	}
@@ -259,5 +302,19 @@ public class ProyectoController implements Serializable {
 		this.filtros = filtros;
 	}
 
-	
+	/**
+	 * @return
+	 */
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	/**
+	 * @param file
+	 */
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
+
 }

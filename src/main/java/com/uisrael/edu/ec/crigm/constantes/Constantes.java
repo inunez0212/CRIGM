@@ -12,4 +12,6 @@ public final class Constantes {
 	public static String REPORTE_RENDIMIENTO_GRUPO="TRG";
 	public static String REPORTE_RENDIMIENTO_USUARIO="TRU";
 	public static String REPORTE_RENDIMIENTO_TOTAL="TRT";
+	public static String TIPO_TAREA_RESTITUCION= "RESTITUCION";
+	
 }

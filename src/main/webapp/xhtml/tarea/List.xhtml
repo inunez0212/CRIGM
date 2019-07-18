@@ -55,10 +55,6 @@
 						sortBy="#{item.proyecto.nombre}">
 						<h:outputText value="#{item.proyecto.nombre}" />
 					</p:column>
-					<p:column headerText="Usuario asignador"
-						sortBy="#{item.usuarioasignador.apellido}">
-						<h:outputText value="#{item.usuarioasignador.apellido} #{item.usuarioasignador.nombre} " />
-					</p:column>
 					<p:column headerText="Operador"
 						sortBy="#{item.usuarioasignado.apellido}">
 						<h:outputText value="#{item.usuarioasignado.apellido} #{item.usuarioasignado.nombre} " />
@@ -70,12 +66,6 @@
 					<p:column headerText="Revisor"
 						sortBy="#{item.revisor.apellido}">
 						<h:outputText value="#{item.revisor.apellido} #{item.revisor.nombre} " />
-					</p:column>
-					<p:column headerText="Fecha inicio" sortBy="#{item.fechainicio}">
-						<h:outputText value="#{item.fechainicio}" />
-					</p:column>
-					<p:column headerText="Fecha fin" sortBy="#{item.fechafin}">
-						<h:outputText value="#{item.fechafin}" />
 					</p:column>
 					<p:column headerText="Estado" sortBy="#{item.descripcion}">
 						<h:outputText value="#{item.estadotarea.descripcion}" />
