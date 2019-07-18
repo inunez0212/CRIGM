@@ -12,7 +12,7 @@
 	<artifactId>CRIGM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CRIGM</name>
-	<Description>Control de Rendimiento con spring boot</Description>
+	<description>Control de Rendimiento con spring boot</description>
 
 	<properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -9,7 +9,7 @@
     <ui:composition>
 
         <p:dialog id="ProyectoCreateDlg" widgetVar="ProyectoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear">
-            <h:form id="ProyectoCreateForm">
+            <h:form id="ProyectoCreateForm" enctype="multipart/form-data">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
                         <p:outputLabel value="ID" for="id" />
@@ -24,6 +24,10 @@
                         <p:calendar id="fechafin" value="#{proyectoController.selected.fechafin}" title="Fecha fin del proyecto"  />
                         <p:outputLabel value="Carpeta inicial" for="rutacarpeta" />
                         <p:inputText id="rutacarpeta" value="#{proyectoController.selected.rutacarpeta}" title="Ruta de la carpeta" />
+						<p:outputLabel value="Archivo" for="modelos" />
+						<p:outputLabel value="#{proyectoController.file.getFileName()}"  rendered="#{proyectoController.file!=null}" id="fileName"/>
+						<p:fileUpload id ="modelos" value="#{proyectoController.file}" mode="advanced" auto="true" fileUploadListener="#{proyectoController.handleFileUpload}" 
+							update="ProyectoCreateForm" rendered="#{proyectoController.file==null}" process="ProyectoCreateForm"/>
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{proyectoController.selected.estado}" >
                         	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>

@@ -23,7 +23,7 @@
 					oncomplete="PF('PerfilModuloCreateDialog').show()" />
 					<p:commandButton icon="fa fa-edit" value="Editar" styleClass="CyanButton"
 						update=":PerfilModuloEditForm" 	
-						oncomplete="PF('UsuarioEditDialog').show()" />
+						oncomplete="PF('PerfilModuloEditDialog').show()" />
 					<p:commandButton icon="fa fa-trash-o" value="Eliminar" styleClass="CyanButton"
 						actionListener="#{perfilModuloController.destroy}" 
 						update=":growl,datalist">
@@ -36,12 +36,12 @@
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
 				<p:panelGrid columns="1" layout="grid" id="gridBusqueda">
 					<p:selectOneMenu id="perfil" value="#{perfilModuloController.perfilBusqueda}" >
-                        	<f:selectItem itemLabel="Perfil" itemValue="0"></f:selectItem>
+                        	<f:selectItem itemLabel="Seleccione" itemValue="0"></f:selectItem>
                         	<f:selectItems value="#{perfilController.items}" var="dato" 
                         	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
                     </p:selectOneMenu>
 					<p:commandButton  value="Buscar" icon="fa fa-search" styleClass="CyanButton"
-						actionListener="#{perfilModuloController.busqueda}" process="gridBusqueda" update="PerfilModuloListForm gridBusqueda"> </p:commandButton>
+						actionListener="#{perfilModuloController.busqueda()}" process="gridBusqueda" update="PerfilModuloListForm gridBusqueda"> </p:commandButton>
     			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{perfilModuloController.items}"
 					var="item" selectionMode="single"

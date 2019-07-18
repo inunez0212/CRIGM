@@ -41,12 +41,6 @@ public class TareaDTO implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "fechainicio")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechainicio;
-    @Column(name = "fechafin")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechafin;
     @Size(max = 200)
     @Column(name = "rutacarpeta")
     private String rutacarpeta;
@@ -71,9 +65,6 @@ public class TareaDTO implements Serializable {
     @JoinColumn(name = "usuarioasignado", referencedColumnName = "id")
     @ManyToOne
     private UsuarioDTO usuarioasignado;
-    @JoinColumn(name = "usuarioasignador", referencedColumnName = "id")
-    @ManyToOne
-    private UsuarioDTO usuarioasignador;
     @JoinColumn(name = "usuariomodificacion", referencedColumnName = "id")
     @ManyToOne
     private UsuarioDTO revisor;
@@ -99,22 +90,6 @@ public class TareaDTO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getFechainicio() {
-        return fechainicio;
-    }
-
-    public void setFechainicio(Date fechainicio) {
-        this.fechainicio = fechainicio;
-    }
-
-    public Date getFechafin() {
-        return fechafin;
-    }
-
-    public void setFechafin(Date fechafin) {
-        this.fechafin = fechafin;
     }
 
     public String getRutacarpeta() {
@@ -179,14 +154,6 @@ public class TareaDTO implements Serializable {
 
     public void setUsuarioasignado(UsuarioDTO usuarioasignado) {
         this.usuarioasignado = usuarioasignado;
-    }
-
-    public UsuarioDTO getUsuarioasignador() {
-        return usuarioasignador;
-    }
-
-    public void setUsuarioasignador(UsuarioDTO usuarioasignador) {
-        this.usuarioasignador = usuarioasignador;
     }
 
     public UsuarioDTO getUsuariomodificacion() {

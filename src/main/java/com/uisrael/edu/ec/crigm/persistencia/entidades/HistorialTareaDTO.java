@@ -61,6 +61,14 @@ public class HistorialTareaDTO implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechamodificacion;
     
+    @JoinColumn(name = "estadoinicio", referencedColumnName = "codigoreferencia")
+    @ManyToOne
+    private CatalogoValorDTO estadoInicio;
+    
+    @JoinColumn(name = "estadofin", referencedColumnName = "codigoreferencia")
+    @ManyToOne
+    private CatalogoValorDTO estadoFin;
+    
     @JoinColumn(name = "causal", referencedColumnName = "codigoreferencia")
     @ManyToOne
     private CatalogoValorDTO causal;
@@ -164,7 +172,50 @@ public class HistorialTareaDTO implements Serializable {
         this.usuarioregistro = usuarioregistro;
     }
 
-    @Override
+    
+    /**
+	 * @return the estadoInicio
+	 */
+	public CatalogoValorDTO getEstadoInicio() {
+		return estadoInicio;
+	}
+
+	/**
+	 * @param estadoInicio the estadoInicio to set
+	 */
+	public void setEstadoInicio(CatalogoValorDTO estadoInicio) {
+		this.estadoInicio = estadoInicio;
+	}
+
+	/**
+	 * @return the estadoFin
+	 */
+	public CatalogoValorDTO getEstadoFin() {
+		return estadoFin;
+	}
+
+	/**
+	 * @param estadoFin the estadoFin to set
+	 */
+	public void setEstadoFin(CatalogoValorDTO estadoFin) {
+		this.estadoFin = estadoFin;
+	}
+
+	/**
+	 * @return the tareaDTO
+	 */
+	public TareaDTO getTareaDTO() {
+		return tareaDTO;
+	}
+
+	/**
+	 * @param tareaDTO the tareaDTO to set
+	 */
+	public void setTareaDTO(TareaDTO tareaDTO) {
+		this.tareaDTO = tareaDTO;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

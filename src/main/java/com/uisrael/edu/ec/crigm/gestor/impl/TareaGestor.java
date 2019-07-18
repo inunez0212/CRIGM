@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.IHistorialTareaGestor;
-import com.uisrael.edu.ec.crigm.gestor.interfaces.IProyectoGestor;
 import com.uisrael.edu.ec.crigm.gestor.interfaces.ITareaGestor;
+import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.IProyectoDAO;
 import com.uisrael.edu.ec.crigm.persistencia.dao.interfaces.ITareaDAO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.ProyectoDTO;
@@ -28,7 +28,7 @@ public class TareaGestor implements ITareaGestor{
 	@Autowired 
 	IHistorialTareaGestor historialTareaGestor;
 	@Autowired
-	IProyectoGestor proyectoGestor; 
+	IProyectoDAO proyectoDAO; 
 	
 	@Override
 	public List<TareaDTO> findByEstadoActivo() {
@@ -56,7 +56,7 @@ public class TareaGestor implements ITareaGestor{
 		TareaDTO tareaDTO = tareaDAO.save(entity);
 		//Actualiza el numero de tareas
 		Integer numeroTareas = entity.getProyecto().getNumerotareas();
-		this.proyectoGestor.actualizarNumeroTareas(++numeroTareas, entity.getProyecto().getId());
+		this.proyectoDAO.actualizarNumeroTareas(++numeroTareas, entity.getProyecto().getId());
 		tareaDTO.setHistorialTareaCollection(new ArrayList<>());
 		//Registra los estados de la tarea
 		if(entity.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
@@ -95,14 +95,14 @@ public class TareaGestor implements ITareaGestor{
 	@Override
 	public List<TareaDTO> findByEstadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(Date fechaInicio,
 			Date fechaFin) {
-		return this.tareaDAO.findByEstadoAndUsuarioasignadoNotNullAndFechainicioBetweenOrderByUsuarioasignadoAsc(Constantes.ESTADO_ACTIVO,
+		return this.tareaDAO.findByEstadoAndUsuarioasignadoNotNullAndFecharegistroBetweenOrderByUsuarioasignadoAsc(Constantes.ESTADO_ACTIVO,
 			fechaInicio, fechaFin);
 	}
 
 	@Override
 	public List<TareaDTO> findByEstadoAndUsuarioasignadoAndfechainicioBetweenOrderByUsuarioAsignadoAsc(
 			UsuarioDTO usuarioasignado, Date fechaInicio, Date fechaFin) {
-		return this.tareaDAO.findByEstadoAndUsuarioasignadoAndFechainicioBetweenOrderByUsuarioasignadoAsc(
+		return this.tareaDAO.findByEstadoAndUsuarioasignadoAndFecharegistroBetweenOrderByUsuarioasignadoAsc(
 				Constantes.ESTADO_ACTIVO, usuarioasignado, fechaInicio, fechaFin); 
 	}
 

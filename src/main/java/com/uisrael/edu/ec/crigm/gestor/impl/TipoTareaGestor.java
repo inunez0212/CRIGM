@@ -45,4 +45,9 @@ public class TipoTareaGestor implements ITipoTareaGestor	{
 	public int eliminar(Long id) {
 		return tipoTareaDAO.eliminar(id);
 	}
+	
+	@Override
+	public TipoTareaDTO findByNombreAndEstadoActivo(String nombre) {
+		return tipoTareaDAO.findByNombreAndEstado(nombre, Constantes.ESTADO_ACTIVO); 
+	}
 }
