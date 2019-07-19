@@ -1,20 +1,28 @@
 package com.uisrael.edu.ec.crigm.vista.beans;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.uisrael.edu.ec.crigm.constantes.Constantes;
-import com.uisrael.edu.ec.crigm.gestor.impl.CatalogoValorGestor;
-import com.uisrael.edu.ec.crigm.gestor.impl.UsuarioGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.ICatalogoValorGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IPerfilModuloGestor;
+import com.uisrael.edu.ec.crigm.gestor.interfaces.IUsuarioGestor;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.CatalogoValorDTO;
+import com.uisrael.edu.ec.crigm.persistencia.entidades.PerfilModuloDTO;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.UsuarioDTO;
 import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
@@ -28,15 +36,19 @@ public class LoginController implements Serializable {
 	
 	
 	@Autowired
-	private UsuarioGestor usuarioGestor;
+	private IUsuarioGestor usuarioGestor;
 	@Autowired
     private JavaMailSender sender;
 	@Autowired 
-	private CatalogoValorGestor catalogoValorGestor;
+	private ICatalogoValorGestor catalogoValorGestor;
+	@Autowired
+	private IPerfilModuloGestor perfilModuloGestor;
 	
 	private static final long serialVersionUID = 1L;
 	private UsuarioDTO usuarioDTO=new UsuarioDTO();
 	private String cedula;
+	
+	private MenuModel model;
 	
 	public void identificar() {
 		try {
@@ -45,6 +57,7 @@ public class LoginController implements Serializable {
 				JsfUtil.addSuccessMessage("Bienvendo "+usuarioDTO.getNombre());
 				FacesContext fContext = FacesContext.getCurrentInstance();
 				ExternalContext extContext = fContext.getExternalContext();
+				this.cargarMenuOpciones();
 				extContext.redirect(extContext.getRequestContextPath() + "/xhtml/proyecto/List.xhtml");
 			}else {
 				usuarioDTO = new UsuarioDTO();
@@ -81,8 +94,38 @@ public class LoginController implements Serializable {
 			e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo enviar el correo");
 		}
-        
     }
+	
+	public void cargarMenuOpciones() {
+		model = new DefaultMenuModel();
+		
+		Collection<PerfilModuloDTO> modulosCOL = this.perfilModuloGestor.
+				findByPerfilDTOAndEstadoOrderByFecharegistroDesc(this.usuarioDTO.getPerfil()); 
+		
+		if(CollectionUtils.isNotEmpty(modulosCOL)) {
+			DefaultSubMenu firstSubmenu = new DefaultSubMenu("Opciones");
+			for(PerfilModuloDTO modulo : modulosCOL ) {
+		        DefaultMenuItem item = new DefaultMenuItem(modulo.getDescripcion());
+		        item.setUrl(modulo.getRuta());
+		        item.setIcon("fas fa-bars");
+		        firstSubmenu.addElement(item);
+			}
+			model.addElement(firstSubmenu);
+		}
+	}
+
+	public void salir() {
+		try {
+			usuarioDTO = new UsuarioDTO();
+				FacesContext fContext = FacesContext.getCurrentInstance();
+				ExternalContext extContext = fContext.getExternalContext();
+				extContext.redirect(extContext.getRequestContextPath() + "/index.xhtml");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JsfUtil.addErrorMessage("Problemas internos con el servicio");
+		}
+	}
+	
 	
 	/**
 	 * @return the usuarioDTO
@@ -112,5 +155,19 @@ public class LoginController implements Serializable {
 		this.cedula = cedula;
 	}
 
+	/**
+	 * @return the model
+	 */
+	public MenuModel getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model the model to set
+	 */
+	public void setModel(MenuModel model) {
+		this.model = model;
+	}
+	
 	
 }

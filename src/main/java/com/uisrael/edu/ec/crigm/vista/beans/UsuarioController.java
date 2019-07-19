@@ -71,7 +71,7 @@ public class UsuarioController implements Serializable {
     public void update() {
     	try {
     		selected.setPerfil(perfilGestor.getOne(idPerfil));
-    		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
+    		//selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		usuarioGestor.save(selected);
     		JsfUtil.addSuccessMessage("UsuarioDTO actualizado correctamente");
