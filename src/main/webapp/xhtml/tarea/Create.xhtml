@@ -24,8 +24,8 @@
                         	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
                         	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
-						<p:outputLabel value="Ruta" for="ruta" />
-                        <p:inputText id="ruta" value="#{tareaController.selected.rutacarpeta}" title="ruta" />
+						<p:outputLabel value="Modelo" for="ruta" />
+                        <p:inputText id="ruta" value="#{tareaController.selected.rutacarpeta}" title="Modelo" />
                         <p:outputLabel value="Operador" for="operador" />
                         <p:selectOneMenu id="operador" value="#{tareaController.idUsuarioAsignado}" >
                         	<f:selectItem itemValue="" itemLabel="Seleccione..."> </f:selectItem>

@@ -33,10 +33,8 @@
 					</p:commandButton>
 					<p:commandButton  value="Tareas" icon="fa fa-user-circle-o" styleClass="CyanButton"
 						actionListener="#{proyectoController.seleccionarTareas}" update=":growl"/>
-					<p:commandButton  value="Global" icon="fa fa-map-o" styleClass="CyanButton"
-						actionListener="#{proyectoController.seleccionarGlobal}" update=":growl"/>
-					<p:commandButton  value="Pausar tareas" icon="fa fa-pause-circle-o" styleClass="CyanButton"
-						oncomplete="PF('ProyectoPausarDialog').show()" update="ProyectoPausarForm"/>
+					
+					
 				</p:panelGrid>
 				<p:separator/>
 				<h:outputText value="B&uacute;squeda" class="BigTopic"></h:outputText>
@@ -106,9 +104,7 @@
 					<p:menuitem  value="Tareas" icon="fa fa-user-circle-o" 
 						actionListener="#{proyectoController.seleccionarTareas}" update=":growl">
 					</p:menuitem>
-					<p:menuitem  value="Global" icon="fa fa-map-o" 
-						actionListener="#{proyectoController.seleccionarGlobal}" update=":growl">
-					</p:menuitem>
+					
 					<p:menuitem  value="Pausar tarea" icon="fa fa-pause-circle-o" 
 						actionListener="#{proyectoController.pausarTareas}" update=":growl">
 					</p:menuitem>

@@ -59,19 +59,14 @@ public class TareaGestor implements ITareaGestor{
 		this.proyectoDAO.actualizarNumeroTareas(++numeroTareas, entity.getProyecto().getId());
 		tareaDTO.setHistorialTareaCollection(new ArrayList<>());
 		//Registra los estados de la tarea
-		if(entity.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
-			//registrada
+		if(entity.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_TERMINADA)) {
+			//Terminada
 			tareaDTO.getHistorialTareaCollection().add(historialTareaGestor.guardarHistorialTarea(
-					this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA), 
+					this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_TERMINADA), 
 					entity.getUsuarioregistro(), tareaDTO, Boolean.TRUE));
-			//asignada
-			tareaDTO.getHistorialTareaCollection().add(historialTareaGestor.guardarHistorialTarea(
-					this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_ASIGNADA), 
-					entity.getUsuarioregistro(), tareaDTO, Boolean.FALSE));
 		}else {
-			//registrada
 			tareaDTO.getHistorialTareaCollection().add(historialTareaGestor.guardarHistorialTarea(
-					this.catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_REGISTRADA), 
+					this.catalogoValorGestor.findByCodigoreferencia(entity.getEstadotarea().getCodigoreferencia()), 
 					entity.getUsuarioregistro(), tareaDTO, Boolean.FALSE));
 		}
 		return tareaDTO;
@@ -79,6 +74,9 @@ public class TareaGestor implements ITareaGestor{
 
 	@Override	
 	public int eliminar(Integer id) {
+		TareaDTO entity = tareaDAO.findById(id);
+		Integer numeroTareas = entity.getProyecto().getNumerotareas();
+		this.proyectoDAO.actualizarNumeroTareas(--numeroTareas, entity.getProyecto().getId());
 		return tareaDAO.eliminar(id);
 	}
 

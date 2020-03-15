@@ -7,6 +7,7 @@ public final class Constantes {
 	public static String ESTADO_ASIGNADA = "ASI";
 	public static String ESTADO_EN_PROCESO = "PRO";
 	public static String ESTADO_EN_PAUSA = "PRO";
+	public static String ESTADO_TERMINADA = "TER";
 	public static String EMAIL_RESETEO ="EMR";
 	public static String CONTRASENIA_POR_DEFECTO ="CPD"; 
 	public static String REPORTE_RENDIMIENTO_GRUPO="TRG";

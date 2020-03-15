@@ -44,7 +44,7 @@
 						actionListener="#{tareaController.busqueda}" process="gridBusqueda" update="TareaListForm gridBusqueda"> </p:commandButton>
     			</p:panelGrid>
 				<p:dataTable id="datalist" value="#{tareaController.items}"
-					var="item" selectionMode="single"
+					var="item" selectionMode="single" filteredValue="#{tareaController.itemsFiltrados}"
 					selection="#{tareaController.selected}" paginator="true"
 					rowKey="#{item.id}" rows="10">
 
@@ -55,7 +55,11 @@
 						sortBy="#{item.proyecto.nombre}">
 						<h:outputText value="#{item.proyecto.nombre}" />
 					</p:column>
-					<p:column headerText="Operador"
+					<p:column headerText="Modelo" filterBy="#{item.rutacarpeta}"
+						sortBy="#{item.rutacarpeta}">
+						<h:outputText value="#{item.rutacarpeta}" />
+					</p:column>
+					<p:column headerText="Operador" filterBy="#{item.usuarioasignado.apellido}" filterMatchMode="contains"
 						sortBy="#{item.usuarioasignado.apellido}">
 						<h:outputText value="#{item.usuarioasignado.apellido} #{item.usuarioasignado.nombre} " />
 					</p:column>
@@ -63,12 +67,15 @@
 						sortBy="#{item.tipotarea.nombre}">
 						<h:outputText value="#{item.tipotarea.nombre}" />
 					</p:column>
-					<p:column headerText="Revisor"
+					<p:column headerText="Revisor" filterBy="#{item.revisor.apellido}" filterMatchMode="contains"
 						sortBy="#{item.revisor.apellido}">
 						<h:outputText value="#{item.revisor.apellido} #{item.revisor.nombre} " />
 					</p:column>
-					<p:column headerText="Estado" sortBy="#{item.descripcion}">
+					<p:column headerText="Estado" sortBy="#{item.estado}">
 						<h:outputText value="#{item.estadotarea.descripcion}" />
+					</p:column>
+					<p:column headerText="Nota" sortBy="#{item.nota}">
+						<h:outputText value="#{item.nota}" />
 					</p:column>
 					<f:facet name="footer" style="text-align: left !important; ">
 						<h:outputText

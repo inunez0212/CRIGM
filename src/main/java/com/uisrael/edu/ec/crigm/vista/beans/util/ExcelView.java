@@ -20,7 +20,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import com.uisrael.edu.ec.crigm.persistencia.entidades.TareaDTO;
 
 /**
- * @author kali
+ * @author David Alvarez
  *
  */
 public class ExcelView{

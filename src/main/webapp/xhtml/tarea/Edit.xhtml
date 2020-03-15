@@ -24,8 +24,10 @@
                         	<f:selectItems value="#{tipoTareaController.items}" var="dato" 
                         	itemLabel="#{dato.descripcion}" itemValue="#{dato.id}"></f:selectItems>
                         </p:selectOneMenu>
-						<p:outputLabel value="Ruta" for="ruta" />
-                        <p:inputText id="ruta" value="#{tareaController.selected.rutacarpeta}" title="ruta" />
+						<p:outputLabel value="Modelo" for="ruta" />
+                        <p:inputText id="ruta" value="#{tareaController.selected.rutacarpeta}" title="Modelo" />
+                        <p:outputLabel value="Nota de calidad" for="nota" />
+                        <p:inputText id="nota" value="#{tareaController.selected.nota}" title="Nota" />
                         <p:outputLabel value="Estado" for="estado" />
                         <p:selectOneMenu id="estado" value="#{tareaController.estadoValor}" >
                         	<f:selectItems value="#{catalogoValorController.obtenerCatalogosPorRelacionado('EST')}" var="item"

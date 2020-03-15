@@ -89,13 +89,14 @@ public class TareaController implements Serializable {
     	try {
     		selected.setTipotarea(tipoTareaGestor.getOne(idTipoTarea));
     		selected.setProyecto(proyectoGestor.getOne(idProyecto));
-    		if(idUsuarioAsignado!=null && selected.getEstadotarea().getCodigoreferencia().equals(Constantes.ESTADO_ASIGNADA)) {
+    		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(estadoValor));
+    		if(idUsuarioAsignado!=null) {
         		selected.setUsuarioasignado(usuarioGestor.getOne(idUsuarioAsignado));
-        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(Constantes.ESTADO_ASIGNADA));
-    		}else {
-        		selected.setEstadotarea(catalogoValorGestor.findByCodigoreferencia(estadoValor));
+        		
     		}
-    		selected.setRevisor(usuarioGestor.getOne(idUsuarioRevisor));
+    		if(idUsuarioRevisor!=null) {
+    			selected.setRevisor(usuarioGestor.getOne(idUsuarioRevisor));
+    		}
     		selected.setUsuariomodificacion(loginController.getUsuarioDTO());
     		selected.setFechamodificacion(new Date());
     		tareaGestor.save(selected);
@@ -103,8 +104,6 @@ public class TareaController implements Serializable {
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo actualizar el tarea");
-		}finally {
-			idProyecto=null;
 		}
     }
 

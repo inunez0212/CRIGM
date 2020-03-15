@@ -67,6 +67,7 @@ public class ProyectoGestor implements IProyectoGestor	{
 				tarea.setRutacarpeta(dato);
 				tarea.setUsuarioregistro(entity.getUsuarioregistro());
 				tarea.setTipotarea(tipoTareaDTO);
+				
 				tareaGestor.save(tarea);
 			}
 		}

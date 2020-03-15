@@ -91,7 +91,6 @@ public class ProyectoController implements Serializable {
 
 	public void update() {
 		try {
-			selected.setNumerotareas(selected.getTareaCollection().size());
 			selected.setEstadoproyecto(this.catalogoValorGestor.findByCodigoreferencia(codigoRefereciaEstado));
 			selected.setUsuariomodificacion(loginController.getUsuarioDTO());
 			selected.setFechamodificacion(new Date());
@@ -201,7 +200,7 @@ public class ProyectoController implements Serializable {
 			wb = new XSSFWorkbook(file.getInputstream());
 			XSSFSheet sheet = wb.getSheetAt(0);
 			int rows = sheet.getLastRowNum();
-			for (i=1; i < rows; ++i) {
+			for (i=1; i <= rows; ++i) {
 				XSSFRow row = sheet.getRow(i);
 				XSSFCell modeloCell = row.getCell(0);
 				String modelo =  modeloCell.getStringCellValue();

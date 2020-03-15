@@ -22,7 +22,7 @@ public interface ITareaDAO extends JpaRepository<TareaDTO, Long>{
 	@Transactional
 	void delete(TareaDTO entity);
 	
-	TareaDTO getOne(Long id);
+	TareaDTO findById(Integer id);
 	
 	long count();
 	

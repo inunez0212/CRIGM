@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Ivan
+ * @author David Alvarez
  */
 @Entity
 @Table(name = "tarea")
@@ -47,6 +47,8 @@ public class TareaDTO implements Serializable {
     @Size(max = 1)
     @Column(name = "estado")
     private String estado;
+    @Column(name = "nota")
+    private String nota;
     @Column(name = "fecharegistro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecharegistro;
@@ -219,4 +221,11 @@ public class TareaDTO implements Serializable {
 		this.historialTareaCollection = historialTareaCollection;
 	}
 
+	public String getNota() {
+		return nota;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
 }

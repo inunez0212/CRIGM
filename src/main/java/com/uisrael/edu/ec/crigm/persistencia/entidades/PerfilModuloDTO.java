@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Ivan
+ * @author David Alvarez
  */
 @Entity
 @Table(name = "perfilmodulo")
