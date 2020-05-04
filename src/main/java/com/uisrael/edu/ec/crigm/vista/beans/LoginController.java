@@ -28,7 +28,7 @@ import com.uisrael.edu.ec.crigm.vista.beans.util.JsfUtil;
 
 /**
  * 
- * @author kali
+ * @author David Alvarez
  *
  */
 @Named("loginController")
